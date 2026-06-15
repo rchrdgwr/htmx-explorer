@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="concept.css"></head>
+<body>
+  <h2>13. hx-boost</h2>
+  <p class="subtitle">Convert normal links and forms into htmx requests with a single attribute on the parent. Progressive enhancement for existing apps.</p>
+
+  <div><span class="key-attr">hx-boost="true"</span></div>
+
+  <div class="compare">
+    <div class="compare-box old">
+      <h4>Without hx-boost</h4>
+      <ul>
+        <li>Every link = full page reload</li>
+        <li>Browser re-downloads JS/CSS</li>
+        <li>Flash of white between pages</li>
+        <li>Scroll position reset</li>
+      </ul>
+    </div>
+    <div class="compare-box new">
+      <h4>With hx-boost</h4>
+      <ul>
+        <li>Links become XHR requests</li>
+        <li>Only &lt;body&gt; is swapped</li>
+        <li>Smooth page transitions</li>
+        <li>URL and history still update</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- Add to body — ALL links and forms get boosted --&gt;</span><br>
+&lt;<span class="tag">body</span> <span class="attr hl">hx-boost</span>=<span class="val">"true"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">nav</span>&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"/home"</span>&gt;Home&lt;/<span class="tag">a</span>&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"/about"</span>&gt;About&lt;/<span class="tag">a</span>&gt;<br>
+&nbsp;&nbsp;&lt;/<span class="tag">nav</span>&gt;<br>
+&nbsp;&nbsp;<span class="cm">&lt;!-- These links now navigate without full reload --&gt;</span><br>
+&lt;/<span class="tag">body</span>&gt;<br><br>
+<span class="cm">&lt;!-- Opt individual links out --&gt;</span><br>
+&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"/download"</span> <span class="attr">hx-boost</span>=<span class="val">"false"</span>&gt;Download PDF&lt;/<span class="tag">a</span>&gt;
+  </div>
+
+  <div class="callout"><strong>Existing apps:</strong> Add <code>hx-boost="true"</code> to an existing multi-page app and it instantly feels like an SPA — with zero refactoring of your routes or templates.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>htmx fetches the linked page and swaps only the <code>&lt;body&gt;</code> content</div></div>
+    <div class="point"><div class="icon">2</div><div>The URL updates and browser history works — back button still works</div></div>
+    <div class="point"><div class="icon">3</div><div>Falls back gracefully: if JS is disabled, links work as normal</div></div>
+    <div class="point"><div class="icon">4</div><div>Combine with <code>hx-push-url</code> for full navigation control</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="concept.css"></head>
+<body>
+  <h2>15. Event System</h2>
+  <p class="subtitle">Components talking to each other without being coupled together. htmx fires rich DOM events at every step — listen to them, or fire your own.</p>
+
+  <div><span class="key-attr">hx-trigger="event from:element"</span><span class="key-attr">htmx.trigger()</span></div>
+
+  <div class="flow">
+    <div class="node browser"><div class="label">Save record</div><div class="detail">POST /record</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">success</div></div>
+    <div class="node purple"><div class="label">Fire event</div><div class="detail">record-saved on body</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">triggers</div></div>
+    <div class="node dom"><div class="label">Refresh grid</div><div class="detail">GET /records</div></div>
+  </div>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- Grid listens for a custom event on the body --&gt;</span><br>
+&lt;<span class="tag">table</span><br>
+&nbsp;&nbsp;<span class="attr">hx-get</span>=<span class="val">"/records"</span><br>
+&nbsp;&nbsp;<span class="attr">hx-target</span>=<span class="val">"#tbody"</span><br>
+&nbsp;&nbsp;<span class="attr hl">hx-trigger</span>=<span class="val">"record-saved from:body"</span>&gt;<br>
+&lt;/<span class="tag">table</span>&gt;<br><br>
+<span class="cm">&lt;!-- Save button fires the event after success --&gt;</span><br>
+&lt;<span class="tag">form</span> <span class="attr">hx-post</span>=<span class="val">"/record"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-on:htmx:after-request</span>=<span class="val">"htmx.trigger(document.body, 'record-saved')"</span>&gt;<br>
+&nbsp;&nbsp;...<br>
+&lt;/<span class="tag">form</span>&gt;
+  </div>
+
+  <div class="section">
+    <div class="section-label">htmx lifecycle events</div>
+    <table>
+      <thead><tr><th>Event</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><code>htmx:beforeRequest</code></td><td>Before XHR fires — can cancel</td></tr>
+        <tr><td><code>htmx:afterRequest</code></td><td>After XHR completes</td></tr>
+        <tr><td><code>htmx:afterSwap</code></td><td>After DOM is updated</td></tr>
+        <tr><td><code>htmx:afterSettle</code></td><td>After CSS transitions complete</td></tr>
+        <tr><td><code>htmx:responseError</code></td><td>Non-2xx response received</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><strong>Decoupled components:</strong> The save form doesn't know about the grid, and the grid doesn't know about the form. They communicate through events on a shared ancestor — clean and maintainable.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>Listen to htmx events to integrate third-party libraries (charts, maps, etc.)</div></div>
+    <div class="point"><div class="icon">2</div><div><code>hx-on:htmx:after-swap="..."</code> runs inline JS after each swap</div></div>
+    <div class="point"><div class="icon">3</div><div><code>htmx.trigger(el, 'event')</code> fires a custom event from JavaScript</div></div>
+    <div class="point"><div class="icon">4</div><div>Custom events decouple components — each piece only knows about its own job</div></div>
+  </div>
+</body>
+</html>

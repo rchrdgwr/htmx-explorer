@@ -1,0 +1,27 @@
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+  <div>
+    <div style="font-size:11px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Master list</div>
+    <div style="border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;">
+      <div style="padding:10px 12px;border-bottom:1px solid #f0f0f0;cursor:pointer;background:#e3f2fd;"
+           hx-get="responses/pattern-detail-1.html" hx-target="#detail-pane">
+        Ada Lovelace
+      </div>
+      <div style="padding:10px 12px;border-bottom:1px solid #f0f0f0;cursor:pointer;"
+           hx-get="responses/pattern-detail-2.html" hx-target="#detail-pane"
+           onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background=''">
+        Grace Hopper
+      </div>
+      <div style="padding:10px 12px;cursor:pointer;"
+           hx-get="responses/pattern-detail-1.html" hx-target="#detail-pane"
+           onmouseenter="this.style.background='#f5f5f5'" onmouseleave="this.style.background=''">
+        Margaret Hamilton
+      </div>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:11px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Detail pane</div>
+    <div id="detail-pane" style="border:1px solid #e0e0e0;border-radius:6px;padding:12px;min-height:100px;background:#fafafa;color:#888;font-size:12px;">
+      Click a name to load details
+    </div>
+  </div>
+</div>

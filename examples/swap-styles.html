@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swap Styles</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+    h2   { margin-bottom: 8px; }
+    p    { color: #555; margin-bottom: 20px; font-size: 14px; }
+    .demo { margin-bottom: 24px; padding: 16px; border: 1px solid #e0e0e0; border-radius: 6px; }
+    .demo h3 { font-size: 13px; color: #333; margin-bottom: 4px; }
+    .demo .desc { font-size: 12px; color: #888; margin-bottom: 12px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+    button {
+      padding: 7px 16px; background: #e65100; color: #fff;
+      border: none; border-radius: 5px; cursor: pointer; font-size: 13px;
+    }
+    button:hover { background: #bf360c; }
+    .target {
+      margin-top: 10px; padding: 8px 12px;
+      background: #fafafa; border: 1px dashed #ccc; border-radius: 4px;
+      font-size: 13px; color: #555; min-height: 36px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Swap Styles</h2>
+  <p><code>hx-swap</code> controls <em>how</em> the response is placed in the DOM.</p>
+
+  <div class="demo">
+    <h3>innerHTML (default)</h3>
+    <div class="desc">Replaces the <em>contents</em> of the target element</div>
+    <button hx-get="responses/swap-fragment.html"
+            hx-target="#s1"
+            hx-swap="innerHTML">Load</button>
+    <div id="s1" class="target">Original content</div>
+  </div>
+
+  <div class="demo">
+    <h3>outerHTML</h3>
+    <div class="desc">Replaces the target element <em>itself</em> with the response</div>
+    <button hx-get="responses/swap-fragment.html"
+            hx-target="#s2"
+            hx-swap="outerHTML">Load</button>
+    <div id="s2" class="target">Original content</div>
+  </div>
+
+  <div class="demo">
+    <h3>beforeend</h3>
+    <div class="desc">Appends the response <em>after</em> existing content</div>
+    <button hx-get="responses/swap-fragment.html"
+            hx-target="#s3"
+            hx-swap="beforeend">Append</button>
+    <div id="s3" class="target">Existing content →</div>
+  </div>
+
+  <div class="demo">
+    <h3>afterbegin</h3>
+    <div class="desc">Prepends the response <em>before</em> existing content</div>
+    <button hx-get="responses/swap-fragment.html"
+            hx-target="#s4"
+            hx-swap="afterbegin">Prepend</button>
+    <div id="s4" class="target">← Existing content</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>POST Form</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+    h2   { margin-bottom: 8px; }
+    p    { color: #555; margin-bottom: 20px; font-size: 14px; }
+    label { display: block; font-size: 13px; color: #444; margin-bottom: 4px; }
+    input[type=text] {
+      width: 100%; padding: 8px 10px; font-size: 14px;
+      border: 1px solid #ccc; border-radius: 4px; margin-bottom: 14px;
+    }
+    button {
+      padding: 9px 20px; background: #2e7d32; color: #fff;
+      border: none; border-radius: 5px; cursor: pointer; font-size: 14px;
+    }
+    button:hover { background: #1b5e20; }
+    #form-result { margin-top: 20px; min-height: 40px; }
+    .htmx-indicator { display: none; color: #888; font-size: 13px; margin-top: 8px; }
+    .htmx-request .htmx-indicator { display: block; }
+  </style>
+</head>
+<body>
+  <h2>POST Form</h2>
+  <p>htmx serializes the form and POSTs it without a page reload. The response fragment replaces <code>#form-result</code>.</p>
+
+  <form hx-post="responses/form-response.html"
+        hx-target="#form-result"
+        hx-swap="innerHTML">
+    <label for="name">Your name</label>
+    <input type="text" id="name" name="name" placeholder="e.g. Ada Lovelace">
+
+    <label for="city">Your city</label>
+    <input type="text" id="city" name="city" placeholder="e.g. San Antonio">
+
+    <button type="submit">Submit via htmx</button>
+    <span class="htmx-indicator">Sending…</span>
+  </form>
+
+  <div id="form-result"></div>
+</body>
+</html>

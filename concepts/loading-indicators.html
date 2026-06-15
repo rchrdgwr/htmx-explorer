@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="concept.css"></head>
+<body>
+  <h2>7. Loading Indicators</h2>
+  <p class="subtitle">User feedback during a request. htmx adds the <code>htmx-request</code> class to the triggering element while the request is in flight — use it to show spinners.</p>
+
+  <div><span class="key-attr">hx-indicator</span><span class="key-attr">.htmx-indicator</span><span class="key-attr">.htmx-request</span></div>
+
+  <div class="flow">
+    <div class="node browser"><div class="label">Click</div><div class="detail">htmx-request added</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">request in flight</div></div>
+    <div class="node purple"><div class="label">Spinner</div><div class="detail">becomes visible</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">response arrives</div></div>
+    <div class="node dom"><div class="label">Done</div><div class="detail">htmx-request removed</div></div>
+  </div>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- htmx adds .htmx-request to the button while waiting --&gt;</span><br>
+&lt;<span class="tag">button</span> <span class="attr">hx-get</span>=<span class="val">"/slow"</span> <span class="attr">hx-target</span>=<span class="val">"#result"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-indicator</span>=<span class="val">"#spinner"</span>&gt;<br>
+&nbsp;&nbsp;Load Data<br>
+&lt;/<span class="tag">button</span>&gt;<br><br>
+<span class="cm">&lt;!-- Hidden by default; .htmx-request makes it visible --&gt;</span><br>
+&lt;<span class="tag">span</span> <span class="attr">id</span>=<span class="val">"spinner"</span> <span class="attr hl">class</span>=<span class="val">"htmx-indicator"</span>&gt;Loading...&lt;/<span class="tag">span</span>&gt;<br><br>
+<span class="cm">/* CSS that htmx uses */</span><br>
+<span class="attr">.htmx-indicator</span> { opacity: 0; transition: opacity 200ms; }<br>
+<span class="attr">.htmx-request .htmx-indicator</span> { opacity: 1; }<br>
+<span class="attr">.htmx-request</span><span class="val">.htmx-indicator</span> { opacity: 1; }
+  </div>
+
+  <div class="callout"><strong>Perceived performance:</strong> A spinner or skeleton screen makes a 1-second wait feel much shorter. Always give users feedback that something is happening.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>htmx adds <code>.htmx-request</code> to the triggering element automatically — no JS needed</div></div>
+    <div class="point"><div class="icon">2</div><div><code>.htmx-indicator</code> elements are hidden by default and fade in during the request</div></div>
+    <div class="point"><div class="icon">3</div><div>Use <code>hx-indicator="#spinner"</code> to point to an indicator anywhere on the page</div></div>
+    <div class="point"><div class="icon">4</div><div>You can also disable the button during the request with CSS: <code>.htmx-request { pointer-events: none; }</code></div></div>
+  </div>
+</body>
+</html>

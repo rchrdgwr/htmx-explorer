@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+    h2   { margin-bottom: 8px; }
+    p    { color: #555; margin-bottom: 20px; font-size: 14px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th { background: #1a1a2e; color: #eee; padding: 8px 12px; text-align: left; font-size: 12px; }
+    td { padding: 9px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+    .delete-btn {
+      padding: 5px 12px; background: #c62828; color: #fff;
+      border: none; border-radius: 4px; cursor: pointer; font-size: 12px;
+    }
+    .delete-btn:hover { background: #b71c1c; }
+    #status { margin-top: 16px; font-size: 14px; color: #555; min-height: 24px; }
+  </style>
+</head>
+<body>
+  <h2>Confirmation</h2>
+  <p>Click Delete — <code>hx-confirm</code> shows a dialog before the request fires. Cancel aborts it entirely.</p>
+
+  <table>
+    <thead><tr><th>Name</th><th>Role</th><th></th></tr></thead>
+    <tbody id="rows">
+      <tr id="row-1">
+        <td>Ada Lovelace</td><td>Engineer</td>
+        <td><button class="delete-btn"
+              hx-delete="responses/deleted.html"
+              hx-target="#row-1"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Ada Lovelace? This cannot be undone.">Delete</button></td>
+      </tr>
+      <tr id="row-2">
+        <td>Grace Hopper</td><td>Admiral</td>
+        <td><button class="delete-btn"
+              hx-delete="responses/deleted.html"
+              hx-target="#row-2"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Grace Hopper? This cannot be undone.">Delete</button></td>
+      </tr>
+      <tr id="row-3">
+        <td>Margaret Hamilton</td><td>Director</td>
+        <td><button class="delete-btn"
+              hx-delete="responses/deleted.html"
+              hx-target="#row-3"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Margaret Hamilton? This cannot be undone.">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="status"></div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<div id="wizard" style="font-size:13px;">
+  <div style="font-size:11px;color:#2e7d32;margin-bottom:10px;font-weight:bold;">&#10003; Complete!</div>
+  <div style="background:#e8f5e9;border-radius:6px;padding:14px;border:1px solid #a5d6a7;">
+    Wizard complete. Each step was a server response replacing the previous step — no client-side routing, no state management.
+    <div style="margin-top:12px;">
+      <button style="padding:7px 16px;background:#1a1a2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:13px;"
+              hx-get="responses/pattern-wizard.html" hx-target="#wizard" hx-swap="outerHTML">
+        Start Over
+      </button>
+    </div>
+  </div>
+</div>

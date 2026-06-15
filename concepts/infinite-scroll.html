@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="concept.css"></head>
+<body>
+  <h2>12. Infinite Scroll / Lazy Loading</h2>
+  <p class="subtitle">Load content on demand as the user scrolls. <code>hx-trigger="revealed"</code> fires when an element scrolls into the viewport.</p>
+
+  <div><span class="key-attr">hx-trigger="revealed"</span><span class="key-attr">hx-swap="outerHTML"</span></div>
+
+  <div class="flow">
+    <div class="node browser"><div class="label">Scroll</div><div class="detail">Sentinel enters viewport</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">GET /items?page=2</div></div>
+    <div class="node server"><div class="label">Server</div><div class="detail">Returns next batch + new sentinel</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">outerHTML swap</div></div>
+    <div class="node dom"><div class="label">DOM</div><div class="detail">Items appended, sentinel replaced</div></div>
+  </div>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- Item list --&gt;</span><br>
+&lt;<span class="tag">ul</span> <span class="attr">id</span>=<span class="val">"items"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;Item 1&lt;/<span class="tag">li</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;Item 2&lt;/<span class="tag">li</span>&gt;<br>
+&nbsp;&nbsp;<span class="cm">&lt;!-- Sentinel: replaces itself with next page + new sentinel --&gt;</span><br>
+&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attr hl">hx-get</span>=<span class="val">"/items?page=2"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-trigger</span>=<span class="val">"revealed"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-swap</span>=<span class="val">"outerHTML"</span>&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Loading more...<br>
+&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;<br>
+&lt;/<span class="tag">ul</span>&gt;
+  </div>
+
+  <div class="callout"><strong>The sentinel pattern:</strong> The last item in the list is a placeholder that watches for visibility. When it appears, it loads the next page and replaces itself — either with more items + a new sentinel, or nothing if there are no more pages.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div><code>revealed</code> uses IntersectionObserver under the hood — efficient and battery-friendly</div></div>
+    <div class="point"><div class="icon">2</div><div>The sentinel replaces itself with the next page of content via <code>hx-swap="outerHTML"</code></div></div>
+    <div class="point"><div class="icon">3</div><div>When the last page is reached, the server returns content without a new sentinel — scrolling stops</div></div>
+    <div class="point"><div class="icon">4</div><div>Also great for lazy-loading images, charts, or expensive widgets below the fold</div></div>
+  </div>
+</body>
+</html>

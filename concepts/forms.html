@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="concept.css"></head>
+<body>
+  <h2>6. Forms</h2>
+  <p class="subtitle">AJAX forms without AJAX code. Add <code>hx-post</code> to a form and htmx handles serialization, submission, and response — all in one attribute.</p>
+
+  <div><span class="key-attr">hx-post</span><span class="key-attr">hx-target</span><span class="key-attr">hx-swap</span></div>
+
+  <div class="compare">
+    <div class="compare-box old">
+      <h4>Traditional form</h4>
+      <ul>
+        <li>Full page reload on submit</li>
+        <li>Browser navigates away</li>
+        <li>Scroll position lost</li>
+        <li>Must redirect after POST</li>
+        <li>Hard to show inline errors</li>
+      </ul>
+    </div>
+    <div class="compare-box new">
+      <h4>htmx form</h4>
+      <ul>
+        <li>No page reload</li>
+        <li>Response swapped inline</li>
+        <li>Scroll position kept</li>
+        <li>Server returns HTML fragment</li>
+        <li>Inline validation is easy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="snippet">
+&lt;<span class="tag">form</span> <span class="attr hl">hx-post</span>=<span class="val">"/save"</span> <span class="attr">hx-target</span>=<span class="val">"#result"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="val">"name"</span> <span class="attr">type</span>=<span class="val">"text"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="val">"email"</span> <span class="attr">type</span>=<span class="val">"email"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attr">type</span>=<span class="val">"submit"</span>&gt;Save&lt;/<span class="tag">button</span>&gt;<br>
+&lt;/<span class="tag">form</span>&gt;<br><br>
+<span class="cm">&lt;!-- Server returns success or validation errors as HTML --&gt;</span><br>
+&lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"result"</span>&gt;&lt;/<span class="tag">div</span>&gt;
+  </div>
+
+  <div class="callout"><strong>Validation pattern:</strong> On error, the server returns the form again with error messages highlighted. On success, it returns a success message or the new record. No JSON, no client-side validation library needed.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>htmx serializes all form fields automatically — no <code>new FormData()</code> needed</div></div>
+    <div class="point"><div class="icon">2</div><div>Works with file uploads too — htmx sets the right <code>Content-Type</code> header</div></div>
+    <div class="point"><div class="icon">3</div><div><code>hx-post</code> can go on a button instead of the form to submit only specific fields</div></div>
+    <div class="point"><div class="icon">4</div><div>Use <code>hx-indicator</code> to show a spinner while the request is in flight</div></div>
+  </div>
+</body>
+</html>

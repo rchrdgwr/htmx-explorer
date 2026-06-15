@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 60%, #1a1a2e 100%);
+      color: #eee;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 140px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    }
+
+    .group-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f4c842;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    h1 span { color: #e94560; }
+
+    .tagline {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 36px;
+      max-width: 380px;
+      line-height: 1.6;
+    }
+
+    /* htmx "pill" badges */
+    .badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-family: monospace;
+      color: #89b4fa;
+    }
+
+    /* Big concept count */
+    .stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .stat { text-align: center; }
+    .stat .num {
+      font-size: 36px;
+      font-weight: 800;
+      color: #e94560;
+      line-height: 1;
+    }
+    .stat .lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .cta {
+      font-size: 13px;
+      color: #666;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .divider {
+      width: 40px; height: 2px;
+      background: #e94560;
+      margin: 0 auto 28px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="alamo-python-logo.jpg" class="logo" alt="Alamo Python">
+
+  <div class="group-name">Alamo Python Group</div>
+
+  <h1>Introduction to <span>htmx</span></h1>
+
+  <div class="divider"></div>
+
+  <p class="tagline">
+    Build dynamic web apps with HTML attributes — no JavaScript framework required.
+    Server returns HTML, not JSON. The browser does the rest.
+  </p>
+
+  <div class="badges">
+    <span class="badge">hx-get</span>
+    <span class="badge">hx-post</span>
+    <span class="badge">hx-target</span>
+    <span class="badge">hx-swap</span>
+    <span class="badge">hx-trigger</span>
+    <span class="badge">hx-swap-oob</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num">16</div><div class="lbl">Concepts</div></div>
+    <div class="stat"><div class="num">7</div><div class="lbl">Core attrs</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">JS written</div></div>
+  </div>
+
+  <div class="cta">← Select a concept to get started</div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="concept.css"></head>
+<body>
+  <h2>1. Basic Request</h2>
+  <p class="subtitle">Replace part of a page without writing JavaScript. This is the core idea of htmx — HTML attributes do the work.</p>
+
+  <div><span class="key-attr">hx-get</span><span class="key-attr">hx-target</span></div>
+
+  <div class="flow">
+    <div class="node browser"><div class="label">Browser</div><div class="detail">User clicks button</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">GET /hello</div></div>
+    <div class="node server"><div class="label">Server</div><div class="detail">Returns HTML fragment</div></div>
+    <div class="arrow"><div class="line"></div><div class="note">HTML snippet</div></div>
+    <div class="node dom"><div class="label">DOM</div><div class="detail">Swapped into #result</div></div>
+  </div>
+
+  <div class="snippet">
+&lt;<span class="tag">button</span><br>
+&nbsp;&nbsp;<span class="attr hl">hx-get</span>=<span class="val">"/hello"</span><br>
+&nbsp;&nbsp;<span class="attr hl">hx-target</span>=<span class="val">"#result"</span>&gt;<br>
+&nbsp;&nbsp;Say Hello<br>
+&lt;/<span class="tag">button</span>&gt;<br><br>
+&lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"result"</span>&gt;&lt;/<span class="tag">div</span>&gt;
+  </div>
+
+  <div class="callout"><strong>Key insight:</strong> The server returns <em>HTML</em>, not JSON. htmx drops it straight into the DOM — no parsing, no templating on the client.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>htmx intercepts the click and fires an XHR GET request automatically</div></div>
+    <div class="point"><div class="icon">2</div><div>The server returns a <strong>plain HTML fragment</strong> — not a full page, not JSON</div></div>
+    <div class="point"><div class="icon">3</div><div>htmx swaps the response into <code>#result</code> with no page reload</div></div>
+    <div class="point"><div class="icon">4</div><div>Zero JavaScript written by you — just two HTML attributes</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<div id="dash-users" style="background:#e3f2fd;border-radius:6px;padding:12px;text-align:center;"
+     hx-get="responses/dash-users.html" hx-trigger="every 3s" hx-swap="outerHTML">
+  <div style="font-size:22px;font-weight:700;color:#1976d2;" id="du2"></div>
+  <div style="font-size:11px;color:#888;margin-top:4px;">Active Users</div>
+  <script>document.getElementById('du2').textContent = Math.floor(Math.random()*100+50);</script>
+</div>

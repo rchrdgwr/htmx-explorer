@@ -1,0 +1,8 @@
+<div id="clock"
+     hx-get="responses/poll-time.html"
+     hx-target="this"
+     hx-trigger="every 2s"
+     style="font-size:42px;font-weight:700;color:#1a1a2e;font-family:monospace;padding:24px;background:#f8f8f8;border-radius:10px;text-align:center;border:2px solid #e0e0e0;">
+  <span id="ct"></span>
+  <script>document.getElementById('ct').textContent = new Date().toLocaleTimeString();</script>
+</div>

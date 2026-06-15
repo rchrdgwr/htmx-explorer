@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page C — hx-boost</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+    nav { display: flex; gap: 8px; margin-bottom: 24px; }
+    nav a { padding: 8px 16px; background: #1a1a2e; color: #eee; text-decoration: none; border-radius: 5px; font-size: 13px; }
+    nav a:hover { background: #e94560; }
+    #content { padding: 20px; background: #e8f5e9; border-radius: 8px; border: 1px solid #a5d6a7; min-height: 80px; }
+  </style>
+</head>
+<body hx-boost="true">
+  <nav>
+    <a href="boost-page-a.html">Page A</a>
+    <a href="boost-page-b.html">Page B</a>
+    <a href="boost-page-c.html">Page C</a>
+  </nav>
+  <div id="content">
+    <strong>Page C</strong> — three pages, zero full reloads. This is what hx-boost gives you for free.
+  </div>
+</body>
+</html>

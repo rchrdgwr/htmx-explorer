@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hx-push-url</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+    h2   { margin-bottom: 8px; }
+    p    { color: #555; margin-bottom: 16px; font-size: 14px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+    input[type=text] { padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; width: 100%; margin-bottom: 12px; }
+    .result-item { padding: 10px 14px; background: #f0f7ff; border-left: 3px solid #1976d2; border-radius: 4px; margin-bottom: 8px; font-size: 14px; }
+    #results { margin-top: 16px; min-height: 40px; }
+    .url-display { font-family: monospace; font-size: 12px; background: #1e1e2e; color: #a6e3a1; padding: 8px 12px; border-radius: 4px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <h2>hx-push-url</h2>
+  <p>Type a search term — the URL updates as you type so results are bookmarkable and shareable. Hit your browser's back button to go back.</p>
+
+  <div class="url-display" id="url-display">URL: <span id="current-url"></span></div>
+
+  <input type="text" name="q" placeholder="Search Python topics..."
+         hx-get="responses/search-results.html"
+         hx-target="#results"
+         hx-trigger="keyup changed delay:400ms"
+         hx-push-url="true">
+
+  <div id="results">
+    <div class="result-item">Start typing to search...</div>
+  </div>
+
+  <script>
+    function updateUrlDisplay() {
+      document.getElementById('current-url').textContent = window.location.href;
+    }
+    updateUrlDisplay();
+    document.addEventListener('htmx:pushedIntoHistory', updateUrlDisplay);
+  </script>
+</body>
+</html>

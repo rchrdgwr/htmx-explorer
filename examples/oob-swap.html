@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Out-of-Band Swap</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+    h2   { margin-bottom: 8px; }
+    p    { color: #555; margin-bottom: 20px; font-size: 14px; }
+    button {
+      padding: 9px 20px; background: #6a0dad; color: #fff;
+      border: none; border-radius: 5px; cursor: pointer; font-size: 14px;
+    }
+    button:hover { background: #520a9e; }
+    .box {
+      margin-top: 16px; padding: 12px 16px;
+      border-radius: 5px; border: 1px solid #ddd;
+      font-size: 14px; color: #444;
+    }
+    .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #999; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <h2>Out-of-Band Swap</h2>
+  <p>One server response updates <strong>two separate elements</strong> using <code>hx-swap-oob</code> — the main target and a status box elsewhere on the page.</p>
+
+  <button hx-get="responses/oob-response.html" hx-target="#main-content">
+    Fire OOB Request
+  </button>
+
+  <div class="label" style="margin-top:20px;">Main target → <code>#main-content</code></div>
+  <div id="main-content" class="box">Waiting for main content…</div>
+
+  <div class="label" style="margin-top:12px;">OOB target → <code>#status-box</code></div>
+  <div id="status-box" class="box" style="border-style: dashed;">Status: idle</div>
+</body>
+</html>

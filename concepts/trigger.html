@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; padding: 28px 32px; background: #fff; color: #222; }
+    h2 { font-size: 20px; color: #1a1a2e; margin-bottom: 6px; }
+    .subtitle { color: #888; font-size: 13px; margin-bottom: 24px; }
+    .key-attr { display: inline-block; background: #1a1a2e; color: #e94560; font-family: monospace; font-size: 13px; padding: 3px 10px; border-radius: 4px; margin: 2px 4px 2px 0; }
+    .snippet { background: #1e1e2e; border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: 'Fira Code', monospace; font-size: 12px; line-height: 1.7; color: #cdd6f4; }
+    .attr { color: #89b4fa; } .val { color: #a6e3a1; } .tag { color: #f38ba8; } .cm { color: #6c7086; font-style: italic; }
+    .hl { background: rgba(233,69,96,0.2); border-radius: 3px; padding: 0 2px; }
+    .points { margin-top: 20px; }
+    .points h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 10px; }
+    .point { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; font-size: 13px; color: #444; }
+    .point .icon { width: 20px; height: 20px; border-radius: 50%; background: #c62828; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px; }
+
+    .trigger-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+    .trigger-table th { background: #1a1a2e; color: #eee; padding: 8px 12px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; }
+    .trigger-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    .trigger-table tr:last-child td { border-bottom: none; }
+    .trigger-table tr:nth-child(even) td { background: #fafafa; }
+    .trigger-table code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; color: #c62828; }
+  </style>
+</head>
+<body>
+
+  <h2>Trigger Events</h2>
+  <p class="subtitle"><code>hx-trigger</code> tells htmx <em>when</em> to fire the request. Default is <code>click</code> for buttons, <code>change</code> for inputs.</p>
+
+  <div>
+    <span class="key-attr">hx-trigger</span>
+  </div>
+
+  <!-- Trigger reference table -->
+  <table class="trigger-table">
+    <thead>
+      <tr><th>Trigger value</th><th>When it fires</th><th>Common use</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>click</code></td>
+        <td>On mouse click</td>
+        <td>Default for buttons</td>
+      </tr>
+      <tr>
+        <td><code>change</code></td>
+        <td>When value changes and focus leaves</td>
+        <td>Default for inputs/selects</td>
+      </tr>
+      <tr>
+        <td><code>keyup changed delay:500ms</code></td>
+        <td>500ms after the user stops typing</td>
+        <td>Live search / autocomplete</td>
+      </tr>
+      <tr>
+        <td><code>mouseenter</code></td>
+        <td>On hover</td>
+        <td>Lazy-load tooltips or previews</td>
+      </tr>
+      <tr>
+        <td><code>load</code></td>
+        <td>When element is loaded into DOM</td>
+        <td>Lazy sections, infinite scroll</td>
+      </tr>
+      <tr>
+        <td><code>every 2s</code></td>
+        <td>Every 2 seconds</td>
+        <td>Live dashboards, polling</td>
+      </tr>
+      <tr>
+        <td><code>submit</code></td>
+        <td>Form submission</td>
+        <td>Default for &lt;form&gt;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="snippet">
+    <span class="cm">&lt;!-- Fires 500ms after user stops typing --&gt;</span><br>
+    &lt;<span class="tag">input</span><br>
+    &nbsp;&nbsp;<span class="attr">hx-get</span>=<span class="val">"/search"</span><br>
+    &nbsp;&nbsp;<span class="attr">hx-target</span>=<span class="val">"#results"</span><br>
+    &nbsp;&nbsp;<span class="attr hl">hx-trigger</span>=<span class="val">"keyup changed delay:500ms"</span>&gt;<br><br>
+    <span class="cm">&lt;!-- Polls every 2 seconds --&gt;</span><br>
+    &lt;<span class="tag">div</span><br>
+    &nbsp;&nbsp;<span class="attr">hx-get</span>=<span class="val">"/status"</span><br>
+    &nbsp;&nbsp;<span class="attr hl">hx-trigger</span>=<span class="val">"every 2s"</span>&gt;&lt;/<span class="tag">div</span>&gt;
+  </div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div><code>changed</code> modifier prevents firing if the value hasn't actually changed</div></div>
+    <div class="point"><div class="icon">2</div><div><code>delay:Xms</code> debounces the request — essential for search inputs</div></div>
+    <div class="point"><div class="icon">3</div><div>Multiple triggers can be combined: <code>hx-trigger="click, keyup"</code></div></div>
+    <div class="point"><div class="icon">4</div><div><code>once</code> modifier makes the trigger fire only the first time</div></div>
+  </div>
+
+</body>
+</html>

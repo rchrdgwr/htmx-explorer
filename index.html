@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTMX Explorer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      background: #f0f2f5;
+      color: #222;
+    }
+
+    /* ── Top bar ── */
+    #topbar {
+      background: #1a1a2e;
+      color: #eee;
+      padding: 0 20px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-shrink: 0;
+      border-bottom: 2px solid #e94560;
+    }
+
+    #topbar h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    #topbar span {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    /* ── Main layout ── */
+    #main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Left sidebar: example list ── */
+    #sidebar {
+      width: 220px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+
+    #sidebar h2 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      padding: 16px 16px 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .example-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      background: none;
+      border: none;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      font-size: 13px;
+      color: #333;
+      transition: background 0.15s;
+    }
+
+    .example-btn:hover { background: #f5f7ff; color: #1a1a2e; }
+
+    .example-btn.active {
+      background: #e94560;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .example-btn .tag {
+      display: inline-block;
+      font-size: 10px;
+      background: rgba(0,0,0,0.1);
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .example-btn.active .tag { background: rgba(255,255,255,0.25); }
+
+    .sidebar-group {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #bbb;
+      padding: 10px 16px 4px;
+      background: #f8f8f8;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* ── Center: iframe preview ── */
+    #preview-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #ddd;
+      background: #fff;
+    }
+
+    .panel-header {
+      padding: 8px 14px;
+      background: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .panel-header .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+    .panel-header .dot.active { background: #4caf50; }
+
+    #preview-frame {
+      flex: 1;
+      border: none;
+      background: #fff;
+    }
+
+    #no-selection {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 15px;
+    }
+
+    /* ── Right column: request + response ── */
+    #inspector {
+      width: 420px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      background: #1e1e2e;
+      color: #cdd6f4;
+    }
+
+    .inspector-half {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-bottom: 2px solid #313244;
+    }
+
+    .inspector-half:last-child { border-bottom: none; }
+
+    .inspector-header {
+      padding: 8px 14px;
+      background: #181825;
+      border-bottom: 1px solid #313244;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #6c7086;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .inspector-header .badge {
+      font-size: 10px;
+      background: #313244;
+      border-radius: 3px;
+      padding: 1px 6px;
+      color: #a6e3a1;
+    }
+
+    .inspector-header .badge.req { color: #89b4fa; }
+    .inspector-header .badge.res { color: #a6e3a1; }
+
+    .code-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+    }
+
+    .code-pane pre {
+      margin: 0;
+      padding: 14px;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .code-pane pre code {
+      background: none !important;
+      padding: 0 !important;
+    }
+
+    .empty-pane {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #45475a;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    /* meta row inside inspector */
+    .meta-row {
+      padding: 6px 14px;
+      font-size: 11px;
+      color: #6c7086;
+      background: #181825;
+      border-bottom: 1px solid #313244;
+      flex-shrink: 0;
+      font-family: monospace;
+    }
+
+    .meta-row .method { color: #89b4fa; font-weight: bold; }
+    .meta-row .url    { color: #cba6f7; }
+    .meta-row .status.ok  { color: #a6e3a1; font-weight: bold; }
+    .meta-row .status.err { color: #f38ba8; font-weight: bold; }
+    .meta-row .target { color: #fab387; }
+
+    /* ── Preview tabs ── */
+    #preview-tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      background: #f8f8f8;
+      flex-shrink: 0;
+    }
+
+    .tab-btn {
+      padding: 8px 18px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #999;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .tab-btn:hover { color: #444; }
+
+    .tab-btn.active {
+      color: #e94560;
+      border-bottom-color: #e94560;
+    }
+
+    #home-frame, #concept-frame, #preview-frame {
+      flex: 1;
+      border: none;
+      background: #fff;
+      display: none;
+    }
+
+    #home-frame.visible, #concept-frame.visible, #preview-frame.visible { display: block; }
+
+    /* pulse animation when updated */
+    @keyframes flash {
+      0%   { background: #313244; }
+      100% { background: transparent; }
+    }
+    .flashed { animation: flash 0.6s ease-out; }
+  </style>
+</head>
+<body>
+
+<!-- ── Top bar ── -->
+<div id="topbar">
+  <h1>HTMX Explorer</h1>
+  <span>Alamo Python Group · Select an example to get started</span>
+</div>
+
+<!-- ── Main layout ── -->
+<div id="main">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <h2>HTMX Explorer</h2>
+    <button class="example-btn active" id="nav-home" onclick="loadPage(this, 'home.html')">Home</button>
+    <button class="example-btn" id="nav-slides" onclick="loadPage(this, 'slides.html')">Slides</button>
+    <div class="sidebar-group">Fundamentals</div>
+    <button class="example-btn" onclick="loadExample(this, 'basic-request')">1. Basic Request</button>
+    <button class="example-btn" onclick="loadExample(this, 'http-verbs')">2. HTTP Verbs</button>
+    <button class="example-btn" onclick="loadExample(this, 'targeting')">3. Targeting</button>
+    <button class="example-btn" onclick="loadExample(this, 'swap-strategies')">4. Swap Strategies</button>
+    <button class="example-btn" onclick="loadExample(this, 'triggering')">5. Triggering</button>
+    <button class="example-btn" onclick="loadExample(this, 'forms')">6. Forms</button>
+    <div class="sidebar-group">Intermediate</div>
+    <button class="example-btn" onclick="loadExample(this, 'loading-indicators')">7. Loading Indicators</button>
+    <button class="example-btn" onclick="loadExample(this, 'oob-swaps')">8. Out-of-Band Swaps</button>
+    <button class="example-btn" onclick="loadExample(this, 'confirmation')">9. Confirmation</button>
+    <button class="example-btn" onclick="loadExample(this, 'inline-editing')">10. Inline Editing</button>
+    <button class="example-btn" onclick="loadExample(this, 'polling')">11. Polling</button>
+    <button class="example-btn" onclick="loadExample(this, 'infinite-scroll')">12. Infinite Scroll</button>
+    <div class="sidebar-group">Advanced</div>
+    <button class="example-btn" onclick="loadExample(this, 'hx-boost')">13. hx-boost</button>
+    <button class="example-btn" onclick="loadExample(this, 'hx-push-url')">14. hx-push-url</button>
+    <button class="example-btn" onclick="loadExample(this, 'event-system')">15. Event System</button>
+    <button class="example-btn" onclick="loadExample(this, 'server-driven-ui')">16. Server-Driven UI</button>
+  </div>
+
+  <!-- Preview -->
+  <div id="preview-panel">
+    <div id="preview-tabs">
+      <button class="tab-btn active" id="tab-concept" onclick="switchTab('concept')">Concept</button>
+      <button class="tab-btn" id="tab-demo" onclick="switchTab('demo')">Live Demo</button>
+    </div>
+    <iframe id="home-frame" class="visible" src="home.html"></iframe>
+    <iframe id="concept-frame"></iframe>
+    <iframe id="preview-frame"></iframe>
+  </div>
+
+  <!-- Inspector -->
+  <div id="inspector">
+
+    <!-- Top half: Page source showing htmx attributes -->
+    <div class="inspector-half">
+      <div class="inspector-header">
+        Page Source
+        <span class="badge req" id="req-badge">select an example</span>
+      </div>
+      <div class="code-pane" id="sent-pane">
+        <div class="empty-pane">The example HTML will appear here</div>
+      </div>
+    </div>
+
+    <!-- Bottom half: Response received -->
+    <div class="inspector-half">
+      <div class="inspector-header">
+        Response Received
+        <span style="display:flex;gap:8px;align-items:center;">
+          <span class="badge res" id="res-badge">waiting</span>
+          <button id="clear-res-btn" onclick="clearResponse()" style="padding:2px 8px;background:#313244;color:#cdd6f4;border:none;border-radius:3px;cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">Clear</button>
+        </span>
+      </div>
+      <div class="meta-row" id="res-meta" style="display:none"></div>
+      <div class="code-pane" id="res-pane">
+        <div class="empty-pane">HTMX response HTML will appear here</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── Example registry ──────────────────────────────────────────────
+const EXAMPLES = {
+  'basic-request':     { label: '1. Basic Request',      file: 'examples/basic-request.html',     concept: 'concepts/basic-request.html' },
+  'http-verbs':        { label: '2. HTTP Verbs',         file: 'examples/http-verbs.html',        concept: 'concepts/http-verbs.html' },
+  'targeting':         { label: '3. Targeting',          file: 'examples/targeting.html',         concept: 'concepts/targeting.html' },
+  'swap-strategies':   { label: '4. Swap Strategies',    file: 'examples/swap-styles.html',       concept: 'concepts/swap-strategies.html' },
+  'triggering':        { label: '5. Triggering',         file: 'examples/trigger.html',           concept: 'concepts/triggering.html' },
+  'forms':             { label: '6. Forms',              file: 'examples/post-form.html',         concept: 'concepts/forms.html' },
+  'loading-indicators':{ label: '7. Loading Indicators', file: 'examples/loading-indicators.html',concept: 'concepts/loading-indicators.html' },
+  'oob-swaps':         { label: '8. OOB Swaps',         file: 'examples/oob-swap.html',          concept: 'concepts/oob-swaps.html' },
+  'confirmation':      { label: '9. Confirmation',       file: 'examples/confirmation.html',      concept: 'concepts/confirmation.html' },
+  'inline-editing':    { label: '10. Inline Editing',    file: 'examples/inline-editing.html',    concept: 'concepts/inline-editing.html' },
+  'polling':           { label: '11. Polling',           file: 'examples/polling.html',           concept: 'concepts/polling.html' },
+  'infinite-scroll':   { label: '12. Infinite Scroll',   file: 'examples/infinite-scroll.html',   concept: 'concepts/infinite-scroll.html' },
+  'hx-boost':          { label: '13. hx-boost',          file: 'examples/hx-boost.html',          concept: 'concepts/hx-boost.html' },
+  'hx-push-url':       { label: '14. hx-push-url',       file: 'examples/hx-push-url.html',       concept: 'concepts/hx-push-url.html' },
+  'event-system':      { label: '15. Event System',      file: 'examples/event-system.html',      concept: 'concepts/event-system.html' },
+  'server-driven-ui':  { label: '16. Server-Driven UI',  file: 'examples/server-driven-ui.html',  concept: 'concepts/server-driven-ui.html' },
+};
+
+let currentExample = null;
+let activeTab = 'concept';
+
+// Hide inspector until an example is selected
+document.getElementById('inspector').style.display = 'none';
+
+// ── Load a full-width page (Home, Slides) ─────────────────────────
+function loadPage(btn, url) {
+  document.querySelectorAll('.example-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentExample = null;
+  document.getElementById('home-frame').src = url;
+  document.getElementById('home-frame').classList.add('visible');
+  document.getElementById('concept-frame').classList.remove('visible');
+  document.getElementById('preview-frame').classList.remove('visible');
+  document.getElementById('inspector').style.display = 'none';
+  document.getElementById('preview-tabs').style.display = 'none';
+}
+
+// ── Tab switching ─────────────────────────────────────────────────
+function switchTab(tab) {
+  activeTab = tab;
+  document.getElementById('tab-concept').classList.toggle('active', tab === 'concept');
+  document.getElementById('tab-demo').classList.toggle('active', tab === 'demo');
+  document.getElementById('concept-frame').classList.toggle('visible', tab === 'concept');
+  document.getElementById('preview-frame').classList.toggle('visible', tab === 'demo');
+  document.getElementById('inspector').style.display = tab === 'demo' ? 'flex' : 'none';
+}
+
+// ── Load example ─────────────────────────────────────────────────
+async function loadExample(btn, key) {
+  document.querySelectorAll('.example-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  currentExample = key;
+  const ex = EXAMPLES[key];
+
+  // Hide home/slides, restore tabs, always land on Concept
+  document.getElementById('home-frame').classList.remove('visible');
+  document.getElementById('preview-tabs').style.display = 'flex';
+  switchTab('concept');
+
+  // Load concept iframe
+  document.getElementById('concept-frame').src = ex.concept;
+
+  // Load demo iframe and wire htmx listener
+  const frame = document.getElementById('preview-frame');
+  frame.src = ex.file;
+  frame.onload = () => wireIframe(frame);
+
+  // Load page source into inspector — show only body content
+  try {
+    const res = await fetch(ex.file);
+    const src = await res.text();
+    const bodyMatch = src.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+    const display = bodyMatch ? bodyMatch[1].trim() : src;
+    renderCode('sent-pane', display, 'html');
+    document.getElementById('req-badge').textContent = ex.file;
+  } catch(e) {
+    renderError('sent-pane', `Could not load ${ex.file}`);
+  }
+
+  // Clear response pane
+  document.getElementById('res-pane').innerHTML = '<div class="empty-pane">Interact with the demo to see the response</div>';
+  document.getElementById('res-badge').textContent = 'waiting';
+  document.getElementById('res-meta').style.display = 'none';
+}
+
+// ── Wire htmx events inside iframe ───────────────────────────────
+function wireIframe(frame) {
+  try {
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    const win = frame.contentWindow;
+
+    // After each htmx request, capture the response
+    doc.addEventListener('htmx:afterRequest', (e) => {
+      const xhr    = e.detail.xhr;
+      const cfg    = e.detail.requestConfig || {};
+      const ok     = xhr.status >= 200 && xhr.status < 300;
+      const method = (cfg.verb || 'GET').toUpperCase();
+      const url    = cfg.path || xhr.responseURL || '?';
+      const target = e.detail.target ? '#' + (e.detail.target.id || '(element)') : '(unknown)';
+
+      // Meta row
+      const meta = document.getElementById('res-meta');
+      meta.style.display = 'block';
+      meta.innerHTML = `
+        <span class="method">${method}</span>
+        <span class="url"> ${url}</span> →
+        <span class="status ${ok ? 'ok' : 'err'}">${xhr.status} ${xhr.statusText}</span>
+        <span class="target"> target: ${target}</span>
+      `;
+
+      // Response body
+      const body = xhr.responseText || '';
+      renderCode('res-pane', body.trim(), 'html');
+      document.getElementById('res-badge').textContent = `${xhr.status} · ${body.length} bytes`;
+
+      // Flash effect
+      flash('res-pane');
+    });
+
+  } catch(err) {
+    // cross-origin (shouldn't happen with python -m http.server)
+    console.warn('Could not wire iframe events:', err);
+  }
+}
+
+// ── Render syntax-highlighted code ───────────────────────────────
+function renderCode(paneId, code, lang) {
+  const pane = document.getElementById(paneId);
+  const pre  = document.createElement('pre');
+  const el   = document.createElement('code');
+  el.className = `language-${lang}`;
+  el.textContent = code;
+  pre.appendChild(el);
+  pane.innerHTML = '';
+  pane.appendChild(pre);
+  hljs.highlightElement(el);
+  flash(paneId);
+}
+
+function renderError(paneId, msg) {
+  document.getElementById(paneId).innerHTML =
+    `<div class="empty-pane" style="color:#f38ba8">${msg}</div>`;
+}
+
+function clearResponse() {
+  document.getElementById('res-pane').innerHTML = '<div class="empty-pane">HTMX response HTML will appear here</div>';
+  document.getElementById('res-meta').style.display = 'none';
+  document.getElementById('res-badge').textContent = 'waiting';
+}
+
+function flash(paneId) {
+  const el = document.getElementById(paneId);
+  el.classList.remove('flashed');
+  void el.offsetWidth; // reflow
+  el.classList.add('flashed');
+}
+</script>
+</body>
+</html>
