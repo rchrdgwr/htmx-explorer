@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Out-of-Band Swap</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-oob-swaps">
+  <h2>Out-of-Band Swap</h2>
+  <p>One server response updates <strong>two separate elements</strong> using <code>hx-swap-oob</code> — the main target and a status box elsewhere on the page.</p>
+
+  <button hx-get="response_oob-swaps.html" hx-target="#main-content">
+    Fire OOB Request
+  </button>
+
+  <div class="label">Main target → <code>#main-content</code></div>
+  <div id="main-content" class="result-box">Waiting for main content…</div>
+
+  <div class="label">OOB target → <code>#status-box</code></div>
+  <div id="status-box" class="result-box dashed">Status: idle</div>
+</body>
+</html>

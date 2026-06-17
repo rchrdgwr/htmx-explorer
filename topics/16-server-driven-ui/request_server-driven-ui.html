@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Server-Driven UI</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-server-driven-ui">
+  <h2>Server-Driven UI Patterns</h2>
+  <p>Click a pattern to see a simplified demo. Each one combines concepts from the previous examples.</p>
+
+  <div class="grid">
+    <div class="card" hx-get="response_server-driven-ui_master-detail.html" hx-target="#demo-area">
+      <h3>Master / Detail</h3>
+      <p>Select → load details</p>
+    </div>
+    <div class="card" hx-get="response_server-driven-ui_crud.html" hx-target="#demo-area">
+      <h3>CRUD Table</h3>
+      <p>Create, edit, delete rows</p>
+    </div>
+    <div class="card" hx-get="response_server-driven-ui_wizard.html" hx-target="#demo-area">
+      <h3>Multi-Step Wizard</h3>
+      <p>Server-driven step flow</p>
+    </div>
+    <div class="card" hx-get="response_server-driven-ui_dashboard.html" hx-target="#demo-area">
+      <h3>Live Dashboard</h3>
+      <p>OOB + polling</p>
+    </div>
+  </div>
+
+  <div id="demo-area">
+    <span class="placeholder">Click a pattern card above</span>
+  </div>
+</body>
+</html>

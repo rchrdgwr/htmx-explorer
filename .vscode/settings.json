@@ -1,0 +1,8 @@
+{
+  "djlint.showInstallError": false,
+  "djlint.pythonPath": "C:\\Python314\\python.exe",
+  "djlint.profile": "html",
+  "flake8.enabled": false,
+  "ruff.enable": true,
+  "ruff.lineLength": 79
+}

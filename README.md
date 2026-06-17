@@ -4,7 +4,7 @@ An interactive demo app for learning [htmx](https://htmx.org) — built for the 
 
 Browse 16 concepts from beginner to "I could build a real app", with a live demo and request/response inspector for each one.
 
-![HTMX Explorer](alamo-python-logo.jpg)
+<img src="alamo-python-logo.jpg" alt="HTMX Explorer" width="160">
 
 ## Quick Start
 
@@ -20,24 +20,24 @@ Python 3.7+ required. No other dependencies.
 
 ## What's Inside
 
-| # | Concept | What you learn |
-|---|---------|----------------|
-| 1 | Basic Request | `hx-get`, server returns HTML not JSON |
-| 2 | HTTP Verbs | `hx-get` `hx-post` `hx-put` `hx-delete` |
-| 3 | Targeting | `hx-target` with CSS selectors and `closest` |
-| 4 | Swap Strategies | `hx-swap` — innerHTML, outerHTML, beforeend… |
-| 5 | Triggering | `hx-trigger` — clicks, keyup, hover, polling |
-| 6 | Forms | `hx-post` on a form, validation, inline errors |
-| 7 | Loading Indicators | Spinners with `hx-on` events |
-| 8 | Out-of-Band Swaps | `hx-swap-oob` — one response, many targets |
-| 9 | Confirmation | `hx-confirm` before destructive actions |
-| 10 | Inline Editing | Click to edit, save returns updated view |
-| 11 | Polling | `hx-trigger="every 5s"` |
-| 12 | Infinite Scroll | `hx-trigger="revealed"` |
-| 13 | hx-boost | Convert links/forms without changing them |
-| 14 | hx-push-url | Browser history and bookmarkable URLs |
-| 15 | Event System | Custom events, decoupled components |
-| 16 | Server-Driven UI | Patterns: CRUD, wizard, dashboard, master/detail |
+| #  | Concept            | What you learn                                   |
+| -- | ------------------ | ------------------------------------------------ |
+| 1  | Basic Request      | `hx-get`, server returns HTML not JSON         |
+| 2  | HTTP Verbs         | `hx-get` `hx-post` `hx-put` `hx-delete`  |
+| 3  | Targeting          | `hx-target` with CSS selectors and `closest` |
+| 4  | Swap Strategies    | `hx-swap` — innerHTML, outerHTML, beforeend… |
+| 5  | Triggering         | `hx-trigger` — clicks, keyup, hover, polling  |
+| 6  | Forms              | `hx-post` on a form, validation, inline errors |
+| 7  | Loading Indicators | Spinners with `hx-on` events                   |
+| 8  | Out-of-Band Swaps  | `hx-swap-oob` — one response, many targets    |
+| 9  | Confirmation       | `hx-confirm` before destructive actions        |
+| 10 | Inline Editing     | Click to edit, save returns updated view         |
+| 11 | Polling            | `hx-trigger="every 5s"`                        |
+| 12 | Infinite Scroll    | `hx-trigger="revealed"`                        |
+| 13 | hx-boost           | Convert links/forms without changing them        |
+| 14 | hx-push-url        | Browser history and bookmarkable URLs            |
+| 15 | Event System       | Custom events, decoupled components              |
+| 16 | Server-Driven UI   | Patterns: CRUD, wizard, dashboard, master/detail |
 
 ## How It Works
 
@@ -47,6 +47,7 @@ Each example has two tabs:
 - **Live Demo** — interactive demo running against the local server
 
 The right panel shows:
+
 - **Page Source** — the body HTML with htmx attributes
 - **Response Received** — the actual HTML fragment returned by the server
 
@@ -58,10 +59,18 @@ htmx_explorer/
 ├── index.html         # Explorer shell
 ├── home.html          # Landing page
 ├── slides.html        # Intro slide deck (8 slides)
-├── concepts/          # Concept explanation pages (one per topic)
-└── examples/          # Live demo pages
-    └── responses/     # HTML fragments returned by the server
+├── css/                # Shared stylesheets (concept.css, examples.css, responses.css)
+└── topics/             # One folder per topic — everything for a topic lives together
+    └── basic-request/
+        ├── concept_basic-request.html   # Explanation + diagram
+        ├── request_basic-request.html   # Live demo page
+        └── response_basic-request.html  # HTML fragment(s) the server returns
 ```
+
+Topics with more than one server response (e.g. Inline Editing, Server-Driven UI) just have
+multiple `response_<topic>_<name>.html` files side by side. Want to add your own topic? Copy
+an existing `topics/<name>/` folder, rename the three files, and register it in the `EXAMPLES`
+map in `index.html`.
 
 ## The Big 7
 

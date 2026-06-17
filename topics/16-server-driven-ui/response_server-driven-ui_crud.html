@@ -1,0 +1,32 @@
+<div class="crud-wrap">
+  <table class="crud-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ada Lovelace</td>
+        <td>Engineer</td>
+        <td>
+          <button class="crud-edit-btn">Edit</button>
+          <button class="crud-del-btn"
+                  hx-delete="response_server-driven-ui_deleted.html" hx-target="closest tr" hx-swap="outerHTML" hx-confirm="Delete?">Del</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Grace Hopper</td>
+        <td>Admiral</td>
+        <td>
+          <button class="crud-edit-btn">Edit</button>
+          <button class="crud-del-btn"
+                  hx-delete="response_server-driven-ui_deleted.html" hx-target="closest tr" hx-swap="outerHTML" hx-confirm="Delete?">Del</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="crud-note">Delete works live — try it. Edit would swap the row with a form in a real app.</div>
+</div>

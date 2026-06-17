@@ -1,0 +1,17 @@
+<div id="wizard" class="wizard-box">
+  <div class="wizard-step-label">Step 2 of 3 — Details</div>
+  <div class="wizard-panel">
+    <label>Your city</label>
+    <input type="text" placeholder="San Antonio">
+    <div class="wizard-actions">
+      <button class="wizard-btn back"
+              hx-get="response_server-driven-ui_wizard.html" hx-target="#wizard" hx-swap="outerHTML">
+        &larr; Back
+      </button>
+      <button class="wizard-btn"
+              hx-get="response_server-driven-ui_wizard-step3.html" hx-target="#wizard" hx-swap="outerHTML">
+        Next &rarr;
+      </button>
+    </div>
+  </div>
+</div>

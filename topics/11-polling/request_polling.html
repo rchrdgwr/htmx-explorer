@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polling</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-polling">
+  <h2>Polling</h2>
+  <p>This clock refreshes itself every 2 seconds using <code>hx-trigger="every 2s"</code>. No JavaScript, no <code>setInterval</code>.</p>
+
+  <div id="clock" class="clock"
+       hx-get="response_polling.html"
+       hx-target="this"
+       hx-trigger="every 2s load">
+    Loading...
+  </div>
+
+  <p class="note">Watch the Response Received panel update automatically every 2 seconds.</p>
+</body>
+</html>

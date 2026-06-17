@@ -1,0 +1,17 @@
+<div class="dash-wrap">
+  <div class="dash-grid">
+    <div id="dash-users" class="dash-widget users"
+         hx-get="response_server-driven-ui_dash-users.html" hx-trigger="every 3s" hx-swap="outerHTML">
+      <div class="dash-value" id="du"></div>
+      <div class="dash-label">Active Users</div>
+      <script>document.getElementById('du').textContent = Math.floor(Math.random()*100+50);</script>
+    </div>
+    <div id="dash-jobs" class="dash-widget jobs"
+         hx-get="response_server-driven-ui_dash-jobs.html" hx-trigger="every 3s" hx-swap="outerHTML">
+      <div class="dash-value" id="dj"></div>
+      <div class="dash-label">Jobs Queued</div>
+      <script>document.getElementById('dj').textContent = Math.floor(Math.random()*20);</script>
+    </div>
+  </div>
+  <div class="dash-note">Both widgets poll independently every 3 seconds via <code>hx-trigger="every 3s"</code>.</div>
+</div>

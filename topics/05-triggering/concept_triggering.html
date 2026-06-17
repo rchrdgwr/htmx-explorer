@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<body>
+  <h2>5. Triggering</h2>
+  <p class="subtitle">Requests don't have to come from clicks. <code>hx-trigger</code> lets any DOM event — or a timer — fire a request.</p>
+
+  <div><span class="key-attr">hx-trigger</span></div>
+
+  <table>
+    <thead><tr><th>Trigger</th><th>When it fires</th><th>Use case</th></tr></thead>
+    <tbody>
+      <tr><td><code>click</code></td><td>Mouse click (default for buttons)</td><td>Any button action</td></tr>
+      <tr><td><code>change</code></td><td>Value changes &amp; focus leaves (default for inputs)</td><td>Select dropdowns</td></tr>
+      <tr><td><code>keyup changed delay:500ms</code></td><td>500ms after typing stops</td><td>Live search, autocomplete</td></tr>
+      <tr><td><code>mouseenter</code></td><td>On hover</td><td>Lazy-load tooltips / previews</td></tr>
+      <tr><td><code>load</code></td><td>Element enters the DOM</td><td>Lazy sections, skeleton loaders</td></tr>
+      <tr><td><code>revealed</code></td><td>Element scrolls into viewport</td><td>Infinite scroll</td></tr>
+      <tr><td><code>every 5s</code></td><td>Every 5 seconds</td><td>Polling, live dashboards</td></tr>
+      <tr><td><code>submit</code></td><td>Form submission (default for forms)</td><td>Ajax forms</td></tr>
+    </tbody>
+  </table>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- Live search: wait 400ms after typing stops --&gt;</span><br>
+&lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="val">"q"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="attr">hx-get</span>=<span class="val">"/search"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="attr">hx-target</span>=<span class="val">"#results"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-trigger</span>=<span class="val">"keyup changed delay:400ms"</span>&gt;<br><br>
+<span class="cm">&lt;!-- Auto-refresh every 5 seconds --&gt;</span><br>
+&lt;<span class="tag">div</span> <span class="attr">hx-get</span>=<span class="val">"/queue-status"</span> <span class="attr hl">hx-trigger</span>=<span class="val">"every 5s"</span>&gt;...&lt;/<span class="tag">div</span>&gt;
+  </div>
+
+  <div class="callout"><strong>Modifiers:</strong> <code>changed</code> skips the request if the value hasn't changed. <code>delay:Xms</code> debounces. <code>once</code> fires only once. Combine them: <code>"keyup changed delay:500ms"</code></div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>Any standard DOM event works as a trigger — <code>focus</code>, <code>blur</code>, <code>input</code>, <code>drop</code>, etc.</div></div>
+    <div class="point"><div class="icon">2</div><div><code>changed</code> modifier prevents duplicate requests when nothing changed</div></div>
+    <div class="point"><div class="icon">3</div><div><code>delay</code> debounces — essential for search inputs to avoid hammering the server</div></div>
+    <div class="point"><div class="icon">4</div><div>Custom events work too: <code>hx-trigger="my-event from:body"</code></div></div>
+  </div>
+</body>
+</html>

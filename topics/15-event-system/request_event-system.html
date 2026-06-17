@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event System</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-event-system">
+  <h2>Event System</h2>
+  <p>The form and the list don't know about each other. They communicate through a custom event on <code>document.body</code>.</p>
+
+  <!-- Save form -->
+  <div class="panel">
+    <div class="panel-label">Add a record (fires "record-saved" event on success)</div>
+    <form hx-post="response_event-system_saved.html"
+          hx-target="#save-result"
+          hx-on:htmx:after-request="htmx.trigger(document.body, 'record-saved'); logEvent('record-saved')">
+      <input type="text" name="name" placeholder="Enter a name...">
+      <button type="submit">Save</button>
+    </form>
+    <div id="save-result"></div>
+  </div>
+
+  <!-- Record list listens for event -->
+  <div class="panel">
+    <div class="panel-label">Record list (refreshes on "record-saved" event)</div>
+    <div id="record-list"
+         hx-get="response_event-system_list.html"
+         hx-trigger="load, record-saved from:body">
+      Loading...
+    </div>
+  </div>
+
+  <!-- Event log -->
+  <div class="panel">
+    <div class="panel-label">Event log</div>
+    <div id="log"><div class="log-line log-placeholder">Waiting for events...</div></div>
+  </div>
+
+  <script>
+    let count = 0;
+    function logEvent(name) {
+      const log = document.getElementById('log');
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      line.innerHTML = `<span class="time">${new Date().toLocaleTimeString()}</span> — <span class="event">${name}</span> fired`;
+      if (log.querySelector('.log-placeholder')) log.innerHTML = '';
+      log.prepend(line);
+    }
+  </script>
+</body>
+</html>

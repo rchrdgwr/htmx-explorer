@@ -1,9 +1,11 @@
-"""Simple HTTP server that handles GET/POST/PUT/DELETE and simulates slow responses."""
+"""Simple HTTP server that handles GET/POST/PUT/DELETE and simulates slow
+responses."""
 import time
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
-SLOW_PATHS = {'/examples/responses/slow.html'}
+SLOW_PATHS = {'/topics/07-loading-indicators/response_loading-indicators.html'}
 SLOW_DELAY = 4.0  # seconds
+
 
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -13,7 +15,7 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'text/html')
             self.send_header('Cache-Control', 'no-store')
             self.end_headers()
-            with open('examples/responses/slow.html', 'rb') as f:
+            with open('topics/07-loading-indicators/response_loading-indicators.html', 'rb') as f:
                 self.wfile.write(f.read())
             return
         super().do_GET()
@@ -33,6 +35,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def log_message(self, fmt, *args):
         print(f"  {args[0]} {args[1]}")
+
 
 if __name__ == '__main__':
     port = 8765

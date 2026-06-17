@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP Verbs</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-http-verbs">
+  <h2>HTTP Verbs</h2>
+  <p>Each button uses a different HTTP method. Watch the inspector panel to see the verb change.</p>
+
+  <div class="verb-row">
+    <button class="get" hx-get="response_http-verbs.html" hx-target="#result">hx-get</button>
+    <span class="label">Fetch / read data</span>
+  </div>
+  <div class="verb-row">
+    <button class="post" hx-post="response_http-verbs.html" hx-target="#result">hx-post</button>
+    <span class="label">Create a record</span>
+  </div>
+  <div class="verb-row">
+    <button class="put" hx-put="response_http-verbs.html" hx-target="#result">hx-put</button>
+    <span class="label">Replace a resource</span>
+  </div>
+  <div class="verb-row">
+    <button class="delete" hx-delete="response_http-verbs.html" hx-target="#result">hx-delete</button>
+    <span class="label">Remove a resource</span>
+  </div>
+
+  <div id="result"></div>
+</body>
+</html>

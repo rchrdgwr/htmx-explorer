@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<body>
+  <h2>2. HTTP Verbs</h2>
+  <p class="subtitle">htmx works with all standard HTTP methods — making it natural to build REST-like interactions. The server stays the source of truth.</p>
+
+  <div>
+    <span class="key-attr">hx-get</span><span class="key-attr">hx-post</span>
+    <span class="key-attr">hx-put</span><span class="key-attr">hx-patch</span><span class="key-attr">hx-delete</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Attribute</th><th>HTTP Method</th><th>Typical use</th></tr></thead>
+    <tbody>
+      <tr><td><code>hx-get</code></td><td>GET</td><td>Load content, search, fetch a record</td></tr>
+      <tr><td><code>hx-post</code></td><td>POST</td><td>Create a record, submit a form</td></tr>
+      <tr><td><code>hx-put</code></td><td>PUT</td><td>Replace a resource entirely</td></tr>
+      <tr><td><code>hx-patch</code></td><td>PATCH</td><td>Update specific fields (inline edit)</td></tr>
+      <tr><td><code>hx-delete</code></td><td>DELETE</td><td>Remove a record, delete a row</td></tr>
+    </tbody>
+  </table>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- Load a list --&gt;</span><br>
+&lt;<span class="tag">button</span> <span class="attr hl">hx-get</span>=<span class="val">"/items"</span> <span class="attr">hx-target</span>=<span class="val">"#list"</span>&gt;Refresh&lt;/<span class="tag">button</span>&gt;<br><br>
+<span class="cm">&lt;!-- Create a new item --&gt;</span><br>
+&lt;<span class="tag">form</span> <span class="attr hl">hx-post</span>=<span class="val">"/items"</span> <span class="attr">hx-target</span>=<span class="val">"#list"</span>&gt;...&lt;/<span class="tag">form</span>&gt;<br><br>
+<span class="cm">&lt;!-- Delete a row --&gt;</span><br>
+&lt;<span class="tag">button</span> <span class="attr hl">hx-delete</span>=<span class="val">"/items/42"</span> <span class="attr">hx-target</span>=<span class="val">"closest tr"</span> <span class="attr">hx-swap</span>=<span class="val">"outerHTML"</span>&gt;Delete&lt;/<span class="tag">button</span>&gt;
+  </div>
+
+  <div class="callout"><strong>Mental model:</strong> htmx is just making HTTP requests. Think of each button or form as a tiny fetch call — but written in HTML. The server-side routes look exactly like a normal REST API.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>Any element can trigger any HTTP verb — not just forms and buttons</div></div>
+    <div class="point"><div class="icon">2</div><div>The server handles business logic and returns updated HTML</div></div>
+    <div class="point"><div class="icon">3</div><div>Using the correct verb makes your API clean and RESTful for free</div></div>
+    <div class="point"><div class="icon">4</div><div>DELETE and PUT still return HTML — typically the updated/removed element</div></div>
+  </div>
+</body>
+</html>

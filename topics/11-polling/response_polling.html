@@ -1,0 +1,7 @@
+<div id="clock" class="clock"
+     hx-get="response_polling.html"
+     hx-target="this"
+     hx-trigger="every 2s">
+  <span id="ct"></span>
+  <script>document.getElementById('ct').textContent = new Date().toLocaleTimeString();</script>
+</div>

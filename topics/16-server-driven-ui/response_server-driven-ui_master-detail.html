@@ -1,0 +1,25 @@
+<div class="demo-grid">
+  <div>
+    <div class="demo-col-label">Master list</div>
+    <div class="master-list">
+      <div class="master-item active"
+           hx-get="response_server-driven-ui_detail-1.html" hx-target="#detail-pane">
+        Ada Lovelace
+      </div>
+      <div class="master-item"
+           hx-get="response_server-driven-ui_detail-2.html" hx-target="#detail-pane">
+        Grace Hopper
+      </div>
+      <div class="master-item"
+           hx-get="response_server-driven-ui_detail-1.html" hx-target="#detail-pane">
+        Margaret Hamilton
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="demo-col-label">Detail pane</div>
+    <div id="detail-pane" class="detail-pane">
+      Click a name to load details
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Targeting</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-targeting">
+  <h2>Targeting</h2>
+  <p>The same response can land in completely different places depending on <code>hx-target</code>.</p>
+
+  <div class="demo">
+    <h3>Target by ID</h3>
+    <div class="desc"><code>hx-target="#box-a"</code></div>
+    <button hx-get="response_targeting_box.html" hx-target="#box-a">Load into #box-a</button>
+    <div id="box-a" class="box">Waiting...</div>
+  </div>
+
+  <div class="demo">
+    <h3>Target a different element</h3>
+    <div class="desc"><code>hx-target="#box-b"</code> — same response, different destination</div>
+    <button hx-get="response_targeting_box.html" hx-target="#box-b">Load into #box-b</button>
+    <div id="box-b" class="box">Waiting...</div>
+  </div>
+
+  <div class="demo">
+    <h3>Target closest ancestor</h3>
+    <div class="desc"><code>hx-target="closest tr"</code> + <code>hx-swap="outerHTML"</code> — replaces the whole row</div>
+    <table>
+      <thead><tr><th>Name</th><th>Role</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Ada Lovelace</td><td>Engineer</td>
+          <td><button hx-get="response_targeting_row.html" hx-target="closest tr" hx-swap="outerHTML">Replace Row</button></td>
+        </tr>
+        <tr>
+          <td>Grace Hopper</td><td>Admiral</td>
+          <td><button hx-get="response_targeting_row.html" hx-target="closest tr" hx-swap="outerHTML">Replace Row</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<body>
+  <h2>3. Targeting</h2>
+  <p class="subtitle">Where does the response go? <code>hx-target</code> accepts any CSS selector — most of htmx's power comes from getting targeting right.</p>
+
+  <div><span class="key-attr">hx-target</span></div>
+
+  <table>
+    <thead><tr><th>Selector</th><th>What it targets</th></tr></thead>
+    <tbody>
+      <tr><td><code>#content</code></td><td>Element with id="content"</td></tr>
+      <tr><td><code>this</code></td><td>The element that triggered the request</td></tr>
+      <tr><td><code>closest tr</code></td><td>Nearest ancestor &lt;tr&gt; — great for table rows</td></tr>
+      <tr><td><code>closest .card</code></td><td>Nearest ancestor with class "card"</td></tr>
+      <tr><td><code>next .result</code></td><td>Next sibling with class "result"</td></tr>
+      <tr><td><code>previous p</code></td><td>Previous sibling &lt;p&gt;</td></tr>
+      <tr><td><code>find .badge</code></td><td>First descendant with class "badge"</td></tr>
+      <tr><td><code>body</code></td><td>The whole page body</td></tr>
+    </tbody>
+  </table>
+
+  <div class="snippet">
+<span class="cm">&lt;!-- Target by id --&gt;</span><br>
+&lt;<span class="tag">button</span> <span class="attr">hx-get</span>=<span class="val">"/data"</span> <span class="attr hl">hx-target</span>=<span class="val">"#content"</span>&gt;Load&lt;/<span class="tag">button</span>&gt;<br><br>
+<span class="cm">&lt;!-- Replace the button itself --&gt;</span><br>
+&lt;<span class="tag">button</span> <span class="attr">hx-get</span>=<span class="val">"/expanded"</span> <span class="attr hl">hx-target</span>=<span class="val">"this"</span> <span class="attr">hx-swap</span>=<span class="val">"outerHTML"</span>&gt;Expand&lt;/<span class="tag">button</span>&gt;<br><br>
+<span class="cm">&lt;!-- Delete the containing row --&gt;</span><br>
+&lt;<span class="tag">button</span> <span class="attr">hx-delete</span>=<span class="val">"/row/1"</span> <span class="attr hl">hx-target</span>=<span class="val">"closest tr"</span> <span class="attr">hx-swap</span>=<span class="val">"outerHTML"</span>&gt;Delete&lt;/<span class="tag">button</span>&gt;
+  </div>
+
+  <div class="callout"><strong>Pro tip:</strong> <code>closest</code> is your best friend in table rows, list items, and cards — it lets each row manage itself without needing unique IDs.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div><code>hx-target</code> defaults to the triggering element if omitted</div></div>
+    <div class="point"><div class="icon">2</div><div><code>closest</code> and <code>find</code> are extended CSS selectors unique to htmx</div></div>
+    <div class="point"><div class="icon">3</div><div>Good targeting means you rarely need unique IDs on every element</div></div>
+    <div class="point"><div class="icon">4</div><div>Pair <code>hx-target="closest tr"</code> with <code>hx-swap="outerHTML"</code> to make self-managing table rows</div></div>
+  </div>
+</body>
+</html>

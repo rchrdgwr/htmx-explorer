@@ -1,0 +1,146 @@
+/* Shared base — applies to every example page */
+body { font-family: system-ui, sans-serif; padding: 24px; max-width: 520px; }
+h2   { margin-bottom: 8px; }
+p    { color: #555; margin-bottom: 20px; font-size: 14px; }
+code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+.note { font-size: 12px; color: #888; margin-top: 12px; }
+#result { margin-top: 16px; min-height: 40px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Shared "demo box" component (targeting, swap-strategies, triggering, loading-indicators) */
+.demo { margin-bottom: 24px; padding: 16px; border: 1px solid #e0e0e0; border-radius: 6px; }
+.demo h3 { font-size: 13px; color: #333; margin-bottom: 6px; }
+.demo .desc, .desc { font-size: 12px; color: #888; margin-bottom: 12px; }
+
+/* Shared dashed placeholder box (targeting, swap-strategies) */
+.box { margin-top: 10px; padding: 8px 12px; background: #fafafa; border: 1px dashed #ccc; border-radius: 4px; font-size: 13px; color: #555; min-height: 32px; }
+
+/* Shared htmx loading-indicator pattern (forms) */
+.htmx-indicator { display: none; color: #888; font-size: 13px; margin-top: 8px; }
+.htmx-request .htmx-indicator { display: block; }
+
+/* Shared nav (hx-boost, boost-page-a/b/c) */
+nav { display: flex; gap: 8px; margin-bottom: 24px; }
+nav a { padding: 8px 16px; background: #1a1a2e; color: #eee; text-decoration: none; border-radius: 5px; font-size: 13px; }
+nav a:hover { background: #e94560; }
+#content { padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; min-height: 80px; background: #f8f8f8; }
+
+/* ── 1. Basic Request ── */
+.page-basic-request button { padding: 9px 20px; background: #0066cc; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+.page-basic-request button:hover { background: #0052a3; }
+
+/* ── 2. HTTP Verbs ── */
+.page-http-verbs .verb-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+.page-http-verbs button { padding: 8px 16px; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 13px; font-family: monospace; min-width: 110px; }
+.page-http-verbs .get    { background: #1976d2; }
+.page-http-verbs .post   { background: #2e7d32; }
+.page-http-verbs .put    { background: #f57c00; }
+.page-http-verbs .delete { background: #c62828; }
+.page-http-verbs .label  { font-size: 12px; color: #888; }
+
+/* ── 3. Targeting ── */
+body.page-targeting { max-width: 560px; }
+.page-targeting button { padding: 7px 14px; background: #1a1a2e; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+.page-targeting button:hover { background: #e94560; }
+.page-targeting table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.page-targeting td, .page-targeting th { padding: 7px 10px; border: 1px solid #ddd; font-size: 13px; text-align: left; }
+.page-targeting th { background: #f5f5f5; }
+
+/* ── 4. Swap Strategies ── */
+.page-swap-strategies button { padding: 7px 16px; background: #e65100; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 13px; }
+.page-swap-strategies button:hover { background: #bf360c; }
+
+/* ── 5. Triggering ── */
+.page-triggering button { padding: 7px 16px; background: #c62828; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 13px; }
+.page-triggering button:hover { background: #b71c1c; }
+.page-triggering input[type=text] { padding: 7px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 100%; }
+.page-triggering .result { margin-top: 10px; min-height: 28px; font-size: 13px; color: #333; }
+
+/* ── 6. Forms ── */
+.page-forms label { display: block; font-size: 13px; color: #444; margin-bottom: 4px; }
+.page-forms input[type=text] { width: 100%; padding: 8px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 14px; }
+.page-forms button { padding: 9px 20px; background: #2e7d32; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+.page-forms button:hover { background: #1b5e20; }
+.page-forms #form-result { margin-top: 20px; min-height: 40px; }
+
+/* ── 7. Loading Indicators ── */
+.page-loading-indicators button { padding: 9px 20px; background: #1a1a2e; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+.page-loading-indicators button:hover { background: #e94560; }
+.page-loading-indicators button:disabled { opacity: 0.6; cursor: not-allowed; background: #1a1a2e; }
+.spinner { display: none; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-left: 6px; }
+.ext-spinner { display: none; margin-left: 10px; color: #e94560; font-size: 13px; vertical-align: middle; }
+.spin-red { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(233,69,96,0.2); border-top-color: #e94560; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 5px; }
+
+/* ── 8. Out-of-Band Swaps ── */
+.page-oob-swaps button { padding: 9px 20px; background: #6a0dad; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+.page-oob-swaps button:hover { background: #520a9e; }
+.page-oob-swaps .result-box { margin-top: 16px; padding: 12px 16px; border-radius: 5px; border: 1px solid #ddd; font-size: 14px; color: #444; }
+.page-oob-swaps .result-box.dashed { border-style: dashed; }
+.page-oob-swaps .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #999; margin-bottom: 6px; }
+.page-oob-swaps .label:first-of-type { margin-top: 20px; }
+.page-oob-swaps .label:last-of-type { margin-top: 12px; }
+
+/* ── 9. Confirmation ── */
+.page-confirmation table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+.page-confirmation th { background: #1a1a2e; color: #eee; padding: 8px 12px; text-align: left; font-size: 12px; }
+.page-confirmation td { padding: 9px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+.page-confirmation .delete-btn { padding: 5px 12px; background: #c62828; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
+.page-confirmation .delete-btn:hover { background: #b71c1c; }
+.page-confirmation #status { margin-top: 16px; font-size: 14px; color: #555; min-height: 24px; }
+
+/* ── 10. Inline Editing ── */
+.page-inline-editing .field { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+.page-inline-editing .field-label { font-size: 12px; color: #888; width: 80px; flex-shrink: 0; }
+.page-inline-editing .field-value { font-size: 15px; color: #222; flex: 1; }
+.page-inline-editing .edit-btn { padding: 4px 12px; background: none; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 12px; color: #555; }
+.page-inline-editing .edit-btn:hover { border-color: #1976d2; color: #1976d2; }
+
+/* ── 11. Polling ── */
+.page-polling .clock { font-size: 42px; font-weight: 700; color: #1a1a2e; font-family: monospace; padding: 24px; background: #f8f8f8; border-radius: 10px; text-align: center; margin: 20px 0; border: 2px solid #e0e0e0; }
+.page-polling .note { text-align: center; }
+
+/* ── 12. Infinite Scroll ── */
+.page-infinite-scroll p { margin-bottom: 16px; }
+.page-infinite-scroll .item { padding: 12px 16px; margin-bottom: 8px; background: #f8f8f8; border-radius: 6px; border-left: 3px solid #1976d2; font-size: 14px; }
+.page-infinite-scroll .item.new { background: #f0f7ff; border-left-color: #7b1fa2; }
+.page-infinite-scroll .sentinel { padding: 12px; text-align: center; color: #888; font-size: 13px; border: 1px dashed #ccc; border-radius: 6px; margin-top: 8px; }
+.page-infinite-scroll #list { max-height: 340px; overflow-y: auto; }
+
+/* ── 13. hx-boost (+ boost-page-a/b/c) ── */
+.page-boost-a #content { background: #e3f2fd; border-color: #90caf9; }
+.page-boost-b #content { background: #f3e5f5; border-color: #ce93d8; }
+.page-boost-c #content { background: #e8f5e9; border-color: #a5d6a7; }
+
+/* ── 14. hx-push-url ── */
+.page-hx-push-url p { margin-bottom: 16px; }
+.page-hx-push-url input[type=text] { padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; width: 100%; margin-bottom: 12px; }
+.page-hx-push-url .result-item { padding: 10px 14px; background: #f0f7ff; border-left: 3px solid #1976d2; border-radius: 4px; margin-bottom: 8px; font-size: 14px; }
+.page-hx-push-url #results { margin-top: 16px; min-height: 40px; }
+.page-hx-push-url .url-display { font-family: monospace; font-size: 12px; background: #1e1e2e; color: #a6e3a1; padding: 8px 12px; border-radius: 4px; margin-bottom: 16px; }
+
+/* ── 15. Event System ── */
+.page-event-system .panel { padding: 16px; border: 1px solid #e0e0e0; border-radius: 6px; margin-bottom: 16px; }
+.page-event-system .panel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #888; margin-bottom: 10px; }
+.page-event-system input[type=text] { padding: 7px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 60%; margin-right: 8px; }
+.page-event-system button { padding: 7px 16px; background: #1a1a2e; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+.page-event-system button:hover { background: #e94560; }
+.page-event-system .record { padding: 8px 12px; background: #f5f5f5; border-radius: 4px; margin-bottom: 6px; font-size: 13px; display: flex; justify-content: space-between; }
+.page-event-system #log { font-family: monospace; font-size: 12px; color: #444; }
+.page-event-system .log-line { padding: 3px 0; border-bottom: 1px solid #f0f0f0; }
+.page-event-system .log-line .time { color: #888; }
+.page-event-system .log-line .event { color: #e94560; font-weight: bold; }
+.page-event-system #save-result { margin-top: 8px; font-size: 13px; color: #2e7d32; }
+.page-event-system .log-placeholder { color: #bbb; }
+
+/* ── 16. Server-Driven UI ── */
+body.page-server-driven-ui { max-width: 560px; }
+.page-server-driven-ui .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.page-server-driven-ui .card { padding: 14px 16px; border: 1px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.page-server-driven-ui .card:hover { border-color: #1976d2; background: #f0f7ff; }
+.page-server-driven-ui .card h3 { font-size: 14px; margin-bottom: 4px; color: #1a1a2e; }
+.page-server-driven-ui .card p { font-size: 12px; color: #888; margin: 0; }
+.page-server-driven-ui button { padding: 8px 16px; background: #1a1a2e; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+.page-server-driven-ui button:hover { background: #e94560; }
+.page-server-driven-ui #demo-area { margin-top: 20px; padding: 16px; background: #fafafa; border-radius: 8px; border: 1px dashed #ccc; min-height: 60px; }
+.page-server-driven-ui .placeholder { color: #bbb; font-size: 13px; }

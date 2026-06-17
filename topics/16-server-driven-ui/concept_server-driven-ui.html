@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<body>
+  <h2>16. Server-Driven UI Patterns</h2>
+  <p class="subtitle">Where htmx really clicks. These patterns combine the concepts you've learned into complete, real-world application building blocks.</p>
+
+  <div class="pattern-grid">
+
+    <div class="pattern-card">
+      <div class="title">Master / Detail</div>
+      <div class="desc">Select a row → update a detail pane</div>
+      <div class="code">hx-get="/customers/42"<br>hx-target="#detail-pane"</div>
+    </div>
+
+    <div class="pattern-card">
+      <div class="title">Modal Dialog</div>
+      <div class="desc">Open a modal from a server response</div>
+      <div class="code">hx-get="/modal/edit"<br>hx-target="#modal-container"</div>
+    </div>
+
+    <div class="pattern-card">
+      <div class="title">CRUD Table</div>
+      <div class="desc">Create, inline-edit, delete rows</div>
+      <div class="code">hx-post="/items" + hx-delete<br>hx-target="closest tr"</div>
+    </div>
+
+    <div class="pattern-card">
+      <div class="title">Multi-Step Wizard</div>
+      <div class="desc">Each step returns the next step's HTML</div>
+      <div class="code">hx-post="/wizard/step1"<br>hx-target="#wizard" hx-swap="outerHTML"</div>
+    </div>
+
+    <div class="pattern-card">
+      <div class="title">Live Dashboard</div>
+      <div class="desc">OOB updates + polling</div>
+      <div class="code">hx-trigger="every 10s"<br>+ hx-swap-oob on multiple widgets</div>
+    </div>
+
+    <div class="pattern-card">
+      <div class="title">Shopping Cart</div>
+      <div class="desc">Add item → update cart badge + total</div>
+      <div class="code">hx-post="/cart/add"<br>+ hx-swap-oob for counter</div>
+    </div>
+
+  </div>
+
+  <div style="background:#1a1a2e;border-radius:8px;padding:16px 20px;margin:16px 0;color:#eee;">
+    <div style="font-size:12px;font-weight:700;color:#e94560;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;">The Big 7 — Build 80% of apps with these</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;font-family:monospace;">
+      <div style="color:#89b4fa;">1. hx-get</div>
+      <div style="color:#a6e3a1;">2. hx-post</div>
+      <div style="color:#89b4fa;">3. hx-target</div>
+      <div style="color:#a6e3a1;">4. hx-swap</div>
+      <div style="color:#89b4fa;">5. hx-trigger</div>
+      <div style="color:#a6e3a1;">6. Forms</div>
+      <div style="color:#cba6f7;grid-column:1/-1;">7. OOB Swaps</div>
+    </div>
+  </div>
+
+  <div class="callout"><strong>The mental shift:</strong> Stop thinking about JSON APIs and client-side state. Think about HTML fragments and URL endpoints. The server renders; htmx delivers. That's the whole model.</div>
+
+  <div class="callout"><strong>About this demo:</strong> The Live Dashboard pattern's numbers come from a tiny inline <code>&lt;script&gt;</code> in the response fragment, not the server — <code>server.py</code> just serves static files. A real backend would return freshly computed values on each poll.</div>
+
+  <div class="points">
+    <h3>Key Points</h3>
+    <div class="point"><div class="icon">1</div><div>Every pattern is just a combination of the 7 core concepts — nothing new to learn</div></div>
+    <div class="point"><div class="icon">2</div><div>The server stays authoritative — no client-side state synchronization problems</div></div>
+    <div class="point"><div class="icon">3</div><div>htmx applications are naturally accessible — they're still HTML pages</div></div>
+    <div class="point"><div class="icon">4</div><div>Start with <code>hx-boost</code> on an existing app and layer in patterns as needed</div></div>
+  </div>
+</body>
+</html>

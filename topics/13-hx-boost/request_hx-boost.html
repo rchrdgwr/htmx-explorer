@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hx-boost</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-hx-boost" hx-boost="true">
+  <h2>hx-boost</h2>
+  <p>These are plain <code>&lt;a&gt;</code> links. Because <code>hx-boost="true"</code> is on <code>&lt;body&gt;</code>, htmx intercepts them and swaps only the <code>&lt;body&gt;</code> content — no full reload.</p>
+
+  <nav>
+    <a href="request_hx-boost_page-a.html">Page A</a>
+    <a href="request_hx-boost_page-b.html">Page B</a>
+    <a href="request_hx-boost_page-c.html">Page C</a>
+  </nav>
+
+  <div id="content">
+    <strong>Home page</strong> — click a nav link above and watch the URL change without a full reload.
+  </div>
+
+  <p class="note">Check the Response Received panel — you'll see the full page HTML returned but only the body is swapped in.</p>
+</body>
+</html>

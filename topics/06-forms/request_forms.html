@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>POST Form</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-forms">
+  <h2>POST Form</h2>
+  <p>htmx serializes the form and POSTs it without a page reload. The response fragment replaces <code>#form-result</code>.</p>
+
+  <form hx-post="response_forms.html"
+        hx-target="#form-result"
+        hx-swap="innerHTML">
+    <label for="name">Your name</label>
+    <input type="text" id="name" name="name" placeholder="e.g. Ada Lovelace">
+
+    <label for="city">Your city</label>
+    <input type="text" id="city" name="city" placeholder="e.g. San Antonio">
+
+    <button type="submit">Submit via htmx</button>
+    <span class="htmx-indicator">Sending…</span>
+  </form>
+
+  <div id="form-result"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infinite Scroll</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-infinite-scroll">
+  <h2>Infinite Scroll</h2>
+  <p>Scroll to the bottom of the list — the sentinel element detects it entered the viewport and loads the next page.</p>
+
+  <div id="list">
+    <div class="item">Record 1 — Python basics</div>
+    <div class="item">Record 2 — List comprehensions</div>
+    <div class="item">Record 3 — Decorators</div>
+    <div class="item">Record 4 — Context managers</div>
+    <div class="item">Record 5 — Generators</div>
+
+    <!-- Sentinel: when it enters the viewport, loads the next page -->
+    <div class="sentinel"
+         hx-get="response_infinite-scroll_more.html"
+         hx-trigger="revealed"
+         hx-swap="outerHTML">
+      Scroll down to load more...
+    </div>
+  </div>
+</body>
+</html>

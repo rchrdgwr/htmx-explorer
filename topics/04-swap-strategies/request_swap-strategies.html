@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swap Styles</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-swap-strategies">
+  <h2>Swap Styles</h2>
+  <p><code>hx-swap</code> controls <em>how</em> the response is placed in the DOM.</p>
+
+  <div class="demo">
+    <h3>innerHTML (default)</h3>
+    <div class="desc">Replaces the <em>contents</em> of the target element</div>
+    <button hx-get="response_swap-strategies.html"
+            hx-target="#s1"
+            hx-swap="innerHTML">Load</button>
+    <div id="s1" class="box">Original content</div>
+  </div>
+
+  <div class="demo">
+    <h3>outerHTML</h3>
+    <div class="desc">Replaces the target element <em>itself</em> with the response</div>
+    <button hx-get="response_swap-strategies.html"
+            hx-target="#s2"
+            hx-swap="outerHTML">Load</button>
+    <div id="s2" class="box">Original content</div>
+  </div>
+
+  <div class="demo">
+    <h3>beforeend</h3>
+    <div class="desc">Appends the response <em>after</em> existing content</div>
+    <button hx-get="response_swap-strategies.html"
+            hx-target="#s3"
+            hx-swap="beforeend">Append</button>
+    <div id="s3" class="box">Existing content →</div>
+  </div>
+
+  <div class="demo">
+    <h3>afterbegin</h3>
+    <div class="desc">Prepends the response <em>before</em> existing content</div>
+    <button hx-get="response_swap-strategies.html"
+            hx-target="#s4"
+            hx-swap="afterbegin">Prepend</button>
+    <div id="s4" class="box">← Existing content</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-confirmation">
+  <h2>Confirmation</h2>
+  <p>Click Delete — <code>hx-confirm</code> shows a dialog before the request fires. Cancel aborts it entirely.</p>
+
+  <table>
+    <thead><tr><th>Name</th><th>Role</th><th></th></tr></thead>
+    <tbody id="rows">
+      <tr id="row-1">
+        <td>Ada Lovelace</td><td>Engineer</td>
+        <td><button class="delete-btn"
+              hx-delete="response_confirmation_deleted.html"
+              hx-target="#row-1"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Ada Lovelace? This cannot be undone.">Delete</button></td>
+      </tr>
+      <tr id="row-2">
+        <td>Grace Hopper</td><td>Admiral</td>
+        <td><button class="delete-btn"
+              hx-delete="response_confirmation_deleted.html"
+              hx-target="#row-2"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Grace Hopper? This cannot be undone.">Delete</button></td>
+      </tr>
+      <tr id="row-3">
+        <td>Margaret Hamilton</td><td>Director</td>
+        <td><button class="delete-btn"
+              hx-delete="response_confirmation_deleted.html"
+              hx-target="#row-3"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Margaret Hamilton? This cannot be undone.">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="status"></div>
+</body>
+</html>

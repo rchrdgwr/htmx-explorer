@@ -1,0 +1,12 @@
+<div id="name-field" class="field">
+  <span class="field-label">Field</span>
+  <input type="text" value="Ada Lovelace" class="field-input" name="value">
+  <button class="save-btn"
+          hx-post="response_inline-editing_saved.html"
+          hx-target="closest div"
+          hx-swap="outerHTML">Save</button>
+  <button class="edit-btn"
+          hx-get="response_inline-editing_cancel.html"
+          hx-target="closest div"
+          hx-swap="outerHTML">Cancel</button>
+</div>
