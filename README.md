@@ -1,6 +1,6 @@
 # HTMX Explorer
 
-An interactive demo app for learning [htmx](https://htmx.org) — built for the [Alamo Python Group](https://alamopython.com).
+An interactive demo app for learning [htmx](https://htmx.org) — built for [Alamo Python](https://alamopython.com).
 
 Browse 16 concepts from beginner to "I could build a real app", with a live demo and request/response inspector for each one.
 
