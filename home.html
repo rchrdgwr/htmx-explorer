@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Introduction to htmx - build dynamic web apps with HTML without JavaScript frameworks">
+  <meta name="keywords" content="htmx, HTML, web development, dynamic web apps">
+  <title>Introduction to htmx - Alamo Python</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 60%, #1a1a2e 100%);
-      color: #eee;
+      background: #fff;
+      color: #222;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -17,25 +20,19 @@
       text-align: center;
     }
 
-    .logo {
-      width: 140px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-    }
-
     .group-name {
-      font-size: 13px;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #f4c842;
+      color: #e94560;
       margin-bottom: 6px;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 37px;
       font-weight: 800;
-      color: #fff;
+      color: #1a1a2e;
       margin-bottom: 10px;
       line-height: 1.2;
     }
@@ -43,8 +40,8 @@
     h1 span { color: #e94560; }
 
     .tagline {
-      font-size: 14px;
-      color: #aaa;
+      font-size: 20px;
+      color: #888;
       margin-bottom: 36px;
       max-width: 380px;
       line-height: 1.6;
@@ -60,13 +57,13 @@
     }
 
     .badge {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: #4389bf;
+      border: 1px solid #4389bf;
       border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 12px;
+      padding: 7px 18px;
+      font-size: 17px;
       font-family: monospace;
-      color: #89b4fa;
+      color: #fff;
     }
 
     /* Big concept count */
@@ -78,13 +75,13 @@
 
     .stat { text-align: center; }
     .stat .num {
-      font-size: 36px;
+      font-size: 45px;
       font-weight: 800;
       color: #e94560;
       line-height: 1;
     }
     .stat .lbl {
-      font-size: 11px;
+      font-size: 16px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: #888;
@@ -92,7 +89,7 @@
     }
 
     .cta {
-      font-size: 13px;
+      font-size: 18px;
       color: #666;
       animation: pulse 2.5s ease-in-out infinite;
     }
@@ -112,17 +109,20 @@
 </head>
 <body>
 
-  <img src="alamo-python-logo.jpg" class="logo" alt="Alamo Python">
-
-  <div class="group-name">Alamo Python Group</div>
+  <div class="group-name">Alamo Python</div>
 
   <h1>Introduction to <span>htmx</span></h1>
 
   <div class="divider"></div>
 
   <p class="tagline">
-    Build dynamic web apps with HTML attributes — no JavaScript framework required.
-    Server returns HTML, not JSON. The browser does the rest.
+    Build dynamic web apps with HTML 
+  </br>
+    No JavaScript framework required.
+      </br>
+    Server returns HTML, not JSON. 
+      </br>
+    The browser does the rest.
   </p>
 
   <div class="badges">
@@ -136,7 +136,7 @@
 
   <div class="stats">
     <div class="stat"><div class="num">16</div><div class="lbl">Concepts</div></div>
-    <div class="stat"><div class="num">7</div><div class="lbl">Core attrs</div></div>
+    <div class="stat"><div class="num">6</div><div class="lbl">Core attrs</div></div>
     <div class="stat"><div class="num">0</div><div class="lbl">JS written</div></div>
   </div>
 

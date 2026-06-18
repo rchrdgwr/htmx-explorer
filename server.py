@@ -8,12 +8,15 @@ SLOW_DELAY = 4.0  # seconds
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_header('Cache-Control', 'no-store')
+        super().end_headers()
+
     def do_GET(self):
         if self.path.split('?')[0] in SLOW_PATHS:
             time.sleep(SLOW_DELAY)
             self.send_response(200)
             self.send_header('Content-Type', 'text/html')
-            self.send_header('Cache-Control', 'no-store')
             self.end_headers()
             with open('topics/07-loading-indicators/response_loading-indicators.html', 'rb') as f:
                 self.wfile.write(f.read())

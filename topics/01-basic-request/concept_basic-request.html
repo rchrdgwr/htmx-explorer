@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Request - htmx Explorer</title>
+  <meta name="description" content="Learn the core idea of htmx: replace part of a page without writing JavaScript using HTML attributes.">
+  <meta name="keywords" content="htmx, hx-get, hx-target, basic request, AJAX">
+  <link rel="stylesheet" href="/css/concept.css">
+</head>
 <body>
   <h2>1. Basic Request</h2>
   <p class="subtitle">Replace part of a page without writing JavaScript. This is the core idea of htmx — HTML attributes do the work.</p>
@@ -18,7 +24,8 @@
   <div class="snippet">
 &lt;<span class="tag">button</span><br>
 &nbsp;&nbsp;<span class="attr hl">hx-get</span>=<span class="val">"/hello"</span><br>
-&nbsp;&nbsp;<span class="attr hl">hx-target</span>=<span class="val">"#result"</span>&gt;<br>
+&nbsp;&nbsp;<span class="attr hl">hx-target</span>=<span class="val">"#result"</span><br>
+&nbsp;&nbsp;<span class="attr hl">hx-swap</span>=<span class="val">"innerHTML"</span>&gt;<br>
 &nbsp;&nbsp;Say Hello<br>
 &lt;/<span class="tag">button</span>&gt;<br><br>
 &lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"result"</span>&gt;&lt;/<span class="tag">div</span>&gt;

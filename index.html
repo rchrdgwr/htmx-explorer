@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="An interactive explorer for learning HTMX with examples and documentation.">
+  <meta name="keywords" content="HTMX, HTML, web development, interactive explorer">
   <title>HTMX Explorer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -20,8 +22,8 @@
 
     /* ── Top bar ── */
     #topbar {
-      background: #1a1a2e;
-      color: #eee;
+      background: #fff;
+      color: #222;
       padding: 0 20px;
       height: 52px;
       display: flex;
@@ -35,12 +37,12 @@
       font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.5px;
-      color: #fff;
+      color: #1a1a2e;
     }
 
     #topbar span {
       font-size: 12px;
-      color: #aaa;
+      color: #888;
     }
 
     /* ── Main layout ── */
@@ -305,7 +307,7 @@
 <!-- ── Top bar ── -->
 <div id="topbar">
   <h1>HTMX Explorer</h1>
-  <span>Alamo Python Group · Select an example to get started</span>
+  <span>Alamo Python · Select an example to get started</span>
 </div>
 
 <!-- ── Main layout ── -->
@@ -404,15 +406,16 @@ const EXAMPLES = {
 let currentExample = null;
 let activeTab = 'concept';
 
-// Hide inspector until an example is selected
+// Hide inspector and tabs until an example is selected
 document.getElementById('inspector').style.display = 'none';
+document.getElementById('preview-tabs').style.display = 'none';
 
 // ── Load a full-width page (Home, Slides) ─────────────────────────
 function loadPage(btn, url) {
   document.querySelectorAll('.example-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   currentExample = null;
-  document.getElementById('home-frame').src = url;
+  document.getElementById('home-frame').src = url + '?t=' + Date.now();
   document.getElementById('home-frame').classList.add('visible');
   document.getElementById('concept-frame').classList.remove('visible');
   document.getElementById('preview-frame').classList.remove('visible');
@@ -444,16 +447,17 @@ async function loadExample(btn, key) {
   switchTab('concept');
 
   // Load concept iframe
-  document.getElementById('concept-frame').src = ex.concept;
+  const bust = Date.now();
+  document.getElementById('concept-frame').src = ex.concept + '?t=' + bust;
 
   // Load demo iframe and wire htmx listener
   const frame = document.getElementById('preview-frame');
-  frame.src = ex.file;
+  frame.src = ex.file + '?t=' + bust;
   frame.onload = () => wireIframe(frame);
 
   // Load page source into inspector — show only body content
   try {
-    const res = await fetch(ex.file);
+    const res = await fetch(ex.file, { cache: 'no-store' });
     const src = await res.text();
     const bodyMatch = src.match(/<body[^>]*>([\s\S]*)<\/body>/i);
     const display = bodyMatch ? bodyMatch[1].trim() : src;
