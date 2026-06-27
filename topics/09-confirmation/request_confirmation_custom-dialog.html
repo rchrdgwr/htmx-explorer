@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation — Custom Modal</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-confirmation page-confirmation-custom">
+  <h2>Confirmation — Custom Modal</h2>
+  <p>Click Delete — <code>htmx:confirm</code> is intercepted so a custom modal appears instead of the browser's native dialog.</p>
+
+  <table>
+    <thead><tr><th>Name</th><th>Role</th><th></th></tr></thead>
+    <tbody id="rows">
+      <tr id="row-1">
+        <td>Ada Lovelace</td><td>Engineer</td>
+        <td><button class="delete-btn"
+              hx-delete="response_confirmation_deleted.html"
+              hx-target="#row-1"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Ada Lovelace? This cannot be undone.">Delete</button></td>
+      </tr>
+      <tr id="row-2">
+        <td>Grace Hopper</td><td>Admiral</td>
+        <td><button class="delete-btn"
+              hx-delete="response_confirmation_deleted.html"
+              hx-target="#row-2"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Grace Hopper? This cannot be undone.">Delete</button></td>
+      </tr>
+      <tr id="row-3">
+        <td>Margaret Hamilton</td><td>Director</td>
+        <td><button class="delete-btn"
+              hx-delete="response_confirmation_deleted.html"
+              hx-target="#row-3"
+              hx-swap="outerHTML"
+              hx-confirm="Delete Margaret Hamilton? This cannot be undone.">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="status"></div>
+
+  <div id="confirm-overlay" class="confirm-overlay">
+    <div class="confirm-box">
+      <p id="confirm-message"></p>
+      <div class="confirm-actions">
+        <button id="confirm-cancel" class="confirm-cancel-btn">Cancel</button>
+        <button id="confirm-ok" class="confirm-ok-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let pendingIssueRequest = null;
+
+    document.addEventListener('htmx:confirm', (e) => {
+      e.preventDefault();
+      pendingIssueRequest = e.detail.issueRequest;
+      document.getElementById('confirm-message').textContent = e.detail.question;
+      document.getElementById('confirm-overlay').classList.add('visible');
+    });
+
+    document.getElementById('confirm-cancel').addEventListener('click', () => {
+      pendingIssueRequest = null;
+      document.getElementById('confirm-overlay').classList.remove('visible');
+    });
+
+    document.getElementById('confirm-ok').addEventListener('click', () => {
+      document.getElementById('confirm-overlay').classList.remove('visible');
+      // true skips htmx's own confirm step, since we already confirmed via this modal
+      if (pendingIssueRequest) pendingIssueRequest(true);
+      pendingIssueRequest = null;
+    });
+  </script>
+</body>
+</html>

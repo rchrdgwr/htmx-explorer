@@ -3,6 +3,10 @@ body { font-family: system-ui, sans-serif; padding: 28px 32px; background: #fff;
 h2 { font-size: 24px; color: #1a1a2e; margin-bottom: 6px; }
 .subtitle { color: #888; font-size: 16px; margin-bottom: 20px; line-height: 1.5; }
 
+.title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.title-row h2 { margin-bottom: 0; }
+.title-row .key-attr { margin: 0; }
+
 .key-attr { display: inline-block; background: #4389bf; color: #fff; font-family: monospace; font-size: 17px; padding: 7px 18px; border-radius: 20px; margin: 2px 6px 8px 0; }
 
 .snippet { background: #1e1e2e; border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 15px; line-height: 1.8; color: #cdd6f4; width: fit-content; max-width: 100%; }

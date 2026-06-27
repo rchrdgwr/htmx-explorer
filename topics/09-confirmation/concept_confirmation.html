@@ -2,10 +2,8 @@
 <html lang="en">
 <head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
 <body>
-  <h2>9. Confirmation</h2>
+  <div class="title-row"><h2>9. Confirmation</h2><span class="key-attr">hx-confirm</span></div>
   <p class="subtitle">Prevent accidental destructive actions. <code>hx-confirm</code> shows a browser dialog before the request fires — one attribute, zero JavaScript.</p>
-
-  <div><span class="key-attr">hx-confirm</span></div>
 
   <div class="flow">
     <div class="node browser"><div class="label">Click</div><div class="detail">User clicks Delete</div></div>
@@ -34,7 +32,8 @@
 <span class="cm">// Override with a custom modal</span><br>
 document.addEventListener(<span class="val">'htmx:confirm'</span>, (e) =&gt; {<br>
 &nbsp;&nbsp;e.preventDefault();<br>
-&nbsp;&nbsp;MyModal.show(e.detail.question, () =&gt; e.detail.issueRequest());<br>
+&nbsp;&nbsp;<span class="cm">// true skips htmx's own confirm step on retry</span><br>
+&nbsp;&nbsp;MyModal.show(e.detail.question, () =&gt; e.detail.issueRequest(<span class="val">true</span>));<br>
 });
     </div>
   </div>

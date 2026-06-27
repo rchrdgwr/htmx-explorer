@@ -41,10 +41,10 @@ Python 3.7+ required. No other dependencies.
 
 ## How It Works
 
-Each example has two tabs:
-
-- **Concept** — explains the idea with a diagram and code snippet
-- **Live Demo** — interactive demo running against the local server
+Each example has a **Concept** tab — explains the idea with a diagram and code snippet — plus
+one demo tab per live demo, running against the local server. A topic with a single demo just
+shows **Live Demo**; a topic with multiple demo variants (e.g. Confirmation: Standard vs. Custom
+Modal) shows one tab per variant, labeled **Demo - `<name>`**.
 
 The right panel shows:
 
@@ -61,16 +61,44 @@ htmx_explorer/
 ├── slides.html        # Intro slide deck (8 slides)
 ├── css/                # Shared stylesheets (concept.css, examples.css, responses.css)
 └── topics/             # One folder per topic — everything for a topic lives together
-    └── basic-request/
+    └── 01-basic-request/
         ├── concept_basic-request.html   # Explanation + diagram
         ├── request_basic-request.html   # Live demo page
         └── response_basic-request.html  # HTML fragment(s) the server returns
 ```
 
 Topics with more than one server response (e.g. Inline Editing, Server-Driven UI) just have
-multiple `response_<topic>_<name>.html` files side by side. Want to add your own topic? Copy
-an existing `topics/<name>/` folder, rename the three files, and register it in the `EXAMPLES`
-map in `index.html`.
+multiple `response_<topic>_<name>.html` files side by side.
+
+Each topic is registered in the `EXAMPLES` map in `index.html` with a `concept` file and a
+`demos` array. Most topics have a single demo:
+
+```js
+'basic-request': { label: '1. Basic Request', concept: 'topics/01-basic-request/concept_basic-request.html', demos: [
+  { label: 'Live Demo', file: 'topics/01-basic-request/request_basic-request.html' }
+]},
+```
+
+A topic can have more than one demo variant — each gets its own file in the same topic folder
+(e.g. `request_confirmation.html` and `request_confirmation_custom-dialog.html`) and its own
+entry in the `demos` array:
+
+```js
+'confirmation': { label: '9. Confirmation', concept: 'topics/09-confirmation/concept_confirmation.html', demos: [
+  { label: 'Standard',     file: 'topics/09-confirmation/request_confirmation.html' },
+  { label: 'Custom Modal', file: 'topics/09-confirmation/request_confirmation_custom-dialog.html' },
+]},
+```
+
+Once `demos` has more than one entry, the app automatically renders one tab per variant — no
+other code changes needed.
+
+**To add a new topic:** create `topics/<NN>-<name>/`, add `concept_<name>.html` and at least one
+`request_<name>.html` + `response_<name>.html`, add a sidebar button calling
+`loadExample(this, '<name>')`, and register it in `EXAMPLES`.
+
+**To add a new demo to an existing topic:** drop the new `request_<topic>_<variant>.html` file
+in that topic's folder and push another `{ label, file }` object onto its `demos` array.
 
 ## The Big 7
 

@@ -343,7 +343,7 @@
   <div id="preview-panel">
     <div id="preview-tabs">
       <button class="tab-btn active" id="tab-concept" onclick="switchTab('concept')">Concept</button>
-      <button class="tab-btn" id="tab-demo" onclick="switchTab('demo')">Live Demo</button>
+      <span id="demo-tabs"></span>
     </div>
     <iframe id="home-frame" class="visible" src="home.html"></iframe>
     <iframe id="concept-frame"></iframe>
@@ -385,26 +385,30 @@
 <script>
 // ── Example registry ──────────────────────────────────────────────
 const EXAMPLES = {
-  'basic-request':     { label: '1. Basic Request',      file: 'topics/01-basic-request/request_basic-request.html',         concept: 'topics/01-basic-request/concept_basic-request.html' },
-  'http-verbs':        { label: '2. HTTP Verbs',         file: 'topics/02-http-verbs/request_http-verbs.html',               concept: 'topics/02-http-verbs/concept_http-verbs.html' },
-  'targeting':         { label: '3. Targeting',          file: 'topics/03-targeting/request_targeting.html',                 concept: 'topics/03-targeting/concept_targeting.html' },
-  'swap-strategies':   { label: '4. Swap Strategies',    file: 'topics/04-swap-strategies/request_swap-strategies.html',     concept: 'topics/04-swap-strategies/concept_swap-strategies.html' },
-  'triggering':        { label: '5. Triggering',         file: 'topics/05-triggering/request_triggering.html',               concept: 'topics/05-triggering/concept_triggering.html' },
-  'forms':             { label: '6. Forms',              file: 'topics/06-forms/request_forms.html',                         concept: 'topics/06-forms/concept_forms.html' },
-  'loading-indicators':{ label: '7. Loading Indicators', file: 'topics/07-loading-indicators/request_loading-indicators.html', concept: 'topics/07-loading-indicators/concept_loading-indicators.html' },
-  'oob-swaps':         { label: '8. OOB Swaps',         file: 'topics/08-oob-swaps/request_oob-swaps.html',                 concept: 'topics/08-oob-swaps/concept_oob-swaps.html' },
-  'confirmation':      { label: '9. Confirmation',       file: 'topics/09-confirmation/request_confirmation.html',           concept: 'topics/09-confirmation/concept_confirmation.html' },
-  'inline-editing':    { label: '10. Inline Editing',    file: 'topics/10-inline-editing/request_inline-editing.html',       concept: 'topics/10-inline-editing/concept_inline-editing.html' },
-  'polling':           { label: '11. Polling',           file: 'topics/11-polling/request_polling.html',                     concept: 'topics/11-polling/concept_polling.html' },
-  'infinite-scroll':   { label: '12. Infinite Scroll',   file: 'topics/12-infinite-scroll/request_infinite-scroll.html',     concept: 'topics/12-infinite-scroll/concept_infinite-scroll.html' },
-  'hx-boost':          { label: '13. hx-boost',          file: 'topics/13-hx-boost/request_hx-boost.html',                   concept: 'topics/13-hx-boost/concept_hx-boost.html' },
-  'hx-push-url':       { label: '14. hx-push-url',       file: 'topics/14-hx-push-url/request_hx-push-url.html',             concept: 'topics/14-hx-push-url/concept_hx-push-url.html' },
-  'event-system':      { label: '15. Event System',      file: 'topics/15-event-system/request_event-system.html',          concept: 'topics/15-event-system/concept_event-system.html' },
-  'server-driven-ui':  { label: '16. Server-Driven UI',  file: 'topics/16-server-driven-ui/request_server-driven-ui.html',   concept: 'topics/16-server-driven-ui/concept_server-driven-ui.html' },
+  'basic-request':     { label: '1. Basic Request',      concept: 'topics/01-basic-request/concept_basic-request.html',        demos: [{ label: 'Live Demo', file: 'topics/01-basic-request/request_basic-request.html' }] },
+  'http-verbs':        { label: '2. HTTP Verbs',         concept: 'topics/02-http-verbs/concept_http-verbs.html',              demos: [{ label: 'Live Demo', file: 'topics/02-http-verbs/request_http-verbs.html' }] },
+  'targeting':         { label: '3. Targeting',          concept: 'topics/03-targeting/concept_targeting.html',                demos: [{ label: 'Live Demo', file: 'topics/03-targeting/request_targeting.html' }] },
+  'swap-strategies':   { label: '4. Swap Strategies',    concept: 'topics/04-swap-strategies/concept_swap-strategies.html',    demos: [{ label: 'Live Demo', file: 'topics/04-swap-strategies/request_swap-strategies.html' }] },
+  'triggering':        { label: '5. Triggering',         concept: 'topics/05-triggering/concept_triggering.html',              demos: [{ label: 'Live Demo', file: 'topics/05-triggering/request_triggering.html' }] },
+  'forms':             { label: '6. Forms',              concept: 'topics/06-forms/concept_forms.html',                        demos: [{ label: 'Live Demo', file: 'topics/06-forms/request_forms.html' }] },
+  'loading-indicators':{ label: '7. Loading Indicators', concept: 'topics/07-loading-indicators/concept_loading-indicators.html', demos: [{ label: 'Live Demo', file: 'topics/07-loading-indicators/request_loading-indicators.html' }] },
+  'oob-swaps':         { label: '8. OOB Swaps',          concept: 'topics/08-oob-swaps/concept_oob-swaps.html',                demos: [{ label: 'Live Demo', file: 'topics/08-oob-swaps/request_oob-swaps.html' }] },
+  'confirmation':      { label: '9. Confirmation',       concept: 'topics/09-confirmation/concept_confirmation.html',          demos: [
+                            { label: 'Standard',     file: 'topics/09-confirmation/request_confirmation.html' },
+                            { label: 'Custom Modal', file: 'topics/09-confirmation/request_confirmation_custom-dialog.html' },
+                          ] },
+  'inline-editing':    { label: '10. Inline Editing',    concept: 'topics/10-inline-editing/concept_inline-editing.html',      demos: [{ label: 'Live Demo', file: 'topics/10-inline-editing/request_inline-editing.html' }] },
+  'polling':           { label: '11. Polling',           concept: 'topics/11-polling/concept_polling.html',                    demos: [{ label: 'Live Demo', file: 'topics/11-polling/request_polling.html' }] },
+  'infinite-scroll':   { label: '12. Infinite Scroll',   concept: 'topics/12-infinite-scroll/concept_infinite-scroll.html',    demos: [{ label: 'Live Demo', file: 'topics/12-infinite-scroll/request_infinite-scroll.html' }] },
+  'hx-boost':          { label: '13. hx-boost',          concept: 'topics/13-hx-boost/concept_hx-boost.html',                  demos: [{ label: 'Live Demo', file: 'topics/13-hx-boost/request_hx-boost.html' }] },
+  'hx-push-url':       { label: '14. hx-push-url',       concept: 'topics/14-hx-push-url/concept_hx-push-url.html',            demos: [{ label: 'Live Demo', file: 'topics/14-hx-push-url/request_hx-push-url.html' }] },
+  'event-system':      { label: '15. Event System',      concept: 'topics/15-event-system/concept_event-system.html',         demos: [{ label: 'Live Demo', file: 'topics/15-event-system/request_event-system.html' }] },
+  'server-driven-ui':  { label: '16. Server-Driven UI',  concept: 'topics/16-server-driven-ui/concept_server-driven-ui.html',  demos: [{ label: 'Live Demo', file: 'topics/16-server-driven-ui/request_server-driven-ui.html' }] },
 };
 
 let currentExample = null;
 let activeTab = 'concept';
+let currentDemoIndex = 0;
 
 // Hide inspector and tabs until an example is selected
 document.getElementById('inspector').style.display = 'none';
@@ -427,10 +431,17 @@ function loadPage(btn, url) {
 function switchTab(tab) {
   activeTab = tab;
   document.getElementById('tab-concept').classList.toggle('active', tab === 'concept');
-  document.getElementById('tab-demo').classList.toggle('active', tab === 'demo');
+  document.querySelectorAll('#demo-tabs .tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', tab === `demo-${i}`);
+  });
   document.getElementById('concept-frame').classList.toggle('visible', tab === 'concept');
-  document.getElementById('preview-frame').classList.toggle('visible', tab === 'demo');
-  document.getElementById('inspector').style.display = tab === 'demo' ? 'flex' : 'none';
+  document.getElementById('preview-frame').classList.toggle('visible', tab !== 'concept');
+  document.getElementById('inspector').style.display = tab !== 'concept' ? 'flex' : 'none';
+
+  if (tab !== 'concept') {
+    const idx = parseInt(tab.split('-')[1], 10);
+    if (idx !== currentDemoIndex) loadDemo(idx);
+  }
 }
 
 // ── Load example ─────────────────────────────────────────────────
@@ -441,30 +452,51 @@ async function loadExample(btn, key) {
   currentExample = key;
   const ex = EXAMPLES[key];
 
-  // Hide home/slides, restore tabs, always land on Concept
+  // Hide home/slides, restore tabs
   document.getElementById('home-frame').classList.remove('visible');
   document.getElementById('preview-tabs').style.display = 'flex';
-  switchTab('concept');
 
-  // Load concept iframe
+  // Build one tab per demo variant — "Live Demo" if there's only one, else "Demo - <label>"
+  const demoTabs = document.getElementById('demo-tabs');
+  demoTabs.innerHTML = '';
+  ex.demos.forEach((demo, i) => {
+    const tabBtn = document.createElement('button');
+    tabBtn.className = 'tab-btn';
+    tabBtn.textContent = ex.demos.length > 1 ? `Demo - ${demo.label}` : 'Live Demo';
+    tabBtn.onclick = () => switchTab(`demo-${i}`);
+    demoTabs.appendChild(tabBtn);
+  });
+
+  // Load concept iframe, always land on Concept tab
   const bust = Date.now();
   document.getElementById('concept-frame').src = ex.concept + '?t=' + bust;
+  switchTab('concept');
+
+  // Pre-load the first demo variant so it's ready the moment the tab is clicked
+  await loadDemo(0, bust);
+}
+
+// ── Load a demo variant into the preview iframe + inspector ──────
+async function loadDemo(idx, bust) {
+  currentDemoIndex = idx;
+  const demo = EXAMPLES[currentExample].demos[idx];
+  bust = bust || Date.now();
 
   // Load demo iframe and wire htmx listener
   const frame = document.getElementById('preview-frame');
-  frame.src = ex.file + '?t=' + bust;
+  frame.src = demo.file + '?t=' + bust;
   frame.onload = () => wireIframe(frame);
 
   // Load page source into inspector — show only body content
   try {
-    const res = await fetch(ex.file, { cache: 'no-store' });
+    const res = await fetch(demo.file, { cache: 'no-store' });
     const src = await res.text();
     const bodyMatch = src.match(/<body[^>]*>([\s\S]*)<\/body>/i);
     const display = bodyMatch ? bodyMatch[1].trim() : src;
     renderCode('sent-pane', display, 'html');
-    document.getElementById('req-badge').textContent = ex.file;
+    document.getElementById('req-badge').textContent = demo.file;
   } catch(e) {
-    renderError('sent-pane', `Could not load ${ex.file}`);
+    renderError('sent-pane', `Could not load ${demo.file}`);
   }
 
   // Clear response pane
