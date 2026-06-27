@@ -3,24 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive demo: auto-refresh a live clock using htmx polling with hx-trigger every.">
-  <meta name="keywords" content="htmx, polling, hx-trigger, every, auto-refresh, demo">
+  <meta name="description" content="Interactive demo: poll a job status endpoint with htmx until the job completes, then stop automatically.">
+  <meta name="keywords" content="htmx, polling, hx-trigger, every, job status, demo">
   <title>Polling</title>
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <link rel="stylesheet" href="/css/examples.css">
   <link rel="stylesheet" href="/css/responses.css">
 </head>
 <body class="page-polling">
-  <h2>Polling</h2>
-  <p>This clock refreshes itself every 2 seconds using <code>hx-trigger="every 2s"</code>. No JavaScript, no <code>setInterval</code>.</p>
+  <h2>Job Status Polling</h2>
+  <p>htmx polls the server every 2 seconds. Each response advances the job state. When the job completes the server returns a fragment <em>without</em> <code>hx-trigger</code> — polling stops automatically.</p>
 
-  <div id="clock" class="clock"
-       hx-get="response_polling.html"
+  <div id="job-status" class="job-card"
+       hx-get="response_polling_1.html"
        hx-target="this"
-       hx-trigger="every 2s load">
-    Loading...
+       hx-swap="outerHTML"
+       hx-trigger="every 2s">
+    <div class="job-header">
+      <div class="job-name">📦 Data Export</div>
+      <div class="job-id">Job #4217</div>
+    </div>
+    <div class="job-body">
+      <div class="job-track">
+        <div class="job-bar" style="width:0%;background:#9ca3af;"></div>
+      </div>
+      <div class="job-status-row">
+        <div class="job-dot" style="background:#9ca3af;"></div>
+        Queued
+      </div>
+      <div class="job-step">Waiting to start · first poll in 2s</div>
+    </div>
   </div>
 
-  <p class="note">Watch the Response Received panel update automatically every 2 seconds.</p>
+  <p class="note">Reset the demo tab to run it again.</p>
+  <p class="note">Note: this demo uses a static file server — a real server would compute fresh status on each poll.</p>
 </body>
 </html>

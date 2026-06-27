@@ -173,15 +173,28 @@ body.page-targeting { }
 .page-inline-editing .edit-btn:hover { border-color: #1976d2; color: #1976d2; }
 
 /* ── 11. Polling ── */
-.page-polling .clock { font-size: 42px; font-weight: 700; color: #1a1a2e; font-family: monospace; padding: 24px; background: #f8f8f8; border-radius: 10px; text-align: center; margin: 20px 0; border: 2px solid #e0e0e0; }
-.page-polling .note { text-align: center; }
+.page-polling .note { font-size: 12px; color: #888; margin-top: 10px; }
+.page-polling .job-card { border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; max-width: 400px; margin: 16px 0; }
+.page-polling .job-card.done { border-color: #86efac; }
+.page-polling .job-header { background: #1a1a2e; color: #eee; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+.page-polling .job-name { font-size: 14px; font-weight: 600; }
+.page-polling .job-id { font-size: 11px; color: #888; font-family: monospace; }
+.page-polling .job-body { padding: 16px; background: #fff; }
+.page-polling .job-track { background: #f0f0f0; border-radius: 999px; height: 12px; margin-bottom: 14px; overflow: hidden; }
+.page-polling .job-bar { height: 100%; border-radius: 999px; transition: width 0.5s ease, background 0.5s ease; }
+.page-polling .job-status-row { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #222; margin-bottom: 8px; }
+.page-polling .job-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.page-polling .job-dot.pulse { animation: job-pulse 1.2s ease-in-out infinite; }
+.page-polling .job-step { font-size: 12px; color: #888; }
+@keyframes job-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
 
 /* ── 12. Infinite Scroll ── */
 .page-infinite-scroll p { margin-bottom: 16px; }
 .page-infinite-scroll .item { padding: 12px 16px; margin-bottom: 8px; background: #f8f8f8; border-radius: 6px; border-left: 3px solid #1976d2; font-size: 14px; }
 .page-infinite-scroll .item.new { background: #f0f7ff; border-left-color: #7b1fa2; }
 .page-infinite-scroll .sentinel { padding: 12px; text-align: center; color: #888; font-size: 13px; border: 1px dashed #ccc; border-radius: 6px; margin-top: 8px; }
-.page-infinite-scroll #list { max-height: 340px; overflow-y: auto; }
+.page-infinite-scroll #list { /* no overflow clipping — let iframe body scroll so htmx revealed trigger works */ }
+.page-infinite-scroll .end-of-list { padding: 12px; text-align: center; color: #888; font-size: 13px; font-style: italic; margin-top: 8px; }
 
 /* ── 13. hx-boost (+ boost-page-a/b/c) ── */
 .page-boost-a #content { background: #e3f2fd; border-color: #90caf9; }
@@ -190,10 +203,20 @@ body.page-targeting { }
 
 /* ── 14. hx-push-url ── */
 .page-hx-push-url p { margin-bottom: 16px; }
-.page-hx-push-url input[type=text] { padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; width: 100%; margin-bottom: 12px; }
+.page-hx-push-url .fake-browser { border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.page-hx-push-url .fake-toolbar { background: #e8e8e8; padding: 8px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #ccc; }
+.page-hx-push-url .fake-nav-btns { display: flex; gap: 4px; }
+.page-hx-push-url .fake-nav-btns span { width: 22px; height: 22px; border-radius: 50%; background: #bbb; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; }
+.page-hx-push-url .fake-addressbar { flex: 1; background: #fff; border: 1px solid #bbb; border-radius: 4px; padding: 4px 10px; font-family: monospace; font-size: 12px; color: #1a1a1a; overflow: hidden; white-space: nowrap; }
+.page-hx-push-url .fake-addressbar .scheme { color: #888; }
+.page-hx-push-url .fake-addressbar .path { color: #1565c0; font-weight: 600; }
+.page-hx-push-url .fake-content { padding: 14px; }
+.page-hx-push-url .filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.page-hx-push-url .filter-btn { padding: 7px 16px; border: 1px solid #1976d2; background: #fff; color: #1976d2; border-radius: 20px; font-size: 13px; cursor: pointer; }
+.page-hx-push-url .filter-btn:hover { background: #e3f2fd; }
+.page-hx-push-url .filter-btn.active { background: #1976d2; color: #fff; }
 .page-hx-push-url .result-item { padding: 10px 14px; background: #f0f7ff; border-left: 3px solid #1976d2; border-radius: 4px; margin-bottom: 8px; font-size: 14px; }
-.page-hx-push-url #results { margin-top: 16px; min-height: 40px; }
-.page-hx-push-url .url-display { font-family: monospace; font-size: 12px; background: #1e1e2e; color: #a6e3a1; padding: 8px 12px; border-radius: 4px; margin-bottom: 16px; }
+.page-hx-push-url #results { min-height: 40px; }
 
 /* ── 15. Event System ── */
 .page-event-system .panel { padding: 16px; border: 1px solid #e0e0e0; border-radius: 6px; margin-bottom: 16px; }
@@ -208,6 +231,7 @@ body.page-targeting { }
 .page-event-system .log-line .event { color: #e94560; font-weight: bold; }
 .page-event-system #save-result { margin-top: 8px; font-size: 13px; color: #2e7d32; }
 .page-event-system .log-placeholder { color: #bbb; }
+.page-event-system .refresh-stamp { margin-top: 8px; font-size: 11px; color: #888; font-style: italic; }
 
 /* ── 16. Server-Driven UI ── */
 body.page-server-driven-ui { }

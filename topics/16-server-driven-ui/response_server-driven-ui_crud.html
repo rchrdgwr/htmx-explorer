@@ -12,7 +12,9 @@
         <td>Ada Lovelace</td>
         <td>Engineer</td>
         <td>
-          <button class="crud-edit-btn">Edit</button>
+          <button class="crud-edit-btn"
+                  hx-get="/topics/16-server-driven-ui/response_server-driven-ui_crud_edit_ada.html"
+                  hx-target="closest tr" hx-swap="outerHTML">Edit</button>
           <button class="crud-del-btn"
                   hx-delete="response_server-driven-ui_deleted.html" hx-target="closest tr" hx-swap="outerHTML" hx-confirm="Delete?">Del</button>
         </td>
@@ -21,12 +23,14 @@
         <td>Grace Hopper</td>
         <td>Admiral</td>
         <td>
-          <button class="crud-edit-btn">Edit</button>
+          <button class="crud-edit-btn"
+                  hx-get="/topics/16-server-driven-ui/response_server-driven-ui_crud_edit_grace.html"
+                  hx-target="closest tr" hx-swap="outerHTML">Edit</button>
           <button class="crud-del-btn"
                   hx-delete="response_server-driven-ui_deleted.html" hx-target="closest tr" hx-swap="outerHTML" hx-confirm="Delete?">Del</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <div class="crud-note">Delete works live — try it. Edit would swap the row with a form in a real app.</div>
+  <div class="crud-note">Edit swaps the row with an inline form. Delete removes the row.</div>
 </div>

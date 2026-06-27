@@ -12,26 +12,61 @@
 </head>
 <body class="page-hx-push-url">
   <h2>hx-push-url</h2>
-  <p>Type a search term — the URL updates as you type so results are bookmarkable and shareable. Hit your browser's back button to go back.</p>
+  <p>Click a category — htmx loads the content <em>and</em> pushes a clean URL into browser history. Watch the address bar update below.</p>
 
-  <div class="url-display" id="url-display">URL: <span id="current-url"></span></div>
+  <div class="fake-browser">
+    <div class="fake-toolbar">
+      <div class="fake-nav-btns">
+        <span>&#8592;</span>
+        <span>&#8594;</span>
+      </div>
+      <div class="fake-addressbar">
+        <span class="scheme">http://myapp.com</span><span class="path" id="fake-path">/books</span>
+      </div>
+    </div>
+    <div class="fake-content">
+      <div class="filter-row">
+        <button class="filter-btn active"
+                hx-get="/topics/14-hx-push-url/response_hx-push-url_all.html"
+                hx-target="#results"
+                hx-push-url="/books"
+                onclick="setActive(this)">All</button>
+        <button class="filter-btn"
+                hx-get="/topics/14-hx-push-url/response_hx-push-url_python.html"
+                hx-target="#results"
+                hx-push-url="/books?cat=python"
+                onclick="setActive(this)">Python</button>
+        <button class="filter-btn"
+                hx-get="/topics/14-hx-push-url/response_hx-push-url_javascript.html"
+                hx-target="#results"
+                hx-push-url="/books?cat=javascript"
+                onclick="setActive(this)">JavaScript</button>
+        <button class="filter-btn"
+                hx-get="/topics/14-hx-push-url/response_hx-push-url_data.html"
+                hx-target="#results"
+                hx-push-url="/books?cat=data-science"
+                onclick="setActive(this)">Data Science</button>
+      </div>
 
-  <input type="text" name="q" placeholder="Search Python topics..."
-         hx-get="response_hx-push-url.html"
-         hx-target="#results"
-         hx-trigger="keyup changed delay:400ms"
-         hx-push-url="true">
-
-  <div id="results">
-    <div class="result-item">Start typing to search...</div>
+      <div id="results">
+        <div class="result-item">Learning Python — Mark Lutz</div>
+        <div class="result-item">Fluent Python — Luciano Ramalho</div>
+        <div class="result-item">JavaScript: The Good Parts — Douglas Crockford</div>
+        <div class="result-item">Python for Data Analysis — Wes McKinney</div>
+      </div>
+    </div>
   </div>
 
+  <p class="note">Inside this iframe the browser address bar won't change — but in a real app it would. The fake bar above shows what <code>hx-push-url</code> pushes into history.</p>
+
   <script>
-    function updateUrlDisplay() {
-      document.getElementById('current-url').textContent = window.location.href;
+    function setActive(btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     }
-    updateUrlDisplay();
-    document.addEventListener('htmx:pushedIntoHistory', updateUrlDisplay);
+    document.addEventListener('htmx:pushedIntoHistory', function(e) {
+      document.getElementById('fake-path').textContent = e.detail.path;
+    });
   </script>
 </body>
 </html>

@@ -12,18 +12,19 @@
   <div class="title-row"><h2>10. Inline Editing</h2><span class="key-attr">hx-get</span><span class="key-attr">hx-put</span><span class="key-attr">hx-target="this"</span><span class="key-attr">hx-swap="outerHTML"</span></div>
   <p class="subtitle">Edit without leaving the page. Click a label — it becomes a form. Save — it becomes a label again. The server drives each state transition.</p>
 
-  <div style="margin:20px 0;">
-    <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:10px;">State machine</div>
-    <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;">
-      <div class="node browser" style="min-width:120px;"><div class="label">View mode</div><div class="detail">Label + Edit btn</div></div>
-      <div class="arrow"><div class="line"></div><div class="note">GET /edit-form</div></div>
-      <div class="node purple" style="min-width:120px;"><div class="label">Edit mode</div><div class="detail">Input + Save btn</div></div>
-      <div class="arrow"><div class="line"></div><div class="note">PUT /save</div></div>
-      <div class="node dom" style="min-width:120px;"><div class="label">View mode</div><div class="detail">Updated label</div></div>
+  <div class="table-snippet-row">
+    <div>
+      <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:10px;">State machine</div>
+      <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;">
+        <div class="node browser" style="min-width:120px;"><div class="label">View mode</div><div class="detail">Label + Edit btn</div></div>
+        <div class="arrow"><div class="line"></div><div class="note">GET /edit-form</div></div>
+        <div class="node purple" style="min-width:120px;"><div class="label">Edit mode</div><div class="detail">Input + Save btn</div></div>
+        <div class="arrow"><div class="line"></div><div class="note">PUT /save</div></div>
+        <div class="node dom" style="min-width:120px;"><div class="label">View mode</div><div class="detail">Updated label</div></div>
+      </div>
     </div>
-  </div>
 
-  <div class="snippet">
+    <div class="snippet">
 <span class="cm">&lt;!-- View state (what the server initially renders) --&gt;</span><br>
 &lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"name-field"</span>&gt;<br>
 &nbsp;&nbsp;Ada Lovelace<br>
@@ -38,6 +39,7 @@
 &nbsp;&nbsp;&lt;<span class="tag">button</span>&gt;Save&lt;/<span class="tag">button</span>&gt;<br>
 &lt;/<span class="tag">form</span>&gt;<br><br>
 <span class="cm">&lt;!-- Save returns the updated view state --&gt;</span>
+    </div>
   </div>
 
   <div class="callout"><strong>Key insight:</strong> The element replaces itself with <code>hx-target="this"</code> + <code>hx-swap="outerHTML"</code>. The server controls both the view and edit HTML — the client just swaps.</div>

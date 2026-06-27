@@ -14,44 +14,61 @@
   <h2>Event System</h2>
   <p>The form and the list don't know about each other. They communicate through a custom event on <code>document.body</code>.</p>
 
-  <!-- Save form -->
+  <!-- Save form: fires "record-saved" on body after success -->
   <div class="panel">
-    <div class="panel-label">Add a record (fires "record-saved" event on success)</div>
-    <form hx-post="response_event-system_saved.html"
-          hx-target="#save-result"
-          hx-on:htmx:after-request="htmx.trigger(document.body, 'record-saved'); logEvent('record-saved')">
+    <div class="panel-label">Add a record — fires <code>record-saved</code> on body after save</div>
+    <form id="save-form"
+          hx-post="response_event-system_saved.html"
+          hx-target="#save-result">
       <input type="text" name="name" placeholder="Enter a name...">
       <button type="submit">Save</button>
     </form>
     <div id="save-result"></div>
   </div>
 
-  <!-- Record list listens for event -->
+  <!-- Record list: listens for record-saved event on body -->
   <div class="panel">
-    <div class="panel-label">Record list (refreshes on "record-saved" event)</div>
+    <div class="panel-label">Record list — refreshes when it hears <code>record-saved</code> from body</div>
     <div id="record-list"
          hx-get="response_event-system_list.html"
-         hx-trigger="load, record-saved from:body">
+         hx-trigger="load, record-saved from:body"
+         hx-target="this"
+         hx-swap="innerHTML">
       Loading...
     </div>
   </div>
 
-  <!-- Event log -->
+  <!-- Event log: also listens for record-saved — a third independent component -->
   <div class="panel">
-    <div class="panel-label">Event log</div>
+    <div class="panel-label">Event log — also hears <code>record-saved</code>, independently</div>
     <div id="log"><div class="log-line log-placeholder">Waiting for events...</div></div>
   </div>
 
   <script>
-    let count = 0;
-    function logEvent(name) {
+    // After the form's request completes, fire the custom event on body.
+    // The form doesn't know who is listening — it just announces what happened.
+    document.getElementById('save-form').addEventListener('htmx:afterRequest', function() {
+      htmx.trigger(document.body, 'record-saved');
+    });
+
+    // After the list refreshes, stamp it with the time so the update is visible.
+    document.getElementById('record-list').addEventListener('htmx:afterSettle', function() {
+      const stamp = document.createElement('div');
+      stamp.className = 'refresh-stamp';
+      stamp.textContent = 'Refreshed at ' + new Date().toLocaleTimeString();
+      this.appendChild(stamp);
+    });
+
+    // The event log is a third independent listener — it also reacts to record-saved.
+    // It has no connection to the form or the list.
+    document.body.addEventListener('record-saved', function() {
       const log = document.getElementById('log');
       const line = document.createElement('div');
       line.className = 'log-line';
-      line.innerHTML = `<span class="time">${new Date().toLocaleTimeString()}</span> — <span class="event">${name}</span> fired`;
+      line.innerHTML = '<span class="time">' + new Date().toLocaleTimeString() + '</span> — <span class="event">record-saved</span> received';
       if (log.querySelector('.log-placeholder')) log.innerHTML = '';
       log.prepend(line);
-    }
+    });
   </script>
 </body>
 </html>

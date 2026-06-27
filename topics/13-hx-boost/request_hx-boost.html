@@ -10,20 +10,20 @@
   <link rel="stylesheet" href="/css/examples.css">
   <link rel="stylesheet" href="/css/responses.css">
 </head>
-<body class="page-hx-boost" hx-boost="true">
+<body class="page-hx-boost">
   <h2>hx-boost</h2>
-  <p>These are plain <code>&lt;a&gt;</code> links. Because <code>hx-boost="true"</code> is on <code>&lt;body&gt;</code>, htmx intercepts them and swaps only the <code>&lt;body&gt;</code> content — no full reload.</p>
+  <p>Plain <code>&lt;a&gt;</code> links — htmx intercepts the click and swaps only the <code>#content</code> area. The nav stays in place. Check the Response Received panel to see the partial HTML fragment.</p>
 
-  <nav>
-    <a href="request_hx-boost_page-a.html">Page A</a>
-    <a href="request_hx-boost_page-b.html">Page B</a>
-    <a href="request_hx-boost_page-c.html">Page C</a>
+  <nav hx-boost="true" hx-target="#content" hx-swap="innerHTML">
+    <a href="response_hx-boost_page-a.html">Page A</a>
+    <a href="response_hx-boost_page-b.html">Page B</a>
+    <a href="response_hx-boost_page-c.html">Page C</a>
   </nav>
 
-  <div id="content">
-    <strong>Home page</strong> — click a nav link above and watch the URL change without a full reload.
+  <div id="content" class="target-zone">
+    <strong>Home</strong> — click a nav link to load content here.
   </div>
 
-  <p class="note">Check the Response Received panel — you'll see the full page HTML returned but only the body is swapped in.</p>
+  <p class="note">In a real app, <code>hx-boost="true"</code> on a parent converts all its plain <code>&lt;a&gt;</code> links to work like this — zero markup changes needed.</p>
 </body>
 </html>

@@ -20,7 +20,22 @@
     <div class="node dom"><div class="label">Refresh grid</div><div class="detail">GET /records</div></div>
   </div>
 
-  <div class="snippet">
+  <div class="table-snippet-row">
+    <div class="section">
+      <div class="section-label">htmx lifecycle events</div>
+      <table>
+        <thead><tr><th>Event</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><td><code>htmx:beforeRequest</code></td><td>Before XHR fires — can cancel</td></tr>
+          <tr><td><code>htmx:afterRequest</code></td><td>After XHR completes</td></tr>
+          <tr><td><code>htmx:afterSwap</code></td><td>After DOM is updated</td></tr>
+          <tr><td><code>htmx:afterSettle</code></td><td>After CSS transitions complete</td></tr>
+          <tr><td><code>htmx:responseError</code></td><td>Non-2xx response received</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="snippet">
 <span class="cm">&lt;!-- Grid listens for a custom event on the body --&gt;</span><br>
 &lt;<span class="tag">table</span><br>
 &nbsp;&nbsp;<span class="attr">hx-get</span>=<span class="val">"/records"</span><br>
@@ -32,21 +47,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-on:htmx:after-request</span>=<span class="val">"htmx.trigger(document.body, 'record-saved')"</span>&gt;<br>
 &nbsp;&nbsp;...<br>
 &lt;/<span class="tag">form</span>&gt;
-  </div>
-
-  <div class="section">
-    <div class="section-label">htmx lifecycle events</div>
-    <table>
-      <thead><tr><th>Event</th><th>When</th></tr></thead>
-      <tbody>
-        <tr><td><code>htmx:beforeRequest</code></td><td>Before XHR fires — can cancel</td></tr>
-        <tr><td><code>htmx:afterRequest</code></td><td>After XHR completes</td></tr>
-        <tr><td><code>htmx:afterSwap</code></td><td>After DOM is updated</td></tr>
-        <tr><td><code>htmx:afterSettle</code></td><td>After CSS transitions complete</td></tr>
-        <tr><td><code>htmx:responseError</code></td><td>Non-2xx response received</td></tr>
-      </tbody>
-    </table>
-  </div>
+    </div>
+  </div><!-- end table-snippet-row -->
 
   <div class="callout"><strong>Decoupled components:</strong> The save form doesn't know about the grid, and the grid doesn't know about the form. They communicate through events on a shared ancestor — clean and maintainable.</div>
 

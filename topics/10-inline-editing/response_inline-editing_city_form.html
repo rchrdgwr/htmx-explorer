@@ -1,0 +1,12 @@
+<div id="city-field" class="field">
+  <span class="field-label">City</span>
+  <input type="text" value="London" class="field-input" name="value">
+  <button class="save-btn"
+          hx-post="response_inline-editing_city_saved.html"
+          hx-target="closest div"
+          hx-swap="outerHTML">Save</button>
+  <button class="edit-btn"
+          hx-get="response_inline-editing_city_cancel.html"
+          hx-target="closest div"
+          hx-swap="outerHTML">Cancel</button>
+</div>

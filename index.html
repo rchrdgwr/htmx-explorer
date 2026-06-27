@@ -625,11 +625,14 @@ function wireIframe(frame) {
 
       // Flash effect
       flash('res-pane');
-    });
 
-    // After htmx swaps the DOM, capture the updated body
-    doc.addEventListener('htmx:afterSettle', () => {
-      renderCode('dom-pane', doc.body.innerHTML.trim(), 'html');
+      // Capture DOM after swap — swap happens synchronously after this event,
+      // so a short delay ensures we read the post-swap state. htmx:afterSettle
+      // is unreliable here because outerHTML swaps remove the triggering element
+      // from the DOM before the event fires, so it never bubbles to document.
+      setTimeout(() => {
+        renderCode('dom-pane', doc.body.innerHTML.trim(), 'html');
+      }, 50);
     });
 
   } catch(err) {

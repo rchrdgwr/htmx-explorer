@@ -55,6 +55,8 @@ td code, p code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; fon
 .table-snippet-row table { margin: 0; }
 .table-snippet-row .snippet { margin: 0; flex-shrink: 0; }
 .table-snippet-row .flow { margin: 0; }
+.table-snippet-row .compare { margin: 0; }
+.table-snippet-row .section { margin: 0; }
 
 /* Section divider */
 .section { margin-top: 22px; }
@@ -65,8 +67,9 @@ td code, p code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; fon
 .callout strong { color: #333; }
 
 /* Pattern grid (server-driven UI overview cards) */
-.pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
-.pattern-card { border-radius: 8px; border: 1px solid #e0e0e0; padding: 14px; }
-.pattern-card .title { font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
-.pattern-card .desc  { font-size: 15px; color: #666; margin-bottom: 8px; }
-.pattern-card .code  { font-family: monospace; font-size: 14px; background: #f8f8f8; padding: 8px; border-radius: 4px; color: #555; }
+.pattern-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 200px)); gap: 8px; margin: 12px 0; }
+.table-snippet-row .pattern-grid { margin: 0; }
+.pattern-card { border-radius: 6px; border: 1px solid #e0e0e0; padding: 10px 12px; }
+.pattern-card .title { font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+.pattern-card .desc  { font-size: 14px; color: #666; margin-bottom: 6px; }
+.pattern-card .code  { font-family: monospace; font-size: 13px; background: #f8f8f8; padding: 6px 8px; border-radius: 4px; color: #555; }

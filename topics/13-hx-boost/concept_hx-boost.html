@@ -12,28 +12,29 @@
   <div class="title-row"><h2>13. hx-boost</h2><span class="key-attr">hx-boost="true"</span></div>
   <p class="subtitle">Convert normal links and forms into htmx requests with a single attribute on the parent. Progressive enhancement for existing apps.</p>
 
-  <div class="compare">
-    <div class="compare-box old">
-      <h4>Without hx-boost</h4>
-      <ul>
-        <li>Every link = full page reload</li>
-        <li>Browser re-downloads JS/CSS</li>
-        <li>Flash of white between pages</li>
-        <li>Scroll position reset</li>
-      </ul>
+  <div class="table-snippet-row">
+    <div class="compare" style="width:fit-content;">
+      <div class="compare-box old">
+        <h4>Without hx-boost</h4>
+        <ul>
+          <li>Every link = full page reload</li>
+          <li>Browser re-downloads JS/CSS</li>
+          <li>Flash of white between pages</li>
+          <li>Scroll position reset</li>
+        </ul>
+      </div>
+      <div class="compare-box new">
+        <h4>With hx-boost</h4>
+        <ul>
+          <li>Links become XHR requests</li>
+          <li>Only &lt;body&gt; is swapped</li>
+          <li>Smooth page transitions</li>
+          <li>URL and history still update</li>
+        </ul>
+      </div>
     </div>
-    <div class="compare-box new">
-      <h4>With hx-boost</h4>
-      <ul>
-        <li>Links become XHR requests</li>
-        <li>Only &lt;body&gt; is swapped</li>
-        <li>Smooth page transitions</li>
-        <li>URL and history still update</li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="snippet">
+    <div class="snippet">
 <span class="cm">&lt;!-- Add to body — ALL links and forms get boosted --&gt;</span><br>
 &lt;<span class="tag">body</span> <span class="attr hl">hx-boost</span>=<span class="val">"true"</span>&gt;<br>
 &nbsp;&nbsp;&lt;<span class="tag">nav</span>&gt;<br>
@@ -45,6 +46,7 @@
 <span class="cm">&lt;!-- Opt individual links out --&gt;</span><br>
 &lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"/download"</span> <span class="attr">hx-boost</span>=<span class="val">"false"</span>&gt;Download PDF&lt;/<span class="tag">a</span>&gt;
   </div>
+  </div><!-- end table-snippet-row -->
 
   <div class="callout"><strong>Existing apps:</strong> Add <code>hx-boost="true"</code> to an existing multi-page app and it instantly feels like an SPA — with zero refactoring of your routes or templates.</div>
 

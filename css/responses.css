@@ -53,6 +53,9 @@
 .crud-edit-btn { padding: 3px 8px; background: #1976d2; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 11px; margin-right: 4px; }
 .crud-del-btn { padding: 3px 8px; background: #c62828; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 11px; }
 .crud-note { color: #888; font-size: 11px; margin-top: 8px; }
+.crud-input { padding: 3px 6px; border: 1px solid #1976d2; border-radius: 3px; font-size: 12px; width: 100%; box-sizing: border-box; }
+.crud-save-btn { padding: 3px 8px; background: #2e7d32; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 11px; margin-right: 4px; }
+.crud-cancel-btn { padding: 3px 8px; background: #888; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-size: 11px; }
 
 /* Server-driven UI: Multi-Step Wizard pattern */
 .wizard-box { font-size: 13px; }

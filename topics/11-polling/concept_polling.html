@@ -12,15 +12,16 @@
   <div class="title-row"><h2>11. Polling</h2><span class="key-attr">hx-trigger="every Xs"</span></div>
   <p class="subtitle">Automatic refresh without WebSockets. Use <code>hx-trigger="every Xs"</code> to repeatedly fetch fresh content on a timer.</p>
 
-  <div class="flow">
-    <div class="node browser"><div class="label">Load</div><div class="detail">Element in DOM</div></div>
-    <div class="arrow"><div class="line"></div><div class="note">every 5s</div></div>
-    <div class="node server"><div class="label">Server</div><div class="detail">Returns latest HTML</div></div>
-    <div class="arrow"><div class="line"></div><div class="note">auto-swap</div></div>
-    <div class="node dom"><div class="label">DOM</div><div class="detail">Updated in place</div></div>
-  </div>
+  <div class="table-snippet-row">
+    <div class="flow">
+      <div class="node browser"><div class="label">Load</div><div class="detail">Element in DOM</div></div>
+      <div class="arrow"><div class="line"></div><div class="note">every 5s</div></div>
+      <div class="node server"><div class="label">Server</div><div class="detail">Returns latest HTML</div></div>
+      <div class="arrow"><div class="line"></div><div class="note">auto-swap</div></div>
+      <div class="node dom"><div class="label">DOM</div><div class="detail">Updated in place</div></div>
+    </div>
 
-  <div class="snippet">
+    <div class="snippet">
 <span class="cm">&lt;!-- Polls every 5 seconds automatically --&gt;</span><br>
 &lt;<span class="tag">div</span><br>
 &nbsp;&nbsp;<span class="attr">hx-get</span>=<span class="val">"/queue-status"</span><br>
@@ -30,11 +31,12 @@
 &lt;/<span class="tag">div</span>&gt;<br><br>
 <span class="cm">&lt;!-- Stop polling when done (server returns element without hx-trigger) --&gt;</span><br>
 &lt;<span class="tag">div</span>&gt;Job complete! ✓&lt;/<span class="tag">div</span>&gt;
+    </div>
   </div>
 
   <div class="callout"><strong>Stop polling:</strong> When the server returns an element <em>without</em> the <code>hx-trigger</code> attribute, polling stops automatically. Use this to stop when a job completes.</div>
 
-  <div class="compare">
+  <div class="compare" style="width:fit-content;">
     <div class="compare-box old">
       <h4>WebSockets</h4>
       <ul>
@@ -54,8 +56,6 @@
       </ul>
     </div>
   </div>
-
-  <div class="callout"><strong>About this demo:</strong> <code>server.py</code> serves static files, so the clock response below returns the exact same fragment every time — the changing time comes from a tiny inline <code>&lt;script&gt;</code> in the fragment, not from the server. A real backend would compute fresh data on each request instead.</div>
 
   <div class="points">
     <h3>Key Points</h3>
