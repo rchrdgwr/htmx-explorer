@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive demo: submit a form with htmx and display the server response inline.">
+  <meta name="keywords" content="htmx, hx-post, form submission, AJAX forms, demo">
   <title>POST Form</title>
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <link rel="stylesheet" href="/css/examples.css">
@@ -14,16 +17,36 @@
   <form hx-post="response_forms.html"
         hx-target="#form-result"
         hx-swap="innerHTML">
-    <label for="name">Your name</label>
+    <label for="name">Your name <span class="req">*</span></label>
     <input type="text" id="name" name="name" placeholder="e.g. Ada Lovelace">
 
-    <label for="city">Your city</label>
+    <label for="city">Your city <span class="req">*</span></label>
     <input type="text" id="city" name="city" placeholder="e.g. San Antonio">
 
     <button type="submit">Submit via htmx</button>
     <span class="htmx-indicator">Sending…</span>
   </form>
 
-  <div id="form-result"></div>
+  <div class="target-zone">
+    <span class="target-zone-label">#form-result</span>
+    <div id="form-result"></div>
+  </div>
+
+  <hr class="demo-divider">
+  <h3 class="demo-section-heading">Validation error path</h3>
+  <p>When required fields are missing, the server returns the form again with inline errors highlighted. The response replaces the form itself (<code>hx-target="closest form"</code> + <code>hx-swap="outerHTML"</code>).</p>
+  <p class="note">This demo always returns the error response — a real server would inspect the submitted values.</p>
+
+  <form hx-post="response_forms_error.html"
+        hx-target="closest form"
+        hx-swap="outerHTML">
+    <label for="name2">Your name <span class="req">*</span></label>
+    <input type="text" id="name2" name="name" placeholder="e.g. Ada Lovelace">
+
+    <label for="city2">Your city <span class="req">*</span></label>
+    <input type="text" id="city2" name="city" placeholder="e.g. San Antonio">
+
+    <button type="submit">Submit with empty fields</button>
+  </form>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<div class="msg-box green">
+  <strong>✓ Added to cart!</strong> <em>HTMX in Action</em> has been added.
+</div>
+
+<span id="cart-count" hx-swap-oob="true">1</span>
+
+<div id="cart-contents" hx-swap-oob="true">
+  <div class="cart-item">
+    <div class="cart-item-cover">📘</div>
+    <div class="cart-item-info">
+      <div class="cart-item-title">HTMX in Action</div>
+      <div class="cart-item-price">$34.99</div>
+    </div>
+    <button class="remove-btn"
+            hx-get="response_oob-swaps_cart_remove.html"
+            hx-target="#cart-message"
+            hx-swap="innerHTML">
+      Remove
+    </button>
+  </div>
+</div>

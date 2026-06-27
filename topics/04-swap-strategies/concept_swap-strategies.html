@@ -1,39 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4. Swap Strategies - htmx Explorer</title>
+  <meta name="description" content="Choose how htmx inserts server responses into the DOM with swap strategies like innerHTML, outerHTML, and more.">
+  <meta name="keywords" content="htmx, hx-swap, innerHTML, outerHTML, afterbegin, beforeend, swap strategies">
+  <link rel="stylesheet" href="/css/concept.css">
+</head>
 <body>
   <div class="title-row"><h2>4. Swap Strategies</h2><span class="key-attr">hx-swap</span></div>
   <p class="subtitle">Once you have the response, <code>hx-swap</code> controls exactly how it is inserted into the DOM. Default is <code>innerHTML</code>.</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0;">
+  <div style="display:grid;grid-template-columns:repeat(3,auto);gap:12px;margin:18px 0;justify-content:start;">
 
-    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:12px;">
-      <div style="background:#1a1a2e;color:#e94560;padding:7px 12px;font-family:monospace;font-weight:bold;">innerHTML <span style="color:#6c7086;font-weight:normal;">(default)</span></div>
+    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:14px;">
+      <div style="background:#1a1a2e;color:#cdd6f4;padding:7px 12px;font-family:monospace;font-weight:bold;">innerHTML <span style="color:#6c7086;font-weight:normal;">(default)</span></div>
       <div style="padding:10px 12px;background:#fafafa;">
         <div style="color:#555;margin-bottom:8px;">Replaces the <em>contents</em> of the target</div>
-        <div style="font-family:monospace;font-size:11px;display:flex;flex-direction:column;gap:3px;">
+        <div style="font-family:monospace;font-size:13px;display:flex;flex-direction:column;gap:3px;">
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;">&lt;div id="t"&gt;Old&lt;/div&gt;</span>
           <span style="color:#2e7d32;background:#e8f5e9;padding:2px 6px;border-radius:3px;">&lt;div id="t"&gt;<b>New</b>&lt;/div&gt;</span>
         </div>
       </div>
     </div>
 
-    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:12px;">
-      <div style="background:#1a1a2e;color:#e94560;padding:7px 12px;font-family:monospace;font-weight:bold;">outerHTML</div>
+    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:14px;">
+      <div style="background:#1a1a2e;color:#cdd6f4;padding:7px 12px;font-family:monospace;font-weight:bold;">outerHTML</div>
       <div style="padding:10px 12px;background:#fafafa;">
         <div style="color:#555;margin-bottom:8px;">Replaces the target element <em>itself</em></div>
-        <div style="font-family:monospace;font-size:11px;display:flex;flex-direction:column;gap:3px;">
+        <div style="font-family:monospace;font-size:13px;display:flex;flex-direction:column;gap:3px;">
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;text-decoration:line-through;">&lt;div id="t"&gt;Old&lt;/div&gt;</span>
           <span style="color:#2e7d32;background:#e8f5e9;padding:2px 6px;border-radius:3px;">&lt;section&gt;New&lt;/section&gt;</span>
         </div>
       </div>
     </div>
 
-    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:12px;">
-      <div style="background:#1a1a2e;color:#e94560;padding:7px 12px;font-family:monospace;font-weight:bold;">beforeend</div>
+    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:14px;">
+      <div style="background:#1a1a2e;color:#cdd6f4;padding:7px 12px;font-family:monospace;font-weight:bold;">beforeend</div>
       <div style="padding:10px 12px;background:#fafafa;">
         <div style="color:#555;margin-bottom:8px;">Appends after existing content</div>
-        <div style="font-family:monospace;font-size:11px;display:flex;flex-direction:column;gap:3px;">
+        <div style="font-family:monospace;font-size:13px;display:flex;flex-direction:column;gap:3px;">
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;">Item 1</span>
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;">Item 2</span>
           <span style="color:#2e7d32;background:#e8f5e9;padding:2px 6px;border-radius:3px;">+ New item</span>
@@ -41,11 +48,11 @@
       </div>
     </div>
 
-    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:12px;">
-      <div style="background:#1a1a2e;color:#e94560;padding:7px 12px;font-family:monospace;font-weight:bold;">afterbegin</div>
+    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:14px;">
+      <div style="background:#1a1a2e;color:#cdd6f4;padding:7px 12px;font-family:monospace;font-weight:bold;">afterbegin</div>
       <div style="padding:10px 12px;background:#fafafa;">
         <div style="color:#555;margin-bottom:8px;">Prepends before existing content</div>
-        <div style="font-family:monospace;font-size:11px;display:flex;flex-direction:column;gap:3px;">
+        <div style="font-family:monospace;font-size:13px;display:flex;flex-direction:column;gap:3px;">
           <span style="color:#2e7d32;background:#e8f5e9;padding:2px 6px;border-radius:3px;">+ New item</span>
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;">Item 1</span>
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;">Item 2</span>
@@ -53,22 +60,22 @@
       </div>
     </div>
 
-    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:12px;">
-      <div style="background:#1a1a2e;color:#e94560;padding:7px 12px;font-family:monospace;font-weight:bold;">delete</div>
+    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:14px;">
+      <div style="background:#1a1a2e;color:#cdd6f4;padding:7px 12px;font-family:monospace;font-weight:bold;">delete</div>
       <div style="padding:10px 12px;background:#fafafa;">
         <div style="color:#555;margin-bottom:8px;">Removes the target, ignores response body</div>
-        <div style="font-family:monospace;font-size:11px;display:flex;flex-direction:column;gap:3px;">
+        <div style="font-family:monospace;font-size:13px;display:flex;flex-direction:column;gap:3px;">
           <span style="color:#888;background:#f0f0f0;padding:2px 6px;border-radius:3px;">Other content</span>
           <span style="color:#b71c1c;background:#ffebee;padding:2px 6px;border-radius:3px;text-decoration:line-through;">&lt;div id="t"&gt;Gone&lt;/div&gt;</span>
         </div>
       </div>
     </div>
 
-    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:12px;">
-      <div style="background:#1a1a2e;color:#e94560;padding:7px 12px;font-family:monospace;font-weight:bold;">none</div>
+    <div style="border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;font-size:14px;">
+      <div style="background:#1a1a2e;color:#cdd6f4;padding:7px 12px;font-family:monospace;font-weight:bold;">none</div>
       <div style="padding:10px 12px;background:#fafafa;">
         <div style="color:#555;margin-bottom:8px;">Do not swap anything (useful for side effects)</div>
-        <div style="font-family:monospace;font-size:11px;">
+        <div style="font-family:monospace;font-size:13px;">
           <span style="color:#888;padding:2px 6px;">Response is discarded — fire and forget</span>
         </div>
       </div>

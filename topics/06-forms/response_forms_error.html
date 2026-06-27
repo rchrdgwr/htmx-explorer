@@ -1,0 +1,14 @@
+<form hx-post="response_forms_error.html"
+      hx-target="closest form"
+      hx-swap="outerHTML">
+  <label for="name2">Your name <span class="req">*</span></label>
+  <input type="text" id="name2" name="name" placeholder="e.g. Ada Lovelace" class="input-error">
+  <div class="field-error">Name is required</div>
+
+  <label for="city2">Your city <span class="req">*</span></label>
+  <input type="text" id="city2" name="city" placeholder="e.g. San Antonio" class="input-error">
+  <div class="field-error">City is required</div>
+
+  <button type="submit">Submit with empty fields</button>
+  <a href="" class="reset-link">← Reset</a>
+</form>

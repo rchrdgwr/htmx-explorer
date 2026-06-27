@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6. Forms - htmx Explorer</title>
+  <meta name="description" content="Submit HTML forms with htmx using hx-post and get instant feedback without a full page reload.">
+  <meta name="keywords" content="htmx, hx-post, forms, form submission, hx-include, AJAX forms">
+  <link rel="stylesheet" href="/css/concept.css">
+</head>
 <body>
   <div class="title-row"><h2>6. Forms</h2><span class="key-attr">hx-post</span><span class="key-attr">hx-target</span><span class="key-attr">hx-swap</span></div>
   <p class="subtitle">AJAX forms without AJAX code. Add <code>hx-post</code> to a form and htmx handles serialization, submission, and response — all in one attribute.</p>
 
-  <div class="compare">
-    <div class="compare-box old">
-      <h4>Traditional form</h4>
-      <ul>
-        <li>Full page reload on submit</li>
-        <li>Browser navigates away</li>
-        <li>Scroll position lost</li>
-        <li>Must redirect after POST</li>
-        <li>Hard to show inline errors</li>
-      </ul>
+  <div class="table-snippet-row" style="align-items:stretch;">
+    <div class="compare">
+      <div class="compare-box old">
+        <h4>Traditional form</h4>
+        <ul>
+          <li>Full page reload on submit</li>
+          <li>Browser navigates away</li>
+          <li>Scroll position lost</li>
+          <li>Must redirect after POST</li>
+          <li>Hard to show inline errors</li>
+        </ul>
+      </div>
+      <div class="compare-box new">
+        <h4>htmx form</h4>
+        <ul>
+          <li>No page reload</li>
+          <li>Response swapped inline</li>
+          <li>Scroll position kept</li>
+          <li>Server returns HTML fragment</li>
+          <li>Inline validation is easy</li>
+        </ul>
+      </div>
     </div>
-    <div class="compare-box new">
-      <h4>htmx form</h4>
-      <ul>
-        <li>No page reload</li>
-        <li>Response swapped inline</li>
-        <li>Scroll position kept</li>
-        <li>Server returns HTML fragment</li>
-        <li>Inline validation is easy</li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="snippet">
+    <div class="snippet">
 &lt;<span class="tag">form</span> <span class="attr hl">hx-post</span>=<span class="val">"/save"</span> <span class="attr">hx-target</span>=<span class="val">"#result"</span>&gt;<br>
 &nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="val">"name"</span> <span class="attr">type</span>=<span class="val">"text"</span>&gt;<br>
 &nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="val">"email"</span> <span class="attr">type</span>=<span class="val">"email"</span>&gt;<br>
@@ -36,6 +44,7 @@
 &lt;/<span class="tag">form</span>&gt;<br><br>
 <span class="cm">&lt;!-- Server returns success or validation errors as HTML --&gt;</span><br>
 &lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"result"</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    </div>
   </div>
 
   <div class="callout"><strong>Validation pattern:</strong> On error, the server returns the form again with error messages highlighted. On success, it returns a success message or the new record. No JSON, no client-side validation library needed.</div>

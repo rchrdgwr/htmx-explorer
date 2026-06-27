@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8. Out-of-Band Swaps - htmx Explorer</title>
+  <meta name="description" content="Update multiple parts of the page simultaneously using hx-swap-oob to inject content outside the primary target.">
+  <meta name="keywords" content="htmx, hx-swap-oob, out-of-band, multiple targets, OOB swap">
+  <link rel="stylesheet" href="/css/concept.css">
+</head>
 <body>
   <div class="title-row"><h2>8. Out-of-Band Swaps</h2><span class="key-attr">hx-swap-oob</span></div>
   <p class="subtitle">One server response updates multiple, unrelated parts of the page. This is one of htmx's superpowers — a single request, many updates.</p>
 
-  <div style="margin:20px 0;padding:16px;background:#fafafa;border-radius:10px;border:1px solid #eee;">
+  <div class="table-snippet-row" style="align-items:flex-start;">
+  <div style="padding:16px;background:#fafafa;border-radius:10px;border:1px solid #eee;flex:0 0 auto;">
     <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:14px;">One response body — two targets</div>
     <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
-      <div style="flex:1;min-width:180px;">
+      <div style="flex:0 0 auto;">
         <div style="font-size:11px;color:#888;margin-bottom:6px;">Server response</div>
         <div style="background:#1e1e2e;border-radius:6px;padding:12px;font-family:monospace;font-size:11px;color:#cdd6f4;line-height:1.8;">
           &lt;<span style="color:#f38ba8">p</span>&gt;Item added!&lt;/<span style="color:#f38ba8">p</span>&gt;<br><br>
@@ -44,6 +52,7 @@
 &lt;<span class="tag">p</span>&gt;Item added to cart!&lt;/<span class="tag">p</span>&gt;<br><br>
 <span class="cm">&lt;!-- This part gets OOB-swapped into #cart-count --&gt;</span><br>
 &lt;<span class="tag">span</span> <span class="attr">id</span>=<span class="val">"cart-count"</span> <span class="attr hl">hx-swap-oob</span>=<span class="val">"true"</span>&gt;1 item&lt;/<span class="tag">span</span>&gt;
+  </div>
   </div>
 
   <div class="callout"><strong>Real-world uses:</strong> Shopping cart counter, notification badge, status bar, breadcrumb, page title — all updated from one request alongside the main content.</div>

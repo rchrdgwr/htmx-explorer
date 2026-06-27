@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shopping cart demo: hx-swap-oob updates the cart counter in the nav while returning the confirmation message inline.">
+  <meta name="keywords" content="htmx, hx-swap-oob, shopping cart, out-of-band swap, demo">
+  <title>OOB Swap — Shopping Cart</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="stylesheet" href="/css/examples.css">
+  <link rel="stylesheet" href="/css/responses.css">
+</head>
+<body class="page-oob-swaps">
+
+  <nav class="shop-nav">
+    <div class="shop-name">🏪 PyShop</div>
+    <div class="shop-cart">
+      <span class="cart-icon">🛒</span>
+      <span id="cart-count">0</span>
+    </div>
+  </nav>
+
+  <h2>Shopping Cart</h2>
+  <p>Click <strong>Add to Cart</strong> — one response updates <em>three</em> elements: the confirmation below, the cart counter in the nav, and the cart contents section at the bottom.</p>
+
+  <div class="product-card">
+    <div class="product-cover">📘</div>
+    <div class="product-info">
+      <div class="product-title">HTMX in Action</div>
+      <div class="product-desc">Build modern, dynamic web apps with minimal JavaScript using htmx's hypermedia-driven approach.</div>
+      <div class="product-footer">
+        <span class="product-price">$34.99</span>
+        <button class="add-to-cart-btn"
+                hx-post="response_oob-swaps_cart.html"
+                hx-target="#cart-message"
+                hx-swap="innerHTML">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="target-zone">
+    <span class="target-zone-label">#cart-message</span>
+    <div id="cart-message"></div>
+  </div>
+
+  <div class="cart-section">
+    <div class="cart-section-label">🛒 Cart Contents</div>
+    <div id="cart-contents">
+      <div class="cart-empty">Your cart is empty</div>
+    </div>
+  </div>
+
+</body>
+</html>

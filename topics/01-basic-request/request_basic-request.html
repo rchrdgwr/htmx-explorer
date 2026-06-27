@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how to make a basic HTMX GET request that swaps HTML response into a target element.">
+  <meta name="keywords" content="HTMX, basic request, GET, HTML swap">
   <title>Basic Request</title>
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <link rel="stylesheet" href="/css/examples.css">
@@ -10,11 +13,14 @@
 <body class="page-basic-request">
   <h2>Basic Request</h2>
   <p>Click the button — htmx fires a GET request and swaps the HTML response into <code>#result</code>. No JavaScript needed.</p>
-
+  
   <button hx-get="response_basic-request.html" hx-target="#result">
     Say Hello
   </button>
 
-  <div id="result"></div>
+  <div class="target-zone">
+    <span class="target-zone-label">#result</span>
+    <div id="result"></div>
+  </div>
 </body>
 </html>

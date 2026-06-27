@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive demo: compare htmx swap strategies — innerHTML, outerHTML, afterbegin, and more.">
+  <meta name="keywords" content="htmx, hx-swap, innerHTML, outerHTML, afterbegin, beforeend, demo">
   <title>Swap Styles</title>
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <link rel="stylesheet" href="/css/examples.css">
@@ -11,40 +14,44 @@
   <h2>Swap Styles</h2>
   <p><code>hx-swap</code> controls <em>how</em> the response is placed in the DOM.</p>
 
-  <div class="demo">
-    <h3>innerHTML (default)</h3>
-    <div class="desc">Replaces the <em>contents</em> of the target element</div>
-    <button hx-get="response_swap-strategies.html"
-            hx-target="#s1"
-            hx-swap="innerHTML">Load</button>
-    <div id="s1" class="box">Original content</div>
+  <div style="display:flex;gap:12px;margin-bottom:12px;">
+    <div class="demo" style="flex:1;margin-bottom:0;">
+      <h3>innerHTML (default)</h3>
+      <div class="desc">Replaces the <em>contents</em> of the target element</div>
+      <button hx-get="response_swap-strategies.html"
+              hx-target="#s1"
+              hx-swap="innerHTML">Load</button>
+      <div id="s1" class="box">Original content</div>
+    </div>
+
+    <div class="demo" style="flex:1;margin-bottom:0;">
+      <h3>outerHTML</h3>
+      <div class="desc">Replaces the target element <em>itself</em> with the response</div>
+      <button hx-get="response_swap-strategies.html"
+              hx-target="#s2"
+              hx-swap="outerHTML">Load</button>
+      <div id="s2" class="box">Original content</div>
+    </div>
   </div>
 
-  <div class="demo">
-    <h3>outerHTML</h3>
-    <div class="desc">Replaces the target element <em>itself</em> with the response</div>
-    <button hx-get="response_swap-strategies.html"
-            hx-target="#s2"
-            hx-swap="outerHTML">Load</button>
-    <div id="s2" class="box">Original content</div>
-  </div>
+  <div style="display:flex;gap:12px;">
+    <div class="demo" style="flex:1;margin-bottom:0;">
+      <h3>beforeend</h3>
+      <div class="desc">Appends the response <em>after</em> existing content</div>
+      <button hx-get="response_swap-strategies.html"
+              hx-target="#s3"
+              hx-swap="beforeend">Append</button>
+      <div id="s3" class="box">Existing content →</div>
+    </div>
 
-  <div class="demo">
-    <h3>beforeend</h3>
-    <div class="desc">Appends the response <em>after</em> existing content</div>
-    <button hx-get="response_swap-strategies.html"
-            hx-target="#s3"
-            hx-swap="beforeend">Append</button>
-    <div id="s3" class="box">Existing content →</div>
-  </div>
-
-  <div class="demo">
-    <h3>afterbegin</h3>
-    <div class="desc">Prepends the response <em>before</em> existing content</div>
-    <button hx-get="response_swap-strategies.html"
-            hx-target="#s4"
-            hx-swap="afterbegin">Prepend</button>
-    <div id="s4" class="box">← Existing content</div>
+    <div class="demo" style="flex:1;margin-bottom:0;">
+      <h3>afterbegin</h3>
+      <div class="desc">Prepends the response <em>before</em> existing content</div>
+      <button hx-get="response_swap-strategies.html"
+              hx-target="#s4"
+              hx-swap="afterbegin">Prepend</button>
+      <div id="s4" class="box">← Existing content</div>
+    </div>
   </div>
 </body>
 </html>

@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive demo: trigger GET, POST, PUT, PATCH, and DELETE requests using htmx attributes.">
+  <meta name="keywords" content="htmx, hx-get, hx-post, hx-put, hx-patch, hx-delete, HTTP verbs, demo">
   <title>HTTP Verbs</title>
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <link rel="stylesheet" href="/css/examples.css">
@@ -27,7 +30,14 @@
     <button class="delete" hx-delete="response_http-verbs.html" hx-target="#result">hx-delete</button>
     <span class="label">Remove a resource</span>
   </div>
+  <div class="verb-row">
+    <button class="clear" hx-get="response_http-verbs_clear.html" hx-target="#result">clear</button>
+    <span class="label">Returns empty HTML → clears the target</span>
+  </div>
 
-  <div id="result"></div>
+  <div class="target-zone">
+    <span class="target-zone-label">#result</span>
+    <div id="result"></div>
+  </div>
 </body>
 </html>

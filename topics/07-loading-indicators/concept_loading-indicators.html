@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7. Loading Indicators - htmx Explorer</title>
+  <meta name="description" content="Show loading spinners and indicators during htmx requests using hx-indicator and the htmx-request class.">
+  <meta name="keywords" content="htmx, hx-indicator, htmx-request, loading spinner, loading state">
+  <link rel="stylesheet" href="/css/concept.css">
+</head>
 <body>
   <div class="title-row"><h2>7. Loading Indicators</h2><span class="key-attr">hx-indicator</span><span class="key-attr">.htmx-indicator</span><span class="key-attr">.htmx-request</span></div>
   <p class="subtitle">User feedback during a request. htmx adds the <code>htmx-request</code> class to the triggering element while the request is in flight — use it to show spinners.</p>
 
-  <div class="flow">
-    <div class="node browser"><div class="label">Click</div><div class="detail">htmx-request added</div></div>
-    <div class="arrow"><div class="line"></div><div class="note">request in flight</div></div>
-    <div class="node purple"><div class="label">Spinner</div><div class="detail">becomes visible</div></div>
-    <div class="arrow"><div class="line"></div><div class="note">response arrives</div></div>
-    <div class="node dom"><div class="label">Done</div><div class="detail">htmx-request removed</div></div>
-  </div>
+  <div class="table-snippet-row">
+    <div class="flow">
+      <div class="node browser"><div class="label">Click</div><div class="detail">htmx-request added</div></div>
+      <div class="arrow"><div class="line"></div><div class="note">request in flight</div></div>
+      <div class="node purple"><div class="label">Spinner</div><div class="detail">becomes visible</div></div>
+      <div class="arrow"><div class="line"></div><div class="note">response arrives</div></div>
+      <div class="node dom"><div class="label">Done</div><div class="detail">htmx-request removed</div></div>
+    </div>
 
-  <div class="snippet">
+    <div class="snippet">
 <span class="cm">&lt;!-- htmx adds .htmx-request to the button while waiting --&gt;</span><br>
 &lt;<span class="tag">button</span> <span class="attr">hx-get</span>=<span class="val">"/slow"</span> <span class="attr">hx-target</span>=<span class="val">"#result"</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr hl">hx-indicator</span>=<span class="val">"#spinner"</span>&gt;<br>
@@ -25,6 +33,7 @@
 <span class="attr">.htmx-indicator</span> { opacity: 0; transition: opacity 200ms; }<br>
 <span class="attr">.htmx-request .htmx-indicator</span> { opacity: 1; }<br>
 <span class="attr">.htmx-request</span><span class="val">.htmx-indicator</span> { opacity: 1; }
+    </div>
   </div>
 
   <div class="callout"><strong>Perceived performance:</strong> A spinner or skeleton screen makes a 1-second wait feel much shorter. Always give users feedback that something is happening.</div>

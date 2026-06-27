@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><link rel="stylesheet" href="/css/concept.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9. Confirmation - htmx Explorer</title>
+  <meta name="description" content="Prompt users before performing destructive actions using hx-confirm with native and custom dialog patterns.">
+  <meta name="keywords" content="htmx, hx-confirm, confirmation dialog, delete confirmation, user prompt">
+  <link rel="stylesheet" href="/css/concept.css">
+</head>
 <body>
   <div class="title-row"><h2>9. Confirmation</h2><span class="key-attr">hx-confirm</span></div>
   <p class="subtitle">Prevent accidental destructive actions. <code>hx-confirm</code> shows a browser dialog before the request fires — one attribute, zero JavaScript.</p>
 
-  <div class="flow">
-    <div class="node browser"><div class="label">Click</div><div class="detail">User clicks Delete</div></div>
-    <div class="arrow"><div class="line"></div><div class="note">dialog shown</div></div>
-    <div class="node purple"><div class="label">Confirm?</div><div class="detail">OK or Cancel</div></div>
-    <div class="arrow"><div class="line"></div><div class="note">if OK</div></div>
-    <div class="node server"><div class="label">Request</div><div class="detail">fires normally</div></div>
-  </div>
+  <div class="table-snippet-row">
+    <div class="flow">
+      <div class="node browser"><div class="label">Click</div><div class="detail">User clicks Delete</div></div>
+      <div class="arrow"><div class="line"></div><div class="note">dialog shown</div></div>
+      <div class="node purple"><div class="label">Confirm?</div><div class="detail">OK or Cancel</div></div>
+      <div class="arrow"><div class="line"></div><div class="note">if OK</div></div>
+      <div class="node server"><div class="label">Request</div><div class="detail">fires normally</div></div>
+    </div>
 
-  <div class="snippet">
+    <div class="snippet">
 <span class="cm">&lt;!-- Simplest form --&gt;</span><br>
 &lt;<span class="tag">button</span><br>
 &nbsp;&nbsp;<span class="attr">hx-delete</span>=<span class="val">"/items/42"</span><br>
@@ -22,28 +30,31 @@
 &nbsp;&nbsp;<span class="attr hl">hx-confirm</span>=<span class="val">"Delete this item? This cannot be undone."</span>&gt;<br>
 &nbsp;&nbsp;Delete<br>
 &lt;/<span class="tag">button</span>&gt;
+    </div>
   </div>
 
   <div class="callout"><strong>Custom dialogs:</strong> For a nicer UX, you can intercept the <code>htmx:confirm</code> event and show a custom modal instead of the browser's native dialog.</div>
 
-  <div class="section">
-    <div class="section-label">Custom confirm with htmx event</div>
-    <div class="snippet">
+  <div class="table-snippet-row" style="align-items:flex-start;">
+    <div class="section">
+      <div class="section-label">Custom confirm with htmx event</div>
+      <div class="snippet">
 <span class="cm">// Override with a custom modal</span><br>
 document.addEventListener(<span class="val">'htmx:confirm'</span>, (e) =&gt; {<br>
 &nbsp;&nbsp;e.preventDefault();<br>
 &nbsp;&nbsp;<span class="cm">// true skips htmx's own confirm step on retry</span><br>
 &nbsp;&nbsp;MyModal.show(e.detail.question, () =&gt; e.detail.issueRequest(<span class="val">true</span>));<br>
 });
+      </div>
     </div>
-  </div>
 
-  <div class="points">
-    <h3>Key Points</h3>
-    <div class="point"><div class="icon">1</div><div>If the user clicks Cancel, the request is never sent</div></div>
-    <div class="point"><div class="icon">2</div><div>Works with any verb — especially useful with <code>hx-delete</code></div></div>
-    <div class="point"><div class="icon">3</div><div>The confirmation message can include dynamic text from the element</div></div>
-    <div class="point"><div class="icon">4</div><div>Intercept <code>htmx:confirm</code> to use any modal library instead of <code>window.confirm()</code></div></div>
+    <div class="points">
+      <h3>Key Points</h3>
+      <div class="point"><div class="icon">1</div><div>If the user clicks Cancel, the request is never sent</div></div>
+      <div class="point"><div class="icon">2</div><div>Works with any verb — especially useful with <code>hx-delete</code></div></div>
+      <div class="point"><div class="icon">3</div><div>The confirmation message can include dynamic text from the element</div></div>
+      <div class="point"><div class="icon">4</div><div>Intercept <code>htmx:confirm</code> to use any modal library instead of <code>window.confirm()</code></div></div>
+    </div>
   </div>
 </body>
 </html>

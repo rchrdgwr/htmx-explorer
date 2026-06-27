@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="An interactive explorer for learning HTMX with examples and documentation.">
   <meta name="keywords" content="HTMX, HTML, web development, interactive explorer">
   <title>HTMX Explorer</title>
@@ -164,10 +165,9 @@
 
     /* ── Right column: request + response ── */
     #inspector {
-      width: 420px;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      flex-shrink: 0;
       background: #1e1e2e;
       color: #cdd6f4;
     }
@@ -190,7 +190,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: #6c7086;
+      color: #cdd6f4;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -208,6 +208,31 @@
     .inspector-header .badge.req { color: #89b4fa; }
     .inspector-header .badge.res { color: #a6e3a1; }
 
+    /* tabs inside an inspector half */
+    .inspector-tabs {
+      display: flex;
+      background: #1e1e2e;
+      border-bottom: 1px solid #313244;
+      flex-shrink: 0;
+    }
+
+    .insp-tab {
+      padding: 6px 14px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #6c7086;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .insp-tab:hover { color: #cdd6f4; }
+    .insp-tab.active { color: #cdd6f4; border-bottom-color: #e94560; }
+
     .code-pane {
       flex: 1;
       overflow-y: auto;
@@ -218,7 +243,7 @@
       margin: 0;
       padding: 14px;
       font-family: 'Fira Code', 'Cascadia Code', monospace;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-all;
@@ -241,20 +266,51 @@
 
     /* meta row inside inspector */
     .meta-row {
-      padding: 6px 14px;
-      font-size: 11px;
-      color: #6c7086;
+      padding: 10px 14px;
       background: #181825;
       border-bottom: 1px solid #313244;
       flex-shrink: 0;
       font-family: monospace;
+      font-size: 14px;
     }
 
-    .meta-row .method { color: #89b4fa; font-weight: bold; }
-    .meta-row .url    { color: #cba6f7; }
+    .meta-request-line { margin-bottom: 10px; }
+    .meta-row .method  { color: #89b4fa; font-weight: bold; }
+    .meta-row .url     { color: #cba6f7; }
     .meta-row .status.ok  { color: #a6e3a1; font-weight: bold; }
     .meta-row .status.err { color: #f38ba8; font-weight: bold; }
-    .meta-row .target { color: #fab387; }
+
+    .meta-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .meta-label {
+      font-size: 13px;
+      color: #a6adc8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: monospace;
+      font-weight: 600;
+    }
+
+    .meta-value { color: #cdd6f4; }
+    .meta-value.target-val { color: #fab387; }
+    .meta-value.swap-val   { color: #cba6f7; }
+
+    /* sub-label within inspector halves */
+    .section-label {
+      padding: 5px 14px;
+      background: #181825;
+      border-bottom: 1px solid #313244;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #cdd6f4;
+      flex-shrink: 0;
+    }
 
     /* ── Preview tabs ── */
     #preview-tabs {
@@ -344,6 +400,7 @@
     <div id="preview-tabs">
       <button class="tab-btn active" id="tab-concept" onclick="switchTab('concept')">Concept</button>
       <span id="demo-tabs"></span>
+      <button id="reset-btn" onclick="loadDemo(currentDemoIndex)" style="display:none;margin-left:auto;margin-right:8px;padding:4px 10px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;color:#555;letter-spacing:0.5px;">↺ Reset</button>
     </div>
     <iframe id="home-frame" class="visible" src="home.html"></iframe>
     <iframe id="concept-frame"></iframe>
@@ -359,8 +416,15 @@
         Page Source
         <span class="badge req" id="req-badge">select an example</span>
       </div>
+      <div class="inspector-tabs">
+        <button class="insp-tab active" id="tab-source" onclick="switchSourceTab('source')">Source</button>
+        <button class="insp-tab" id="tab-dom" onclick="switchSourceTab('dom')">Live DOM</button>
+      </div>
       <div class="code-pane" id="sent-pane">
         <div class="empty-pane">The example HTML will appear here</div>
+      </div>
+      <div class="code-pane" id="dom-pane" style="display:none">
+        <div class="empty-pane">Interact with the demo to see the live DOM</div>
       </div>
     </div>
 
@@ -374,6 +438,7 @@
         </span>
       </div>
       <div class="meta-row" id="res-meta" style="display:none"></div>
+      <div class="section-label">HTML Received</div>
       <div class="code-pane" id="res-pane">
         <div class="empty-pane">HTMX response HTML will appear here</div>
       </div>
@@ -392,7 +457,10 @@ const EXAMPLES = {
   'triggering':        { label: '5. Triggering',         concept: 'topics/05-triggering/concept_triggering.html',              demos: [{ label: 'Live Demo', file: 'topics/05-triggering/request_triggering.html' }] },
   'forms':             { label: '6. Forms',              concept: 'topics/06-forms/concept_forms.html',                        demos: [{ label: 'Live Demo', file: 'topics/06-forms/request_forms.html' }] },
   'loading-indicators':{ label: '7. Loading Indicators', concept: 'topics/07-loading-indicators/concept_loading-indicators.html', demos: [{ label: 'Live Demo', file: 'topics/07-loading-indicators/request_loading-indicators.html' }] },
-  'oob-swaps':         { label: '8. OOB Swaps',          concept: 'topics/08-oob-swaps/concept_oob-swaps.html',                demos: [{ label: 'Live Demo', file: 'topics/08-oob-swaps/request_oob-swaps.html' }] },
+  'oob-swaps':         { label: '8. OOB Swaps',          concept: 'topics/08-oob-swaps/concept_oob-swaps.html',                demos: [
+                            { label: 'Basic',         file: 'topics/08-oob-swaps/request_oob-swaps.html' },
+                            { label: 'Shopping Cart', file: 'topics/08-oob-swaps/request_oob-swaps_cart.html' },
+                          ] },
   'confirmation':      { label: '9. Confirmation',       concept: 'topics/09-confirmation/concept_confirmation.html',          demos: [
                             { label: 'Standard',     file: 'topics/09-confirmation/request_confirmation.html' },
                             { label: 'Custom Modal', file: 'topics/09-confirmation/request_confirmation_custom-dialog.html' },
@@ -437,11 +505,20 @@ function switchTab(tab) {
   document.getElementById('concept-frame').classList.toggle('visible', tab === 'concept');
   document.getElementById('preview-frame').classList.toggle('visible', tab !== 'concept');
   document.getElementById('inspector').style.display = tab !== 'concept' ? 'flex' : 'none';
+  document.getElementById('reset-btn').style.display  = tab !== 'concept' ? 'block' : 'none';
 
   if (tab !== 'concept') {
     const idx = parseInt(tab.split('-')[1], 10);
     if (idx !== currentDemoIndex) loadDemo(idx);
   }
+}
+
+// ── Source / Live DOM tab toggle ─────────────────────────────────
+function switchSourceTab(tab) {
+  document.getElementById('tab-source').classList.toggle('active', tab === 'source');
+  document.getElementById('tab-dom').classList.toggle('active', tab === 'dom');
+  document.getElementById('sent-pane').style.display = tab === 'source' ? '' : 'none';
+  document.getElementById('dom-pane').style.display  = tab === 'dom'    ? '' : 'none';
 }
 
 // ── Load example ─────────────────────────────────────────────────
@@ -499,10 +576,12 @@ async function loadDemo(idx, bust) {
     renderError('sent-pane', `Could not load ${demo.file}`);
   }
 
-  // Clear response pane
+  // Clear response pane and live DOM pane
   document.getElementById('res-pane').innerHTML = '<div class="empty-pane">Interact with the demo to see the response</div>';
   document.getElementById('res-badge').textContent = 'waiting';
   document.getElementById('res-meta').style.display = 'none';
+  document.getElementById('dom-pane').innerHTML = '<div class="empty-pane">Interact with the demo to see the live DOM</div>';
+  switchSourceTab('source');
 }
 
 // ── Wire htmx events inside iframe ───────────────────────────────
@@ -513,21 +592,30 @@ function wireIframe(frame) {
 
     // After each htmx request, capture the response
     doc.addEventListener('htmx:afterRequest', (e) => {
-      const xhr    = e.detail.xhr;
-      const cfg    = e.detail.requestConfig || {};
-      const ok     = xhr.status >= 200 && xhr.status < 300;
-      const method = (cfg.verb || 'GET').toUpperCase();
-      const url    = cfg.path || xhr.responseURL || '?';
-      const target = e.detail.target ? '#' + (e.detail.target.id || '(element)') : '(unknown)';
+      const xhr         = e.detail.xhr;
+      const cfg         = e.detail.requestConfig || {};
+      const ok          = xhr.status >= 200 && xhr.status < 300;
+      const method      = (cfg.verb || 'GET').toUpperCase();
+      const url         = cfg.path || xhr.responseURL || '?';
+      const target      = e.detail.target ? '#' + (e.detail.target.id || '(element)') : '(unknown)';
+      const contentType = (xhr.getResponseHeader('Content-Type') || 'text/html').split(';')[0].trim();
+      const triggerEl   = cfg.elt || e.detail.elt;
+      const swap        = triggerEl?.closest('[hx-swap]')?.getAttribute('hx-swap') || 'innerHTML';
 
       // Meta row
       const meta = document.getElementById('res-meta');
       meta.style.display = 'block';
       meta.innerHTML = `
-        <span class="method">${method}</span>
-        <span class="url"> ${url}</span> →
-        <span class="status ${ok ? 'ok' : 'err'}">${xhr.status} ${xhr.statusText}</span>
-        <span class="target"> target: ${target}</span>
+        <div class="meta-request-line">
+          <span class="method">${method}</span>
+          <span class="url">${url}</span>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Status: </span><span class="meta-value status ${ok ? 'ok' : 'err'}">${xhr.status} ${xhr.statusText}</span></div>
+          <div class="meta-item"><span class="meta-label">Content-Type: </span><span class="meta-value">${contentType}</span></div>
+          <div class="meta-item"><span class="meta-label">Target: </span><span class="meta-value target-val">${target}</span></div>
+          <div class="meta-item"><span class="meta-label">Swap: </span><span class="meta-value swap-val">${swap}</span></div>
+        </div>
       `;
 
       // Response body
@@ -537,6 +625,11 @@ function wireIframe(frame) {
 
       // Flash effect
       flash('res-pane');
+    });
+
+    // After htmx swaps the DOM, capture the updated body
+    doc.addEventListener('htmx:afterSettle', () => {
+      renderCode('dom-pane', doc.body.innerHTML.trim(), 'html');
     });
 
   } catch(err) {
