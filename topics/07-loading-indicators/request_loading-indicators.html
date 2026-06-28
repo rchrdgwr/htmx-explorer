@@ -12,33 +12,36 @@
 </head>
 <body class="page-loading-indicators">
   <h2>Loading Indicators</h2>
-  <p>Show the user something is happening. htmx fires events before and after each request — use them to show and hide spinners.</p>
+  <p>htmx adds <code>.htmx-request</code> to the triggering element while a request is in flight. Use CSS to show a spinner - no JavaScript needed.</p>
 
   <div class="demo">
-    <h3>Inline spinner (inside the button)</h3>
-    <div class="desc">Uses <code>hx-on</code> to show a spinner inside the button during the request</div>
-    <button id="btn1"
-            hx-get="response_loading-indicators.html"
+    <h3>Inline spinner (child of button)</h3>
+    <div class="desc">
+      The spinner is inside the button with <code>class="htmx-indicator"</code>.<br>
+      CSS rule <code>.htmx-request .htmx-indicator</code> makes it visible automatically.
+    </div>
+    <button hx-get="response_loading-indicators.html"
             hx-target="#result"
-            hx-on:htmx:before-request="this.disabled=true; document.getElementById('spin1').style.display='inline-block'"
-            hx-on:htmx:after-request="this.disabled=false; document.getElementById('spin1').style.display='none'">
+            hx-swap="innerHTML swap:1000ms">
       Load Data
-      <span id="spin1" class="spinner"></span>
+      <span class="spinner htmx-indicator"></span>
     </button>
   </div>
 
   <div class="demo">
     <h3>External indicator</h3>
-    <div class="desc">Spinner lives elsewhere on the page — shown via <code>hx-indicator</code></div>
-    <button id="btn2"
-            hx-get="response_loading-indicators.html"
+    <div class="desc">
+      <code>hx-indicator="#ext-indicator"</code> points to a spinner elsewhere on the page.<br>
+      htmx adds <code>.htmx-request</code> directly to that element.
+    </div>
+    <button hx-get="response_loading-indicators.html"
             hx-target="#result"
-            hx-on:htmx:before-request="document.getElementById('ext-spin').style.display='inline-block'"
-            hx-on:htmx:after-request="document.getElementById('ext-spin').style.display='none'">
+            hx-swap="innerHTML swap:1000ms"
+            hx-indicator="#ext-indicator">
       Load Data
     </button>
-    <span id="ext-spin" class="ext-spinner">
-      <span class="spin-red"></span>Loading...
+    <span id="ext-indicator" class="ext-spinner htmx-indicator">
+      <span class="spin-dot"></span> Loading...
     </span>
   </div>
 

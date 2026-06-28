@@ -31,12 +31,16 @@
       <h3>Live Dashboard</h3>
       <p>OOB + polling</p>
     </div>
+    <div class="card" hx-get="response_server-driven-ui_modal.html" hx-target="#modal-container">
+      <h3>Modal Dialog</h3>
+      <p>Open a modal from a server response</p>
+    </div>
   </div>
 
   <div id="demo-area">
     <span class="placeholder">Click a pattern card above</span>
   </div>
 
-  <p class="note">The Live Dashboard numbers come from an inline <code>&lt;script&gt;</code> in the response fragment — this server only serves static files. A real backend would return freshly computed values on each poll.</p>
+  <div id="modal-container"></div>
 </body>
 </html>

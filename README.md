@@ -1,10 +1,13 @@
 # HTMX Explorer
 
-An interactive demo app for learning [htmx](https://htmx.org) — built for [Alamo Python](https://alamopython.com).
+An interactive demo app for learning [htmx](https://htmx.org) - built for [Alamo Python](https://alamopython.com).
 
 Browse 16 concepts from beginner to "I could build a real app", with a live demo and request/response inspector for each one.
 
-<img src="alamo-python-logo.jpg" alt="HTMX Explorer" width="160">
+<div style="display:flex;align-items:center;gap:24px;">
+  <img src="alamo-python-logo.jpg" alt="Alamo Python logo" width="160">
+  <img src="app.png" alt="HTMX Explorer screenshot" width="480">
+</div>
 
 ## Quick Start
 
@@ -20,36 +23,36 @@ Python 3.7+ required. No other dependencies.
 
 ## What's Inside
 
-| #  | Concept            | What you learn                                   |
-| -- | ------------------ | ------------------------------------------------ |
-| 1  | Basic Request      | `hx-get`, server returns HTML not JSON         |
-| 2  | HTTP Verbs         | `hx-get` `hx-post` `hx-put` `hx-delete`  |
-| 3  | Targeting          | `hx-target` with CSS selectors and `closest` |
-| 4  | Swap Strategies    | `hx-swap` — innerHTML, outerHTML, beforeend… |
-| 5  | Triggering         | `hx-trigger` — clicks, keyup, hover, polling  |
-| 6  | Forms              | `hx-post` on a form, validation, inline errors |
-| 7  | Loading Indicators | Spinners with `hx-on` events                   |
-| 8  | Out-of-Band Swaps  | `hx-swap-oob` — one response, many targets    |
-| 9  | Confirmation       | `hx-confirm` before destructive actions        |
-| 10 | Inline Editing     | Click to edit, save returns updated view         |
-| 11 | Polling            | `hx-trigger="every 5s"`                        |
-| 12 | Infinite Scroll    | `hx-trigger="revealed"`                        |
-| 13 | hx-boost           | Convert links/forms without changing them        |
-| 14 | hx-push-url        | Browser history and bookmarkable URLs            |
-| 15 | Event System       | Custom events, decoupled components              |
-| 16 | Server-Driven UI   | Patterns: CRUD, wizard, dashboard, master/detail |
+| #   | Concept            | What you learn                                   |
+| --- | ------------------ | ------------------------------------------------ |
+| 1   | Basic Request      | `hx-get`, server returns HTML not JSON           |
+| 2   | HTTP Verbs         | `hx-get` `hx-post` `hx-put` `hx-delete`          |
+| 3   | Targeting          | `hx-target` with CSS selectors and `closest`     |
+| 4   | Swap Strategies    | `hx-swap` - innerHTML, outerHTML, beforeend…     |
+| 5   | Triggering         | `hx-trigger` - clicks, keyup, hover, polling     |
+| 6   | Forms              | `hx-post` on a form, validation, inline errors   |
+| 7   | Loading Indicators | Spinners with `hx-on` events                     |
+| 8   | Out-of-Band Swaps  | `hx-swap-oob` - one response, many targets       |
+| 9   | Confirmation       | `hx-confirm` before destructive actions          |
+| 10  | Inline Editing     | Click to edit, save returns updated view         |
+| 11  | Polling            | `hx-trigger="every 5s"`                          |
+| 12  | Infinite Scroll    | `hx-trigger="revealed"`                          |
+| 13  | hx-boost           | Convert links/forms without changing them        |
+| 14  | hx-push-url        | Browser history and bookmarkable URLs            |
+| 15  | Event System       | Custom events, decoupled components              |
+| 16  | Server-Driven UI   | Patterns: CRUD, wizard, dashboard, master/detail |
 
 ## How It Works
 
-Each example has a **Concept** tab — explains the idea with a diagram and code snippet — plus
+Each example has a **Concept** tab - explains the idea with a diagram and code snippet - plus
 one demo tab per live demo, running against the local server. A topic with a single demo just
 shows **Live Demo**; a topic with multiple demo variants (e.g. Confirmation: Standard vs. Custom
 Modal) shows one tab per variant, labeled **Demo - `<name>`**.
 
 The right panel shows:
 
-- **Page Source** — the body HTML with htmx attributes
-- **Response Received** — the actual HTML fragment returned by the server
+- **Page Source** - the body HTML with htmx attributes
+- **Response Received** - the actual HTML fragment returned by the server
 
 ## Structure
 
@@ -58,9 +61,9 @@ htmx_explorer/
 ├── server.py          # Local dev server (handles GET/POST/PUT/DELETE)
 ├── index.html         # Explorer shell
 ├── home.html          # Landing page
-├── slides.html        # Intro slide deck (8 slides)
+├── slides.html        # Intro slide deck (9 slides)
 ├── css/                # Shared stylesheets (concept.css, examples.css, responses.css)
-└── topics/             # One folder per topic — everything for a topic lives together
+└── topics/             # One folder per topic - everything for a topic lives together
     └── 01-basic-request/
         ├── concept_basic-request.html   # Explanation + diagram
         ├── request_basic-request.html   # Live demo page
@@ -79,7 +82,7 @@ Each topic is registered in the `EXAMPLES` map in `index.html` with a `concept` 
 ]},
 ```
 
-A topic can have more than one demo variant — each gets its own file in the same topic folder
+A topic can have more than one demo variant - each gets its own file in the same topic folder
 (e.g. `request_confirmation.html` and `request_confirmation_custom-dialog.html`) and its own
 entry in the `demos` array:
 
@@ -90,7 +93,7 @@ entry in the `demos` array:
 ]},
 ```
 
-Once `demos` has more than one entry, the app automatically renders one tab per variant — no
+Once `demos` has more than one entry, the app automatically renders one tab per variant - no
 other code changes needed.
 
 **To add a new topic:** create `topics/<NN>-<name>/`, add `concept_<name>.html` and at least one
@@ -105,18 +108,18 @@ in that topic's folder and push another `{ label, file }` object onto its `demos
 If you only remember seven things, these cover 80–90% of real htmx apps:
 
 ```html
-hx-get    hx-post    hx-target    hx-swap    hx-trigger    hx-swap-oob
+hx-get hx-post hx-target hx-swap hx-trigger hx-swap-oob
 ```
 
 And: **the server returns HTML, not JSON.**
 
 ## Resources
 
-- [htmx.org](https://htmx.org) — official docs
-- [htmx Discord](https://htmx.org/discord) — community
-- [Hypermedia Systems](https://hypermedia.systems) — free book by the htmx author
-- [django-htmx](https://github.com/adamchainz/django-htmx) — Django integration
-- [Flask + htmx](https://github.com/Konfuzzyus/htmx-flask) — Flask integration
+- [htmx.org](https://htmx.org) - official docs
+- [htmx Discord](https://htmx.org/discord) - community
+- [Hypermedia Systems](https://hypermedia.systems) - free book by the htmx author
+- [django-htmx](https://github.com/adamchainz/django-htmx) - Django integration
+- [Flask + htmx](https://github.com/Konfuzzyus/htmx-flask) - Flask integration
 
 ## License
 

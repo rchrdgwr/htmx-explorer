@@ -34,13 +34,13 @@
 &lt;/<span class="tag">ul</span>&gt;
   </div>
 
-  <div class="callout"><strong>The sentinel pattern:</strong> The last item in the list is a placeholder that watches for visibility. When it appears, it loads the next page and replaces itself — either with more items + a new sentinel, or nothing if there are no more pages.</div>
+  <div class="callout"><strong>The sentinel pattern:</strong> The last item in the list is a placeholder that watches for visibility. When it appears, it loads the next page and replaces itself - either with more items + a new sentinel, or nothing if there are no more pages.</div>
 
   <div class="points">
     <h3>Key Points</h3>
-    <div class="point"><div class="icon">1</div><div><code>revealed</code> uses IntersectionObserver under the hood — efficient and battery-friendly</div></div>
+    <div class="point"><div class="icon">1</div><div><code>revealed</code> uses IntersectionObserver under the hood - efficient and battery-friendly</div></div>
     <div class="point"><div class="icon">2</div><div>The sentinel replaces itself with the next page of content via <code>hx-swap="outerHTML"</code></div></div>
-    <div class="point"><div class="icon">3</div><div>When the last page is reached, the server returns content without a new sentinel — scrolling stops</div></div>
+    <div class="point"><div class="icon">3</div><div>When the last page is reached, the server returns content without a new sentinel - scrolling stops</div></div>
     <div class="point"><div class="icon">4</div><div>Also great for lazy-loading images, charts, or expensive widgets below the fold</div></div>
   </div>
 </body>

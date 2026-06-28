@@ -13,7 +13,7 @@
     <h2>1. Basic Request</h2>
     <span class="key-attr">hx-get</span><span class="key-attr">hx-target</span><span class="key-attr">hx-swap</span>
   </div>
-  <p class="subtitle">Replace part of a page without writing JavaScript. This is the core idea of htmx — HTML attributes do the work.</p>
+  <p class="subtitle">Replace part of a page without writing JavaScript. This is the core idea of htmx - HTML attributes do the work.</p>
 
   <div class="flow">
     <div class="node browser"><div class="label">Browser</div><div class="detail">User clicks button</div></div>
@@ -33,14 +33,14 @@
 &lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"result"</span>&gt;&lt;/<span class="tag">div</span>&gt;
   </div>
 
-  <div class="callout"><strong>Key insight:</strong> The server returns <em>HTML</em>, not JSON. htmx drops it straight into the DOM — no parsing, no templating on the client.</div>
+  <div class="callout"><strong>Key insight:</strong> The server returns <em>HTML</em>, not JSON. htmx drops it straight into the DOM - no parsing, no templating on the client.</div>
 
   <div class="points">
     <h3>Key Points</h3>
     <div class="point"><div class="icon">1</div><div>htmx intercepts the click and fires an XHR GET request automatically</div></div>
-    <div class="point"><div class="icon">2</div><div>The server returns a <strong>plain HTML fragment</strong> — not a full page, not JSON</div></div>
+    <div class="point"><div class="icon">2</div><div>The server returns a <strong>plain HTML fragment</strong> - not a full page, not JSON</div></div>
     <div class="point"><div class="icon">3</div><div>htmx swaps the response into <code>#result</code> with no page reload</div></div>
-    <div class="point"><div class="icon">4</div><div>Zero JavaScript written by you — just two HTML attributes</div></div>
+    <div class="point"><div class="icon">4</div><div>Zero JavaScript written by you - just two HTML attributes</div></div>
   </div>
 </body>
 </html>

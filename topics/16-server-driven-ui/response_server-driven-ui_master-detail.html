@@ -3,15 +3,18 @@
     <div class="demo-col-label">Master list</div>
     <div class="master-list">
       <div class="master-item active"
-           hx-get="response_server-driven-ui_detail-1.html" hx-target="#detail-pane">
+           hx-get="response_server-driven-ui_detail-1.html" hx-target="#detail-pane"
+           onclick="setActive(this)">
         Ada Lovelace
       </div>
       <div class="master-item"
-           hx-get="response_server-driven-ui_detail-2.html" hx-target="#detail-pane">
+           hx-get="response_server-driven-ui_detail-2.html" hx-target="#detail-pane"
+           onclick="setActive(this)">
         Grace Hopper
       </div>
       <div class="master-item"
-           hx-get="response_server-driven-ui_detail-1.html" hx-target="#detail-pane">
+           hx-get="response_server-driven-ui_detail-3.html" hx-target="#detail-pane"
+           onclick="setActive(this)">
         Margaret Hamilton
       </div>
     </div>
@@ -23,3 +26,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  function setActive(el) {
+    el.closest('.master-list').querySelectorAll('.master-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+  }
+</script>

@@ -207,10 +207,10 @@
 
 <!-- Nav -->
 <div id="nav">
-  <button id="prev-btn" onclick="go(-1)" disabled>&#8592; Prev</button>
+  <button id="prev-btn" onclick="go(-1)" disabled>← Prev</button>
   <div id="dots"></div>
-  <span id="slide-counter">1 / 8</span>
-  <button id="next-btn" onclick="go(1)">Next &#8594;</button>
+  <span id="slide-counter">1 / 9</span>
+  <button id="next-btn" onclick="go(1)">Next →</button>
 </div>
 
 <!-- Slides -->
@@ -218,7 +218,7 @@
 
   <!-- Slide 1 -->
   <div class="slide active">
-    <div class="slide-label">Slide 1 of 8</div>
+    <div class="slide-label">Slide 1 of 9</div>
     <h1>The Traditional Web</h1>
     <h2>Click a Link</h2>
     <div class="divider"></div>
@@ -237,7 +237,7 @@
 
   <!-- Slide 2 -->
   <div class="slide">
-    <div class="slide-label">Slide 2 of 8</div>
+    <div class="slide-label">Slide 2 of 9</div>
     <h1>The Problem</h1>
     <h2>Small Change, Big Refresh</h2>
     <div class="divider"></div>
@@ -256,7 +256,7 @@
 
   <!-- Slide 3 -->
   <div class="slide">
-    <div class="slide-label">Slide 3 of 8</div>
+    <div class="slide-label">Slide 3 of 9</div>
     <h1>Modern Solution</h1>
     <h2>Single Page Applications</h2>
     <div class="divider"></div>
@@ -270,12 +270,12 @@
       <li>Receive JSON</li>
       <li>JavaScript updates the UI</li>
     </ul>
-    <p>Powerful — but often complex.</p>
+    <p>Powerful - but often complex.</p>
   </div>
 
   <!-- Slide 4 -->
   <div class="slide">
-    <div class="slide-label">Slide 4 of 8</div>
+    <div class="slide-label">Slide 4 of 9</div>
     <h1>HTMX</h1>
     <h2>A Different Approach</h2>
     <div class="divider"></div>
@@ -293,7 +293,7 @@
 
   <!-- Slide 5 -->
   <div class="slide">
-    <div class="slide-label">Slide 5 of 8</div>
+    <div class="slide-label">Slide 5 of 9</div>
     <h1>The HTMX Idea</h1>
     <h2>Extend HTML</h2>
     <div class="divider"></div>
@@ -315,7 +315,7 @@
 
   <!-- Slide 6 -->
   <div class="slide">
-    <div class="slide-label">Slide 6 of 8</div>
+    <div class="slide-label">Slide 6 of 9</div>
     <h1>Three Things HTMX Needs</h1>
     <h2>Every HTMX Request</h2>
     <div class="divider"></div>
@@ -336,12 +336,12 @@
         <div class="desc">How to insert the HTML</div>
       </div>
     </div>
-    <p style="font-size:16px;color:#888;margin-top:4px;">Where and How both have sensible defaults — the triggering element, and <code>innerHTML</code> — so you only write them when you want something different.</p>
+    <p style="font-size:16px;color:#888;margin-top:4px;">Where and How both have sensible defaults - the triggering element, and <code>innerHTML</code> - so you only write them when you want something different.</p>
   </div>
 
   <!-- Slide 7 -->
   <div class="slide">
-    <div class="slide-label">Slide 7 of 8</div>
+    <div class="slide-label">Slide 7 of 9</div>
     <h1>Complete Example</h1>
     <div class="divider"></div>
     <div class="row" style="align-items:flex-start;">
@@ -372,7 +372,7 @@
 
   <!-- Slide 8 -->
   <div class="slide">
-    <div class="slide-label">Slide 8 of 8</div>
+    <div class="slide-label">Slide 8 of 9</div>
     <h1>HTMX in One Sentence</h1>
     <h2>The Mental Model</h2>
     <div class="divider"></div>
@@ -391,6 +391,27 @@
       <span class="badge" style="color:#2e7d32;border-color:#a5d6a7;background:#e8f5e9;">OOB</span>
       <span class="badge" style="color:#2e7d32;border-color:#a5d6a7;background:#e8f5e9;">Polling</span>
     </div>
+  </div>
+
+
+  <!-- Slide 9 -->
+  <div class="slide">
+    <div class="slide-label">Slide 9 of 9</div>
+    <h1>Try It Yourself</h1>
+    <h2>HTMX Explorer</h2>
+    <div class="divider"></div>
+    <p>The full source code is on GitHub:</p>
+    <div class="code" style="font-size:20px;text-align:center;padding:20px 32px;margin:12px 0;">
+      github.com/<span class="hl">rchrdgwr</span>/htmx-explorer
+    </div>
+    <ul class="bullets" style="margin-top:12px;">
+      <li>Clone and run with the included Python dev server</li>
+      <li>A tiny backend handles GET/POST/PUT/DELETE - no JSON, no framework</li>
+      <li>Each topic has a concept page, live demo &amp; source inspector</li>
+    </ul>
+    <p style="margin-top:20px;color:#666;font-size:16px;">
+      <strong>python server.py</strong> then open <strong>localhost:8765</strong>
+    </p>
   </div>
 
 </div><!-- /slides -->

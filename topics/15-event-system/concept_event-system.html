@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="title-row"><h2>15. Event System</h2><span class="key-attr">hx-trigger="event from:element"</span><span class="key-attr">htmx.trigger()</span></div>
-  <p class="subtitle">Components talking to each other without being coupled together. htmx fires rich DOM events at every step — listen to them, or fire your own.</p>
+  <p class="subtitle">Components talking to each other without being coupled together. htmx fires rich DOM events at every step - listen to them, or fire your own.</p>
 
   <div class="flow">
     <div class="node browser"><div class="label">Save record</div><div class="detail">POST /record</div></div>
@@ -26,7 +26,7 @@
       <table>
         <thead><tr><th>Event</th><th>When</th></tr></thead>
         <tbody>
-          <tr><td><code>htmx:beforeRequest</code></td><td>Before XHR fires — can cancel</td></tr>
+          <tr><td><code>htmx:beforeRequest</code></td><td>Before XHR fires - can cancel</td></tr>
           <tr><td><code>htmx:afterRequest</code></td><td>After XHR completes</td></tr>
           <tr><td><code>htmx:afterSwap</code></td><td>After DOM is updated</td></tr>
           <tr><td><code>htmx:afterSettle</code></td><td>After CSS transitions complete</td></tr>
@@ -50,14 +50,14 @@
     </div>
   </div><!-- end table-snippet-row -->
 
-  <div class="callout"><strong>Decoupled components:</strong> The save form doesn't know about the grid, and the grid doesn't know about the form. They communicate through events on a shared ancestor — clean and maintainable.</div>
+  <div class="callout"><strong>Decoupled components:</strong> The save form doesn't know about the grid, and the grid doesn't know about the form. They communicate through events on a shared ancestor - clean and maintainable.</div>
 
   <div class="points">
     <h3>Key Points</h3>
     <div class="point"><div class="icon">1</div><div>Listen to htmx events to integrate third-party libraries (charts, maps, etc.)</div></div>
     <div class="point"><div class="icon">2</div><div><code>hx-on:htmx:after-swap="..."</code> runs inline JS after each swap</div></div>
     <div class="point"><div class="icon">3</div><div><code>htmx.trigger(el, 'event')</code> fires a custom event from JavaScript</div></div>
-    <div class="point"><div class="icon">4</div><div>Custom events decouple components — each piece only knows about its own job</div></div>
+    <div class="point"><div class="icon">4</div><div>Custom events decouple components - each piece only knows about its own job</div></div>
   </div>
 </body>
 </html>

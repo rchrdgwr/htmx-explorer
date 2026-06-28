@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="title-row"><h2>7. Loading Indicators</h2><span class="key-attr">hx-indicator</span><span class="key-attr">.htmx-indicator</span><span class="key-attr">.htmx-request</span></div>
-  <p class="subtitle">User feedback during a request. htmx adds the <code>htmx-request</code> class to the triggering element while the request is in flight — use it to show spinners.</p>
+  <p class="subtitle">User feedback during a request. htmx adds the <code>htmx-request</code> class to the triggering element while the request is in flight - use it to show spinners.</p>
 
   <div class="table-snippet-row">
     <div class="flow">
@@ -40,10 +40,11 @@
 
   <div class="points">
     <h3>Key Points</h3>
-    <div class="point"><div class="icon">1</div><div>htmx adds <code>.htmx-request</code> to the triggering element automatically — no JS needed</div></div>
+    <div class="point"><div class="icon">1</div><div>htmx adds <code>.htmx-request</code> to the triggering element automatically - no JS needed</div></div>
     <div class="point"><div class="icon">2</div><div><code>.htmx-indicator</code> elements are hidden by default and fade in during the request</div></div>
-    <div class="point"><div class="icon">3</div><div>Use <code>hx-indicator="#spinner"</code> to point to an indicator anywhere on the page</div></div>
-    <div class="point"><div class="icon">4</div><div>You can also disable the button during the request with CSS: <code>.htmx-request { pointer-events: none; }</code></div></div>
+    <div class="point"><div class="icon">3</div><div>If the spinner is <em>inside</em> the trigger element, no <code>hx-indicator</code> needed - <code>.htmx-request .htmx-indicator</code> finds it automatically</div></div>
+    <div class="point"><div class="icon">4</div><div>Use <code>hx-indicator="#spinner"</code> when the spinner lives <em>outside</em> the trigger - htmx adds <code>.htmx-request</code> directly to that element</div></div>
+    <div class="point"><div class="icon">5</div><div>You can also disable the button during the request with CSS: <code>.htmx-request { pointer-events: none; }</code></div></div>
   </div>
 </body>
 </html>

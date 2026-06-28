@@ -1,6 +1,6 @@
 <div id="dash-jobs" class="dash-widget jobs"
      hx-get="response_server-driven-ui_dash-jobs.html" hx-trigger="every 3s" hx-swap="outerHTML">
-  <div class="dash-value" id="dj2"></div>
+  <div class="dash-value" id="dj"></div>
   <div class="dash-label">Jobs Queued</div>
-  <script>document.getElementById('dj2').textContent = Math.floor(Math.random()*20);</script>
+  <script>document.getElementById('dj').textContent = Math.floor(Math.random()*20);</script>
 </div>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>5. Triggering - htmx Explorer</title>
-  <meta name="description" content="Control when htmx fires requests using hx-trigger — clicks, changes, keyboard events, delays, and polling.">
+  <meta name="description" content="Control when htmx fires requests using hx-trigger - clicks, changes, keyboard events, delays, and polling.">
   <meta name="keywords" content="htmx, hx-trigger, events, delay, throttle, polling, triggering">
   <link rel="stylesheet" href="/css/concept.css">
 </head>
@@ -13,7 +13,7 @@
     <h2>5. Triggering</h2>
     <span class="key-attr">hx-trigger</span>
   </div>
-  <p class="subtitle">Requests don't have to come from clicks. <code>hx-trigger</code> lets any DOM event — or a timer — fire a request.</p>
+  <p class="subtitle">Requests don't have to come from clicks. <code>hx-trigger</code> lets any DOM event - or a timer - fire a request.</p>
 
   <div class="table-snippet-row">
     <table>
@@ -41,14 +41,14 @@
   </div>
 
   <div class="callout"><strong>Modifiers</strong> are keywords you add after the event name to change <em>how</em> it behaves.
-  For example <code>hx-trigger="keyup changed delay:400ms"</code> means: fire on keyup — but only if the value actually changed, and only after the user has stopped typing for 400ms.
+  For example <code>hx-trigger="keyup changed delay:400ms"</code> means: fire on keyup - but only if the value actually changed, and only after the user has stopped typing for 400ms.
   Without modifiers, a search input would fire a request on every single keystroke. Common modifiers: <code>changed</code> (skip if value unchanged), <code>delay:Xms</code> (debounce), <code>throttle:Xms</code> (rate-limit), <code>once</code> (fire once and stop).</div>
 
   <div class="points">
     <h3>Key Points</h3>
-    <div class="point"><div class="icon">1</div><div>Any standard DOM event works as a trigger — <code>focus</code>, <code>blur</code>, <code>input</code>, <code>drop</code>, etc.</div></div>
+    <div class="point"><div class="icon">1</div><div>Any standard DOM event works as a trigger - <code>focus</code>, <code>blur</code>, <code>input</code>, <code>drop</code>, etc.</div></div>
     <div class="point"><div class="icon">2</div><div><code>changed</code> modifier prevents duplicate requests when nothing changed</div></div>
-    <div class="point"><div class="icon">3</div><div><code>delay</code> debounces — essential for search inputs to avoid hammering the server</div></div>
+    <div class="point"><div class="icon">3</div><div><code>delay</code> debounces - essential for search inputs to avoid hammering the server</div></div>
     <div class="point"><div class="icon">4</div><div>Custom events work too: <code>hx-trigger="my-event from:body"</code></div></div>
   </div>
 </body>

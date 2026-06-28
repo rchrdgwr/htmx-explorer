@@ -7,3 +7,10 @@
 <div id="cart-contents" hx-swap-oob="true">
   <div class="cart-empty">Your cart is empty</div>
 </div>
+
+<button id="add-to-cart-btn" class="add-to-cart-btn" hx-swap-oob="true"
+        hx-post="response_oob-swaps_cart.html"
+        hx-target="#cart-message"
+        hx-swap="innerHTML">
+  Add to Cart
+</button>

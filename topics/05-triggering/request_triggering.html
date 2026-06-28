@@ -12,11 +12,11 @@
 </head>
 <body class="page-triggering">
   <h2>Trigger Events</h2>
-  <p><code>hx-trigger</code> controls <em>when</em> the request fires — on click, on input, on hover, after a delay, and more.</p>
+  <p><code>hx-trigger</code> controls <em>when</em> the request fires - on click, on input, on hover, after a delay, and more.</p>
 
   <div class="demo">
     <h3>1. Click (default)</h3>
-    <div class="desc"><code>hx-trigger="click"</code> — fires when the button is clicked</div>
+    <div class="desc"><code>hx-trigger="click"</code> - fires when the button is clicked</div>
     <button hx-get="response_triggering.html?t=click"
             hx-target="#r1">Click me</button>
     <div id="r1" class="result"></div>
@@ -24,7 +24,7 @@
 
   <div class="demo">
     <h3>2. Keyup with delay</h3>
-    <div class="desc"><code>hx-trigger="keyup changed delay:500ms"</code> — fires 500 ms after you stop typing</div>
+    <div class="desc"><code>hx-trigger="keyup changed delay:500ms"</code> - fires 500 ms after you stop typing</div>
     <input type="text" name="q"
            hx-get="response_triggering.html?t=keyup"
            hx-target="#r2"
@@ -35,7 +35,7 @@
 
   <div class="demo">
     <h3>3. Mouse-enter</h3>
-    <div class="desc"><code>hx-trigger="mouseenter"</code> — fires when you hover over the element</div>
+    <div class="desc"><code>hx-trigger="mouseenter"</code> - fires when you hover over the element</div>
     <button hx-get="response_triggering.html?t=hover"
             hx-target="#r3"
             hx-trigger="mouseenter">Hover over me</button>

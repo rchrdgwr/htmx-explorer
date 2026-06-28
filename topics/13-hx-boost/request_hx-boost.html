@@ -12,7 +12,7 @@
 </head>
 <body class="page-hx-boost">
   <h2>hx-boost</h2>
-  <p>Plain <code>&lt;a&gt;</code> links — htmx intercepts the click and swaps only the <code>#content</code> area. The nav stays in place. Check the Response Received panel to see the partial HTML fragment.</p>
+  <p>Plain <code>&lt;a&gt;</code> links - htmx intercepts the click and swaps only the <code>#content</code> area. The nav stays in place. Check the Response Received panel to see the partial HTML fragment.</p>
 
   <nav hx-boost="true" hx-target="#content" hx-swap="innerHTML">
     <a href="response_hx-boost_page-a.html">Page A</a>
@@ -21,9 +21,9 @@
   </nav>
 
   <div id="content" class="target-zone">
-    <strong>Home</strong> — click a nav link to load content here.
+    <strong>Home</strong> - click a nav link to load content here.
   </div>
 
-  <p class="note">In a real app, <code>hx-boost="true"</code> on a parent converts all its plain <code>&lt;a&gt;</code> links to work like this — zero markup changes needed.</p>
+  <p class="note">In a real app, <code>hx-boost="true"</code> on a parent converts all its plain <code>&lt;a&gt;</code> links to work like this - zero markup changes needed.</p>
 </body>
 </html>

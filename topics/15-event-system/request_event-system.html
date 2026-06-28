@@ -16,7 +16,7 @@
 
   <!-- Save form: fires "record-saved" on body after success -->
   <div class="panel">
-    <div class="panel-label">Add a record — fires <code>record-saved</code> on body after save</div>
+    <div class="panel-label">Add a record - fires <code>record-saved</code> on body after save</div>
     <form id="save-form"
           hx-post="response_event-system_saved.html"
           hx-target="#save-result">
@@ -28,7 +28,7 @@
 
   <!-- Record list: listens for record-saved event on body -->
   <div class="panel">
-    <div class="panel-label">Record list — refreshes when it hears <code>record-saved</code> from body</div>
+    <div class="panel-label">Record list - htmx itself listens via <code>hx-trigger="record-saved from:body"</code></div>
     <div id="record-list"
          hx-get="response_event-system_list.html"
          hx-trigger="load, record-saved from:body"
@@ -38,15 +38,15 @@
     </div>
   </div>
 
-  <!-- Event log: also listens for record-saved — a third independent component -->
+  <!-- Event log: also listens for record-saved - a third independent component -->
   <div class="panel">
-    <div class="panel-label">Event log — also hears <code>record-saved</code>, independently</div>
+    <div class="panel-label">Event log - plain <code>addEventListener</code>, not an htmx feature - any JS can hear it</div>
     <div id="log"><div class="log-line log-placeholder">Waiting for events...</div></div>
   </div>
 
   <script>
     // After the form's request completes, fire the custom event on body.
-    // The form doesn't know who is listening — it just announces what happened.
+    // The form doesn't know who is listening - it just announces what happened.
     document.getElementById('save-form').addEventListener('htmx:afterRequest', function() {
       htmx.trigger(document.body, 'record-saved');
     });
@@ -59,13 +59,13 @@
       this.appendChild(stamp);
     });
 
-    // The event log is a third independent listener — it also reacts to record-saved.
+    // The event log is a third independent listener - it also reacts to record-saved.
     // It has no connection to the form or the list.
     document.body.addEventListener('record-saved', function() {
       const log = document.getElementById('log');
       const line = document.createElement('div');
       line.className = 'log-line';
-      line.innerHTML = '<span class="time">' + new Date().toLocaleTimeString() + '</span> — <span class="event">record-saved</span> received';
+      line.innerHTML = '<span class="time">' + new Date().toLocaleTimeString() + '</span> - <span class="event">record-saved</span> received';
       if (log.querySelector('.log-placeholder')) log.innerHTML = '';
       log.prepend(line);
     });

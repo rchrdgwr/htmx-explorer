@@ -128,13 +128,13 @@
 
     .panel-header {
       padding: 8px 14px;
-      background: #f8f8f8;
-      border-bottom: 1px solid #ddd;
+      background: #1a1a2e;
+      border-bottom: 1px solid #2e2e4e;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: #666;
+      color: #aaa;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -184,13 +184,13 @@
 
     .inspector-header {
       padding: 8px 14px;
-      background: #181825;
-      border-bottom: 1px solid #313244;
+      background: #1565c0;
+      border-bottom: 1px solid #0d47a1;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: #cdd6f4;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -254,6 +254,10 @@
       padding: 0 !important;
     }
 
+    .htmx-attr { color: #e94560; font-weight: 700; }
+
+    .block-divider { height: 1px; background: rgba(255,255,255,0.3); }
+
     .empty-pane {
       flex: 1;
       display: flex;
@@ -285,6 +289,10 @@
       flex-direction: column;
       gap: 5px;
     }
+    .meta-pair {
+      display: flex;
+      gap: 24px;
+    }
 
     .meta-label {
       font-size: 13px;
@@ -302,13 +310,13 @@
     /* sub-label within inspector halves */
     .section-label {
       padding: 5px 14px;
-      background: #181825;
-      border-bottom: 1px solid #313244;
+      background: #1565c0;
+      border-bottom: 1px solid #0d47a1;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: #cdd6f4;
+      color: #fff;
       flex-shrink: 0;
     }
 
@@ -533,7 +541,7 @@ async function loadExample(btn, key) {
   document.getElementById('home-frame').classList.remove('visible');
   document.getElementById('preview-tabs').style.display = 'flex';
 
-  // Build one tab per demo variant — "Live Demo" if there's only one, else "Demo - <label>"
+  // Build one tab per demo variant - "Live Demo" if there's only one, else "Demo - <label>"
   const demoTabs = document.getElementById('demo-tabs');
   demoTabs.innerHTML = '';
   ex.demos.forEach((demo, i) => {
@@ -564,7 +572,7 @@ async function loadDemo(idx, bust) {
   frame.src = demo.file + '?t=' + bust;
   frame.onload = () => wireIframe(frame);
 
-  // Load page source into inspector — show only body content
+  // Load page source into inspector - show only body content
   try {
     const res = await fetch(demo.file, { cache: 'no-store' });
     const src = await res.text();
@@ -611,22 +619,26 @@ function wireIframe(frame) {
           <span class="url">${url}</span>
         </div>
         <div class="meta-grid">
-          <div class="meta-item"><span class="meta-label">Status: </span><span class="meta-value status ${ok ? 'ok' : 'err'}">${xhr.status} ${xhr.statusText}</span></div>
-          <div class="meta-item"><span class="meta-label">Content-Type: </span><span class="meta-value">${contentType}</span></div>
-          <div class="meta-item"><span class="meta-label">Target: </span><span class="meta-value target-val">${target}</span></div>
-          <div class="meta-item"><span class="meta-label">Swap: </span><span class="meta-value swap-val">${swap}</span></div>
+          <div class="meta-pair">
+            <div class="meta-item"><span class="meta-label">Status: </span><span class="meta-value status ${ok ? 'ok' : 'err'}">${xhr.status} ${xhr.statusText}</span></div>
+            <div class="meta-item"><span class="meta-label">Content-Type: </span><span class="meta-value">${contentType}</span></div>
+          </div>
+          <div class="meta-pair">
+            <div class="meta-item"><span class="meta-label">Target: </span><span class="meta-value target-val">${target}</span></div>
+            <div class="meta-item"><span class="meta-label">Swap: </span><span class="meta-value swap-val">${swap}</span></div>
+          </div>
         </div>
       `;
 
       // Response body
       const body = xhr.responseText || '';
-      renderCode('res-pane', body.trim(), 'html');
+      renderResponseBlocks('res-pane', body.trim());
       document.getElementById('res-badge').textContent = `${xhr.status} · ${body.length} bytes`;
 
       // Flash effect
       flash('res-pane');
 
-      // Capture DOM after swap — swap happens synchronously after this event,
+      // Capture DOM after swap - swap happens synchronously after this event,
       // so a short delay ensures we read the post-swap state. htmx:afterSettle
       // is unreliable here because outerHTML swaps remove the triggering element
       // from the DOM before the event fires, so it never bubbles to document.
@@ -636,22 +648,48 @@ function wireIframe(frame) {
     });
 
   } catch(err) {
-    // cross-origin (shouldn't happen with python -m http.server)
+    // cross-origin (shouldn't happen with server.py)
     console.warn('Could not wire iframe events:', err);
   }
 }
 
 // ── Render syntax-highlighted code ───────────────────────────────
-function renderCode(paneId, code, lang) {
-  const pane = document.getElementById(paneId);
-  const pre  = document.createElement('pre');
-  const el   = document.createElement('code');
+function appendHighlightedBlock(pane, code, lang) {
+  const pre = document.createElement('pre');
+  const el  = document.createElement('code');
   el.className = `language-${lang}`;
   el.textContent = code;
   pre.appendChild(el);
-  pane.innerHTML = '';
   pane.appendChild(pre);
   hljs.highlightElement(el);
+  el.querySelectorAll('.hljs-attr').forEach(span => {
+    if (/^hx-/.test(span.textContent)) span.classList.add('htmx-attr');
+  });
+}
+
+function renderCode(paneId, code, lang) {
+  const pane = document.getElementById(paneId);
+  pane.innerHTML = '';
+  appendHighlightedBlock(pane, code, lang);
+  flash(paneId);
+}
+
+// Response bodies can contain several top-level fragments (the main target
+// plus hx-swap-oob blocks) - this renders each one as its own highlighted
+// block, separated by a divider, since the convention in this app's demo
+// fragments is a blank line between top-level OOB blocks.
+function renderResponseBlocks(paneId, code) {
+  const pane = document.getElementById(paneId);
+  pane.innerHTML = '';
+  const blocks = code.split(/\n\s*\n/).map(b => b.trim()).filter(b => b.length);
+  blocks.forEach((block, i) => {
+    if (i > 0) {
+      const divider = document.createElement('div');
+      divider.className = 'block-divider';
+      pane.appendChild(divider);
+    }
+    appendHighlightedBlock(pane, block, 'html');
+  });
   flash(paneId);
 }
 

@@ -10,11 +10,11 @@
 </head>
 <body>
   <div class="title-row"><h2>8. Out-of-Band Swaps</h2><span class="key-attr">hx-swap-oob</span></div>
-  <p class="subtitle">One server response updates multiple, unrelated parts of the page. This is one of htmx's superpowers — a single request, many updates.</p>
+  <p class="subtitle">One server response updates multiple, unrelated parts of the page. This is one of htmx's superpowers - a single request, many updates.</p>
 
   <div class="table-snippet-row" style="align-items:flex-start;">
   <div style="padding:16px;background:#fafafa;border-radius:10px;border:1px solid #eee;flex:0 0 auto;">
-    <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:14px;">One response body — two targets</div>
+    <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:14px;">One response body - two targets</div>
     <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
       <div style="flex:0 0 auto;">
         <div style="font-size:11px;color:#888;margin-bottom:6px;">Server response</div>
@@ -55,11 +55,11 @@
   </div>
   </div>
 
-  <div class="callout"><strong>Real-world uses:</strong> Shopping cart counter, notification badge, status bar, breadcrumb, page title — all updated from one request alongside the main content.</div>
+  <div class="callout"><strong>Real-world uses:</strong> Shopping cart counter, notification badge, status bar, breadcrumb, page title - all updated from one request alongside the main content.</div>
 
   <div class="points">
     <h3>Key Points</h3>
-    <div class="point"><div class="icon">1</div><div>OOB elements are matched by their <code>id</code> — they find themselves anywhere on the page</div></div>
+    <div class="point"><div class="icon">1</div><div>OOB elements are matched by their <code>id</code> - they find themselves anywhere on the page</div></div>
     <div class="point"><div class="icon">2</div><div>No limit on the number of OOB elements in one response</div></div>
     <div class="point"><div class="icon">3</div><div><code>hx-swap-oob</code> accepts swap strategies too: <code>hx-swap-oob="beforeend:#list"</code></div></div>
     <div class="point"><div class="icon">4</div><div>This replaces the need for global state management for many common UI patterns</div></div>

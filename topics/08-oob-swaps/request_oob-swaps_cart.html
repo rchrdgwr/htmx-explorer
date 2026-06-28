@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Shopping cart demo: hx-swap-oob updates the cart counter in the nav while returning the confirmation message inline.">
   <meta name="keywords" content="htmx, hx-swap-oob, shopping cart, out-of-band swap, demo">
-  <title>OOB Swap — Shopping Cart</title>
+  <title>OOB Swap - Shopping Cart</title>
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <link rel="stylesheet" href="/css/examples.css">
   <link rel="stylesheet" href="/css/responses.css">
@@ -21,7 +21,7 @@
   </nav>
 
   <h2>Shopping Cart</h2>
-  <p>Click <strong>Add to Cart</strong> — one response updates <em>three</em> elements: the confirmation below, the cart counter in the nav, and the cart contents section at the bottom.</p>
+  <p>Click <strong>Add to Cart</strong> - one response updates <em>four</em> elements: the confirmation below, the cart counter in the nav, the cart contents section at the bottom, and the button itself.</p>
 
   <div class="product-card">
     <div class="product-cover">📘</div>
@@ -30,7 +30,7 @@
       <div class="product-desc">Build modern, dynamic web apps with minimal JavaScript using htmx's hypermedia-driven approach.</div>
       <div class="product-footer">
         <span class="product-price">$34.99</span>
-        <button class="add-to-cart-btn"
+        <button id="add-to-cart-btn" class="add-to-cart-btn"
                 hx-post="response_oob-swaps_cart.html"
                 hx-target="#cart-message"
                 hx-swap="innerHTML">
