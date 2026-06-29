@@ -103,9 +103,9 @@ other code changes needed.
 **To add a new demo to an existing topic:** drop the new `request_<topic>_<variant>.html` file
 in that topic's folder and push another `{ label, file }` object onto its `demos` array.
 
-## The Big 7
+## The Big 6
 
-If you only remember seven things, these cover 80–90% of real htmx apps:
+If you only remember six things, these cover 80–90% of real htmx apps:
 
 ```html
 hx-get hx-post hx-target hx-swap hx-trigger hx-swap-oob
